@@ -1,0 +1,60 @@
+.profileDiv {
+    width: 100%;
+    height: 400px;
+    box-shadow: 2px 2px 5px black;
+    background: linear-gradient(to bottom right, #384d66, #08182c);
+}
+
+.profileContainer {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.profileName {
+    text-align: center;
+    padding-top: 50px;
+    margin-bottom: 25px;
+    color: #eee;
+}
+
+.profileImageContainer {
+    margin-left: 100px;
+    width: 175px;
+    float: left;
+}
+
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid white;
+}
+
+.profileImageContainer {
+    margin-right: 20px;
+}
+
+.profileInfo {
+    width: 25%;
+    min-height: 200px;
+    float: left;
+    padding-top: 60px;
+    text-align: center;
+    color: #eee;
+}
+
+.profileDetails {
+    width: 25%;
+    min-height: 150px;
+    float: right;
+    margin-top: 50px;
+    margin-right: 25px;
+    text-align: center;
+    box-shadow: -2px 2px 5px black;
+    color: #eee;
+}
+
+.profileDetails h1 {
+    color: #888;
+}

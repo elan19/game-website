@@ -1,0 +1,346 @@
+.mapHeading {
+    margin-bottom: 25px;
+    margin-top: 25px;
+    border-bottom: none;
+    text-align: left;
+    color: #eee;
+}
+
+.both {
+    width: 100%;
+    height: 400px;
+    box-shadow: 2px 2px 5px black;
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #384d66, #08182c);
+}
+
+.noCursor {
+    cursor: default;
+}
+
+.gameInfoHeight {
+    height: 450px;
+}
+
+.leftDiv {
+    width: 50%;
+    height: 400px;
+    float: left;
+    margin-left: 5%;
+}
+
+.noMarginLeft {
+    margin-left: 0;
+}
+
+.gameInfoPic {
+    width: 100%;
+    object-fit: cover;
+    max-height: 400px;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.border {
+    border: 1px solid black;
+}
+
+.rightDivInfo {
+    width: 45%;
+    height: 370px;
+    float: right;
+    clear: right;
+}
+
+.rightDivInfoImg {
+    width: 100%;
+    max-height: 200px;
+    object-fit: contain;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding: 0;
+}
+
+.rightDivInfo p {
+    color: #50616c;
+    font-size: 14px;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.rightDivInfo a {
+    color: #65bcef;
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.rightDivInfo a:hover {
+    color: #fff;
+}
+
+.rightDivInfo span {
+    color: #879098;
+}
+
+.gameBody {
+    min-height: 700px;
+    display: grid;
+    grid-template-columns: 60% 40%;
+}
+
+.gameBody h2 {
+    color: #eee;
+    border-bottom: none;
+    margin-left: 25px;
+    padding-top: 30px;
+}
+
+.buyGame {
+    background: linear-gradient(to right, #2b3b4a, #566574);
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+.buyGame h2 {
+    margin-bottom: 0;
+}
+
+.buyGame p {
+    margin-left: 25px;
+    color: #c5c3c0;
+    padding: 0;
+}
+
+.purchase {
+    text-align: right;
+    font-size: 0;
+    margin-top: 20px;
+}
+
+.gameCost {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 35px;
+    right: 50px;
+    margin: 0;
+    text-align: center;
+    line-height: 30px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: #2b3b4a;
+}
+
+.gameCost p {
+    margin: auto;
+    color: #00cf0a;
+}
+
+.buyGameBtn {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 35px;
+    right: 50px;
+    border: 2px solid black;
+    border-radius: 5px;
+    color: #eee;
+    background: linear-gradient(to right, #75b022, #598b1b);
+    cursor: pointer;
+}
+
+.buyGameBtn:hover {
+    background: linear-gradient(to right, #9ae036, #75b022);
+}
+
+.recommended {
+    margin-left: 10%;
+    min-height: 150px;
+    margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.recommended p {
+    color: #c5c3c0;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+.gameDesc {
+    margin-top: 50px;
+    font-size: 14px;
+}
+
+.gameDesc h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.gameDescH2Border {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, #eee, #1b2838);
+    margin-bottom: 10px;
+}
+
+.gameDesc p {
+    color: #c5c3c0;
+}
+
+.gameLinks {
+    margin-left: 10%;
+    min-height: 250px;
+    max-height: 300px;
+    margin-top: 50px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.gameLinks p {
+    color: #50616c;
+    padding-left: 5%;
+}
+
+.gameLinks a {
+    color: #65bcef;
+}
+
+.gameLinks p:first-child {
+    margin-top: 15px;
+}
+
+.gameLinks span {
+    color: #879098;
+}
+
+.gameLinks .allLinks {
+    margin-top: 15px;
+}
+
+.gameLinks .link {
+    width: 90%;
+    display: block;
+    padding: 0;
+    margin: 0 5% 3px;
+    background-color: #172936;
+    color: #4a8bb1;
+    padding-left: 5px;
+}
+
+.gameLinks .link:hover {
+    background-color: #4a8bb1;
+    text-decoration: none;
+    color: #eee;
+}
+
+.gameReq {
+    min-height: 150px;
+    margin-top: 50px;
+}
+
+.gameReq h2 {
+    padding: 0;
+    margin: 0;
+}
+
+.reqMin {
+    font-size: 14px;
+    margin-top: 25px;
+    color: #c5c3c0;
+    float: left;
+    width: 45%;
+}
+
+.reqMin pre {
+    width: 100%;
+    white-space: pre-wrap;
+}
+
+.reqRec {
+    width: 45%;
+    font-size: 14px;
+    margin-top: 25px;
+    color: #c5c3c0;
+    float: right;
+}
+
+.reqRec pre {
+    width: 100%;
+    white-space: pre-wrap;
+}
+
+
+
+
+@media (max-width: 667px) {
+
+    .mapHeading {
+        text-align: center;
+    }
+
+    .both {
+        height: 425px;
+    }
+
+    .gameInfoHeight {
+        height: 475px;
+    }
+
+    .leftDiv {
+        width: 98%;
+        margin-right: 1%;
+        margin-left: 1%;
+        height: auto;
+    }
+
+    .gameInfoPic {
+        margin-top: 0;
+        margin-left: 0;
+    }
+
+    .rightDivInfo {
+        width: 100%;
+        float: none;
+    }
+
+    .rightDivInfoImg {
+        display: none;
+    }
+
+    .buyGame {
+        width: 100%;
+    }
+
+    .recommended {
+        width: 100%;
+    }
+
+    .recommended p {
+        margin-bottom: 25px;
+    }
+
+    .gameDesc {
+        width: 100%;
+    }
+
+    .gameDesc h2 {
+        text-align: center;
+    }
+
+    .gameDesc p {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .gameLinks {
+        width: 100%;
+    }
+
+    .gameReq {
+        width: 100%;
+    }
+
+    .gameReq h2 {
+        text-align: center;
+    }
+}

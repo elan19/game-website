@@ -1,0 +1,116 @@
+.nav {
+    min-height: 125px;
+}
+
+.bottomNav {
+    width: 100%;
+    color: white;
+    background-color: #171a21;
+    display: block;
+}
+
+a {
+    margin: 15px;
+    color: #ccc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #eee;
+}
+
+.navPic {
+    margin: 0;
+    padding: 0;
+    margin-bottom: -15px;
+    width: 10%;
+    color: white;
+    margin-left: 20%;
+    margin-top: 35px;
+    position: relative;
+}
+
+.navLink {
+    margin: 15px;
+    text-decoration: none;
+    color: #ccc;
+}
+
+.navLink:nth-child(6) {
+    margin-left: 25%;
+}
+
+.hamburgMenu {
+    display: none;
+    position: absolute;
+    cursor: pointer;
+    right: 5%;
+    top: 30px;
+}
+
+.bar1,
+.bar2,
+.bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #ccc;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+
+.changeBar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+}
+
+.changeBar2 {
+    opacity: 0;
+}
+
+.changeBar3 {
+    transform: translate(0, -11px) rotate(45deg);
+}
+
+.navLinksVisible {
+    margin: 15px;
+    text-decoration: none;
+    color: #ccc;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        overflow-x: auto;
+        min-height: 100px;
+    }
+
+    .hamburgMenu {
+        display: block;
+    }
+
+    .navPic {
+        padding: 0;
+        margin-top: 35px;
+        margin-bottom: -15px;
+        margin-left: 5%;
+        width: 30%;
+    }
+
+    .navLink {
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        margin: 30px;
+        display: none;
+    }
+
+    .navLinksVisible {
+        display: block;
+    }
+
+    .navLink:nth-child(6) {
+        margin-left: 30px;
+    }
+}

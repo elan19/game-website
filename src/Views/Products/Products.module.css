@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    line-height: 1.4;
+    font-family: sans-serif;
+    background-color: #1b2838;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    font-size: 1.8rem;
+}
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.4rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+header {
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 25px;
+}
+
+.search {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 60%;
+    height: 45px;
+}
+
+.search input {
+    height: 30px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    margin-left: 7.5px;
+    border-radius: 5px;
+}
+
+.searchText {
+    color: #eee;
+    margin-top: 25px;
+    padding: 0;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 1200px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.searchBar {
+    color: #eee;
+    background-color: #213a4c;
+    border: none;
+    font-size: 14px;
+}
+
+.searchBar:focus {
+    border: none;
+    outline: 2px solid grey;
+}
+
+.searchBtn {
+    width: 50px;
+    background-color: #213a4c;
+    color: #5fb2e2;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.searchBtn:hover {
+    background-color: #5fb2e2;
+    color: #eee;
+}
+
+.gameListH3 {
+    font-size: 22px;
+    margin-top: 25px;
+    color: #eee;
+}
+
+.prevPage {
+    width: 100px;
+    height: 50px;
+    color: #eee;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s, border-radius 0.3s;
+}
+
+.prevPage:hover {
+    box-shadow: -40px 0 10px -5px inset rgba(255, 255, 255, 0.5);
+    border-radius: 0 15px 15px 0;
+}
+
+.nextPage {
+    width: 100px;
+    height: 50px;
+    color: #eee;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 36px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    float: right;
+    clear: both;
+    transition: box-shadow 0.3s, border-radius 0.3s;
+}
+
+.nextPage:hover {
+    box-shadow: 40px 0 10px -5px inset rgba(255, 255, 255, 0.5);
+    border-radius: 15px 0 0 15px;
+}
+

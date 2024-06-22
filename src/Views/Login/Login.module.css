@@ -1,0 +1,8 @@
+.mainLogin {
+    width: 100%;
+    max-width: 100%;
+    min-height: 700px;
+    margin: 0;
+    background-image: url("../../images/login.jpg");
+    font-family: "Motiva Sans";
+}

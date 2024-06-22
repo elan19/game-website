@@ -1,0 +1,169 @@
+.both {
+    width: 100%;
+    height: 400px;
+    box-shadow: 2px 2px 5px black;
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #384d66, #08182c);
+}
+
+.gameName {
+    font-size: 1.2vw;
+    color: #eee;
+    text-align: center;
+}
+
+.gamePic {
+    width: 100%;
+    height: 340px;
+    margin-top: 30px;
+    box-shadow: 5px 5px 5px black;
+    object-fit: cover;
+    border: 1px solid black;
+    transition: transform 0.3s;
+}
+
+.gamePic:hover {
+    transform: scale(1.05);
+}
+
+.smallScreenshot {
+    width: 40%;
+    border: 1px solid black;
+    object-fit: cover;
+}
+
+.leftDiv {
+    width: 50%;
+    height: 400px;
+    float: left;
+    margin-left: 5%;
+}
+
+.rightTopDiv {
+    padding-top: 20px;
+    height: 30px;
+    width: 45%;
+    float: right;
+}
+
+.rightDiv {
+    --g: 2px;   /* the gap */
+    --s: 370px; /* the size */
+
+    width: 45%;
+    height: 370px;
+    display: grid;
+    place-content: center;
+}
+
+.rightDiv > img {
+    grid-area: 1/1;
+    width: 300px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    transform: translate(var(--_x, 0), var(--_y, 0));
+    cursor: pointer;
+    z-index: 0;
+    transition: 0.3s, z-index 0s 0.3s;
+}
+
+.rightDiv img:hover {
+    --_i: 1;
+
+    z-index: 1;
+    transition: transform 0.2s, clip-path 0.3s 0.2s, z-index 0s;
+}
+
+.rightDiv:hover img {
+    transform: translate(0, 0);
+}
+
+.rightDiv > img:nth-child(1) {
+    clip-path: polygon(50% 50%, calc(50% * var(--_i, 0)) calc(120% * var(--_i, 0)), 0 calc(100% * var(--_i, 0)), 0 0, 100% 0, 100% calc(100% * var(--_i, 0)), calc(100% - 50% * var(--_i, 0)) calc(120% * var(--_i, 0)));
+
+    --_y: calc(-1 * var(--g));
+}
+
+.rightDiv > img:nth-child(2) {
+    clip-path: polygon(50% 50%, calc(100% - 120% * var(--_i, 0)) calc(50% * var(--_i, 0)), calc(100% - 100% * var(--_i, 0)) 0, 100% 0, 100% 100%, calc(100% - 100% * var(--_i, 0)) 100%, calc(100% - 120% * var(--_i, 0)) calc(100% - 50% * var(--_i, 0)));
+
+    --_x: var(--g);
+}
+
+.rightDiv > img:nth-child(3) {
+    clip-path: polygon(50% 50%, calc(100% - 50% * var(--_i, 0)) calc(100% - 120% * var(--_i, 0)), 100% calc(100% - 120% * var(--_i, 0)), 100% 100%, 0 100%, 0 calc(100% - 100% * var(--_i, 0)), calc(50% * var(--_i, 0)) calc(100% - 120% * var(--_i, 0)));
+
+    --_y: var(--g);
+}
+
+.rightDiv > img:nth-child(4) {
+    clip-path: polygon(50% 50%, calc(120% * var(--_i, 0)) calc(50% * var(--_i, 0)), calc(100% * var(--_i, 0)) 0, 0 0, 0 100%, calc(100% * var(--_i, 0)) 100%, calc(120% * var(--_i, 0)) calc(100% - 50% * var(--_i, 0)));
+
+    --_x: calc(-1 * var(--g));
+}
+
+.rightDivTwoImgs {
+    --g: 2px;   /* the gap */
+    --s: 370px; /* the size */
+
+    width: 45%;
+    height: 370px;
+    display: grid;
+    place-content: center;
+}
+
+.rightDivTwoImgs > img {
+    grid-area: 1/1;
+    width: 300px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    transform: translate(var(--_x, 0), var(--_y, 0));
+    cursor: pointer;
+    z-index: 0;
+    transition: 0.3s, z-index 0s 0.3s;
+}
+
+.rightDivTwoImgs img:hover {
+    --_i: 1;
+
+    z-index: 1;
+    transition: transform 0.2s, clip-path 0.3s 0.2s, z-index 0s;
+}
+
+.rightDivTwoImgs img {
+    transform: translate(0, 0);
+}
+
+.rightDivTwoImgs > img:first-child {
+    clip-path: polygon(0% 100%, calc(0% * var(--_i, 0)) calc(120% * var(--_i, 0)), 0 calc(100% * var(--_i, 0)), 0 0, 100% 0, 100% calc(100% * var(--_i, 0)), calc(100% - 50% * var(--_i, 0)) calc(120% * var(--_i, 0)));
+
+    --_y: calc(-1 * var(--g));
+}
+
+.rightDivTwoImgs > img:last-child {
+    clip-path: polygon(0% 100%, calc(100% - 120% * var(--_i, 0)) calc(50% * var(--_i, 0)), calc(100% - 100% * var(--_i, 0)) 0, 100% 0, 100% 100%, calc(00% - 100% * var(--_i, 0)) 100%, calc(100% - 120% * var(--_i, 0)) calc(100% - 50% * var(--_i, 0)));
+
+    --_x: var(--g);
+}
+
+.rightDivOneImg {
+    width: 45%;
+    height: 370px;
+    display: grid;
+    place-content: center;
+}
+
+.rightDivOneImg > img {
+    grid-area: 1/1;
+    width: 300px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.rightDivOneImg > img:first-child {
+    clip-path: polygon(0);
+}

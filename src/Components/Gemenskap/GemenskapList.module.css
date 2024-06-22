@@ -1,0 +1,53 @@
+.gemenskap {
+    width: 44%;
+    background-color: #213a4c;
+    margin-top: 15px;
+    text-align: center;
+    display: inline-block;
+}
+
+.gemenskap img {
+    width: 300px;
+    height: 250px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+.gemenskap:nth-child(odd) {
+    margin-left: 5%;
+}
+
+.gemenskap:nth-child(even) {
+    margin-right: 5%;
+    border-left: 1px solid #1b2838;
+}
+
+.picBtn {
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    background-color: #213a4c;
+    color: #5fb2e2;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.picBtn:hover {
+    background-color: #5fb2e2;
+    color: #eee;
+}
+
+.gemenskapH2 {
+    text-align: center;
+}
+
+.gameDescH2Border {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, #1b2838, #eee, #1b2838);
+    margin-bottom: 10px;
+}

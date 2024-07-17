@@ -45,3 +45,43 @@
     max-width: 125px;
     width: 10%;
 }
+
+
+@media (max-width: 667px) {
+    .footer {
+        height: auto;
+        min-height: 250px;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .footerContent img {
+        margin-top: 20px;
+    }
+
+    .footerPic {
+        width: 25%;
+    }
+
+    .footerPicRight {
+        width: 30%;
+    }
+
+    .footerContent p {
+        margin-left: 0%;
+        font-size: 12px;
+        margin-right: 0%;
+        margin-bottom: 10px;
+        margin-top: 5px;
+    }
+
+    .footerLink {
+        width: 25%;
+        height: 25px;
+        margin: 0;
+        margin-right: 25px;
+        margin-left: 25px;
+        display: inline-block;
+        text-align: center;
+    }
+}

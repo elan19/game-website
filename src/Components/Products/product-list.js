@@ -25,7 +25,21 @@ const ProductList = () => {
 
     setProducts(result.results);
     setNext(result.next);
-    setPrev(result.previous);
+    if (result.previous !== null) {
+      const url = new URL(result.previous);
+      const params = new URLSearchParams(url.search);
+      
+      if (!params.has('page')) {
+        // Append &page=1 if the page parameter is not present
+        params.append('page', '1');
+        url.search = params.toString();
+      }
+      
+      setPrev(url.toString());
+    } else {
+      setPrev('https://api.rawg.io/api/games?key=7cb59c195dc14cf682ec1efef10d43ed&page=1');
+    }
+    console.log(prev);
   };
 
   useEffect(() => {

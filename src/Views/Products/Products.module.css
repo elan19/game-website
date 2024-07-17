@@ -140,3 +140,13 @@ main {
     border-radius: 15px 0 0 15px;
 }
 
+@media (max-width: 667px) {
+    .gameListH3 {
+        font-size: 22px;
+        margin-top: 75px;
+        margin-bottom: 10px;
+        color: #eee;
+        margin-left: 5px;
+    }
+}
+

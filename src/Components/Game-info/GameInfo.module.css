@@ -283,7 +283,7 @@
     }
 
     .gameInfoHeight {
-        height: 475px;
+        height: 550px;
     }
 
     .leftDiv {
@@ -313,6 +313,7 @@
 
     .recommended {
         width: 100%;
+        margin-left: 0;
     }
 
     .recommended p {
@@ -334,13 +335,40 @@
 
     .gameLinks {
         width: 100%;
+        margin-left: 0;
     }
 
     .gameReq {
         width: 100%;
     }
 
+    .reqMin pre {
+        margin-left: 5%;
+    }
+
+    .reqRec pre {
+        margin-right: 5%;
+    }
+
     .gameReq h2 {
         text-align: center;
+    }
+
+    .gameBody {
+        grid-template-columns: 100%;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .gameInfoHeight {
+        height: 475px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .gameInfoHeight {
+        height: 420px;
     }
 }

@@ -7,7 +7,7 @@
 }
 
 .gameName {
-    font-size: 1.2vw;
+    font-size: 1.0em;
     color: #eee;
     text-align: center;
 }
@@ -166,4 +166,29 @@
 
 .rightDivOneImg > img:first-child {
     clip-path: polygon(0);
+}
+
+
+@media (max-width: 667px) {
+    .leftDiv {
+        width: 90%;
+        height: 350px;
+    }
+
+    .gamePic {
+        height: 300px;
+    }
+
+    .rightDiv {
+        display: none;
+    }
+
+    .rightTopDiv {
+        width: 100%;
+
+    }
+
+    .gameName {
+        font-size: 1.0em;
+    }
 }

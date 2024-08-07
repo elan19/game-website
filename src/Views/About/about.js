@@ -26,7 +26,7 @@ const About = () => {
                 <h1>Få tillgång till spel direkt</h1>
                 <div className={styles.aboutTextMiddle}>
                     <p>
-                        Med nästan 30 000 spel från AAA till indie och allt däremellan. 
+                        Med mängder av spel från AAA till indie och allt däremellan. 
                         Njut av exklusiva erbjudanden, 
                         automatiska speluppdateringar och andra bra förmåner. 
                     </p>

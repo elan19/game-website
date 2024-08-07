@@ -82,7 +82,7 @@
     box-sizing: border-box;
     display: block;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1.4rem;
+    font-size: 1.4vw;
     text-align: center;
     border-radius: 0.2rem;
     height: 40px;
@@ -189,4 +189,71 @@
     margin-right: 20%;
     float: right;
     margin-top: 200px;
+}
+
+@media (max-width:800px) {
+
+    .aboutContent {
+        min-height: 550px;
+    }
+
+    .aboutText {
+        width: 80%;
+        margin-left: 10%;
+        height: 400px;
+        margin-top: 100px;
+        z-index: 5;
+        position: relative;
+    }
+
+    .aboutImgDiv {
+        position: absolute;
+        z-index: 1;
+        top: 120px;
+        right: 0px;
+        margin-right: 10%;
+        width: 25%;
+        min-width: 150px;
+    }
+
+    .installSteamButton {
+        font-size: 18px;
+        margin-left: 10%;
+    }
+
+    .aboutContentShopInfo {
+        min-height: 500px;
+    }
+
+    .aboutTextMiddle {
+        height: auto;
+    }
+
+    .aboutTextMiddle {
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .aboutTextLeftAboutGemenskap {
+        width: 80%;
+        margin-left: 10%;
+        position: relative;
+    }
+
+    .aboutImgDivRightAboutGemenskap {
+        margin-top: 0;
+        position: relative;
+    }
+
+}
+
+@media (max-width: 520px) {
+    .aboutImgDivRightAboutGemenskap {
+        position: absolute;
+        bottom: -900px;
+        right: 0px;
+        margin-right: 10%;
+    }
+
 }

@@ -270,12 +270,49 @@
 }
 
 
+@media (max-width: 1200px) {
+    .mapHeading {
+        margin-left: 2%;
+    }
 
+    .gameDesc h2 {
+        margin-left: 2%;
+    }
 
-@media (max-width: 667px) {
+    .gameDesc p {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .gameReq h2 {
+        margin-left: 2%;
+    }
+
+    .reqMin pre {
+        margin-left: 2%;
+    }
+
+    .reqRec pre {
+        margin-right: 2%;
+    }
+}
+
+@media (max-width: 800px) {
+    .recommended {
+        min-height: 225px;
+    }
+
+    .purchase {
+        margin-top: 50px;
+    }
+}
+
+@media (max-width: 800px) {
+
 
     .mapHeading {
         text-align: center;
+        margin-top: 50px
     }
 
     .both {
@@ -283,7 +320,11 @@
     }
 
     .gameInfoHeight {
-        height: 550px;
+        height: 650px;
+    }
+
+    .gameInfoPic {
+        margin-bottom: 15px;
     }
 
     .leftDiv {
@@ -294,8 +335,20 @@
     }
 
     .gameInfoPic {
-        margin-top: 0;
+        margin-top: 6px;
         margin-left: 0;
+    }
+
+    .gameLinks .link {
+        width: 96%;
+        margin: 0 2% 3px;
+        background-color: #172936;
+        color: #4a8bb1;
+        padding-left: 5px;
+    }
+    
+    .gameLinks p {
+        padding-left: 2%;
     }
 
     .rightDivInfo {
@@ -311,8 +364,13 @@
         width: 100%;
     }
 
+    .purchase {
+        margin-top: 20px;
+    }
+
     .recommended {
         width: 100%;
+        min-height: 150px;
         margin-left: 0;
     }
 
@@ -326,11 +384,7 @@
 
     .gameDesc h2 {
         text-align: center;
-    }
-
-    .gameDesc p {
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 0%;
     }
 
     .gameLinks {
@@ -342,16 +396,9 @@
         width: 100%;
     }
 
-    .reqMin pre {
-        margin-left: 5%;
-    }
-
-    .reqRec pre {
-        margin-right: 5%;
-    }
-
     .gameReq h2 {
         text-align: center;
+        margin-left: 0%;
     }
 
     .gameBody {
@@ -359,16 +406,22 @@
     }
 }
 
+@media (max-width: 625px) {
+    .gameInfoHeight {
+        height: 550px;
+    }
+}
+
 @media (max-width: 520px) {
 
     .gameInfoHeight {
-        height: 475px;
+        height: 500px;
     }
 }
 
 @media (max-width: 420px) {
 
     .gameInfoHeight {
-        height: 420px;
+        height: 450px;
     }
 }

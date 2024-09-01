@@ -119,4 +119,13 @@
         font-size: 1rem;
         width: 50%;
     }
+
+    .registerForm {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .leftInputLabel {
+        width: 90%;
+    }
 }

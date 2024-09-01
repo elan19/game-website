@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import MongoDbModel from '../../models/mongodb';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 import styles from './Profile.module.css'; // Assuming you have a CSS file for styling
 
 import defaultProfilePic from '../../images/login.jpg';
@@ -41,6 +42,9 @@ const ProfileView = () => {
             {userData ? (
                 <div className={styles.profileContainer}>
                     <h1 className={styles.profileName}>{userData.username}</h1>
+                        <Link to="/profile/edit" className={styles.editProfileLink}>
+                            Edit Profile
+                        </Link>
                     <div className={styles.profileImageContainer}>
                         <img src={userData.profilePic || defaultProfilePic} alt="Profile" className={styles.profileImage} />
                     </div>
@@ -54,6 +58,7 @@ const ProfileView = () => {
                         <p>Inventory</p>
                         <p>{`Number of Friends: ${userData.friends.length}`}</p>
                     </div>
+                    
                 </div>
             ) : (
                 <div>No user data found.</div>

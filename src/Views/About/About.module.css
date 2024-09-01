@@ -82,7 +82,7 @@
     box-sizing: border-box;
     display: block;
     font-family: 'Source Sans Pro', sans-serif;
-    font-size: 1.4vw;
+    font-size: 18px;
     text-align: center;
     border-radius: 0.2rem;
     height: 40px;
@@ -191,6 +191,12 @@
     margin-top: 200px;
 }
 
+@media (max-width:1400px) {
+    .installSteamButton {
+        width: 100%;
+    }
+}
+
 @media (max-width:800px) {
 
     .aboutContent {
@@ -219,6 +225,7 @@
     .installSteamButton {
         font-size: 18px;
         margin-left: 10%;
+        width: 40%;
     }
 
     .aboutContentShopInfo {

@@ -269,6 +269,10 @@
     white-space: pre-wrap;
 }
 
+.hide {
+    display: none;
+}
+
 
 @media (max-width: 1200px) {
     .mapHeading {

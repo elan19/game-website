@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { UserContext } from '../../util/UserContext'; // Import UserContext
 import MongoDbModel from '../../models/mongodb';
-import { Link } from 'react-router-dom'; // Import Link for navigation
-import styles from './Profile.module.css'; // Assuming you have a CSS file for styling
-
+import { Link } from 'react-router-dom';
+import styles from './Profile.module.css';
 import defaultProfilePic from '../../images/login.jpg';
+import MoneyModal from './MoneyModal'; // Import the MoneyModal component
 
 const ProfileView = () => {
-    const [userData, setUserData] = useState(null);
+    const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showModal, setShowModal] = useState(false); // State for modal visibility
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const data = await MongoDbModel.getOneUser(localStorage.getItem('username'));
-                if (data) {
-                    setUserData(data);
-                } else {
-                    setError('Failed to fetch user data.');
-                }
-            } catch (err) {
-                setError('An error occurred while fetching user data.');
-            } finally {
-                setLoading(false);
-            }
-        };
+        if (!userData) {
+            fetchUserData();
+        } else {
+            setLoading(false);
+        }
+    }, [userData, fetchUserData]);
 
-        fetchUserData();
-    }, []);
+    const addMoney = async (amount) => {
+        try {
+            await MongoDbModel.updateUserMoney(userData.username, amount);
+            fetchUserData(); // Refresh user data
+        } catch (error) {
+            console.error('Failed to update user data:', error);
+        }
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -39,26 +39,39 @@ const ProfileView = () => {
 
     return (
         <div className={styles.profileDiv}>
+            {showModal && (
+                <MoneyModal
+                    onClose={() => setShowModal(false)}
+                    onAddMoney={addMoney}
+                />
+            )}
             {userData ? (
                 <div className={styles.profileContainer}>
                     <h1 className={styles.profileName}>{userData.username}</h1>
-                        <Link to="/profile/edit" className={styles.editProfileLink}>
-                            Edit Profile
-                        </Link>
+                    <Link to="/profile/edit" className={styles.editProfileLink}>
+                        Edit Profile
+                    </Link>
+                    <div className={styles.addMoney}>
+                        <button onClick={() => setShowModal(true)} className={styles.addMoneyButton}>
+                            Add Money
+                        </button>
+                    </div>
                     <div className={styles.profileImageContainer}>
                         <img src={userData.profilePic || defaultProfilePic} alt="Profile" className={styles.profileImage} />
                     </div>
                     <div className={styles.profileInfo}>
-                        <p>{userData.name}Test Testing</p>
+                        <p>{userData.name}</p>
                         <p className={styles.test}>{userData.desc}</p>
+                        <p>{`Money: $${userData.money}`}</p>
                     </div>
                     <div className={styles.profileDetails}>
                         <h1>Details</h1>
                         <p>{`Number of Games: ${userData.games.length}`}</p>
-                        <p>Inventory</p>
+                        <Link to="/profile/inventory" className={styles.inventoryLink}>
+                            Inventory
+                        </Link>
                         <p>{`Number of Friends: ${userData.friends.length}`}</p>
                     </div>
-                    
                 </div>
             ) : (
                 <div>No user data found.</div>

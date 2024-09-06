@@ -88,5 +88,62 @@
 /* Ensure no text decoration on hover */
 .editProfileLink a {
     text-decoration: none;
-    color: ccc;
+    color: #ccc;
+}
+
+
+
+.addMoney {
+    width: 100px;
+    height: 40px;
+    margin-left: 80%;
+    text-align: right;
+}
+
+.addMoneyButton {
+    width: 100px;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    color: white; /* Ensure text is visible on the background */
+    text-decoration: none; /* Remove underline from text */
+    transition: background-color 0.2s; /* Apply transition to the background color */
+    text-decoration: none;
+}
+
+/* Hover effect for the link */
+.addMoneyButton:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}
+
+@media (max-width: 800px) {
+    .profileDiv {
+        min-height: 600px;
+    }
+
+    .profileName {
+        width: 55%;
+        margin-right: 15%;
+    }
+
+    .profileImageContainer {
+        width: 35%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    .addMoney {
+        margin-left: 70%;
+    }
+
+    .profileDetails {
+        width: 50%;
+    }
 }

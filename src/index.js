@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
 import { AuthProvider, AuthContext } from './util/AuthContext';
-
+import { UserProvider } from './util/UserContext'; // Import UserProvider
 
 import ProductsView from './Views/Products/products';
 import Footer from './Views/Footer/footer';
@@ -20,43 +20,44 @@ import GemenskapView from './Views/Gemenskap/gemenskap';
 import RegisterView from './Views/Register/register';
 import ProfileView from './Views/Profile/profile';
 import EditProfile from './Views/Profile/edit-profile';
+import Library from './Views/Library/library';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <Router>
-        <AuthContext.Consumer>
-          {({ isLoggedIn }) => (
-            <>
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<ProductsView />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/game-info/:gameId" element={<GameInfoView />} />
-                {!isLoggedIn && (
-                  <>
-                    <Route path="/login" element={<LoginView />} />
-                    <Route path="/register" element={<RegisterView />} />
-                  </>
-                )}
-                <Route path="/publisher/:id" element={<PublisherInfoView />} />
-                <Route path="/developer/:id" element={<DeveloperInfoView />} />
-                <Route path="/gemenskap" element={<GemenskapView />} />
-                <Route path="/profile" element={<ProfileView />} />
-                <Route path="/profile/edit" element={<EditProfile />} />
-              </Routes>
-              <Footer />
-            </>
-          )}
-        </AuthContext.Consumer>
-      </Router>
+      <UserProvider> {/* Wrap with UserProvider */}
+        <Router>
+          <AuthContext.Consumer>
+            {({ isLoggedIn }) => (
+              <>
+                <Navbar />
+                <Routes>
+                  <Route path="/" element={<ProductsView />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/library" element={<Library />} />
+                  <Route path="/game-info/:gameId" element={<GameInfoView />} />
+                  {!isLoggedIn && (
+                    <>
+                      <Route path="/login" element={<LoginView />} />
+                      <Route path="/register" element={<RegisterView />} />
+                    </>
+                  )}
+                  <Route path="/publisher/:id" element={<PublisherInfoView />} />
+                  <Route path="/developer/:id" element={<DeveloperInfoView />} />
+                  <Route path="/gemenskap" element={<GemenskapView />} />
+                  <Route path="/profile" element={<ProfileView />} />
+                  <Route path="/profile/edit" element={<EditProfile />} />
+                </Routes>
+                <Footer />
+              </>
+            )}
+          </AuthContext.Consumer>
+        </Router>
+      </UserProvider> {/* Close UserProvider */}
     </AuthProvider>
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

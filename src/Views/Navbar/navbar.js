@@ -3,24 +3,29 @@ import { Link } from 'react-router-dom';
 import logoSteam from '../../images/logo_steam.png';
 import styles from './Navbar.module.css';
 import { AuthContext } from '../../util/AuthContext';
+import { UserContext } from '../../util/UserContext'; // Import UserContext
 
 const Navigation = () => {
     const [menuOpen, setMenuOpen] = useState(false);
-    const [dropdownOpen, setDropdownOpen] = useState(false); // State for dropdown visibility
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Track if the view is mobile
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+    const { userData } = useContext(UserContext); // Access user data from context
     const { isLoggedIn, logout } = useContext(AuthContext);
 
     const routes = {
         '/': { name: 'Shop', hidden: false },
+        ...(isLoggedIn && { '/library': { name: 'Library', hidden: false } }),
         '/about': { name: 'About', hidden: false },
         '/gemenskap': { name: 'Gemenskap', hidden: false },
         '/login': { name: 'Login', hidden: false },
-        ...(localStorage.getItem('isLoggedIn') && { '/profile': { name: localStorage.getItem('username'), hidden: false } }), // Conditionally include profile link if authenticated
+        ...(isLoggedIn && { '/profile': { name: localStorage.getItem('username') + " ▼ $" + (userData ? userData.money : 0), hidden: false } })
     };
 
     const handleMenuClick = (event) => {
         event.preventDefault();
+        console.log(menuOpen);
         setMenuOpen(!menuOpen);
+        setDropdownOpen(false)
     };
 
     const handleLogoutClick = (event) => {
@@ -34,21 +39,18 @@ const Navigation = () => {
     };
 
     useEffect(() => {
-        // Update the isMobile state when resizing
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
+            setIsMobile(window.innerWidth <= 900);
         };
 
         window.addEventListener('resize', handleResize);
 
-        // Clean up the event listener on component unmount
         return () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
 
     useEffect(() => {
-        // Close dropdown when resizing to desktop view
         if (!isMobile) {
             setDropdownOpen(false);
         }
@@ -65,36 +67,28 @@ const Navigation = () => {
                     <div className={`${styles.bar2} ${menuOpen ? styles.changeBar2 : ''}`}></div>
                     <div className={`${styles.bar3} ${menuOpen ? styles.changeBar3 : ''}`}></div>
                 </div>
+
                 {Object.keys(routes).map((path) => {
                     const route = routes[path];
                     if (route.hidden || (path === '/login' && isLoggedIn)) {
-                        return null; // Hide the login link if authenticated
+                        return null;
                     }
                     return path === '/gemenskap' ? (
                         <div
                             key={path}
-                            className={styles.dropdownContainer}
-                            onClick={(e) => {
-                                if (isMobile) {
-                                    handleDropdownToggle(e); // Toggle dropdown on click in mobile view
-                                }
-                            }}
-                            onMouseEnter={() => !isMobile && setDropdownOpen(true)} // Show dropdown on hover for larger screens
-                            onMouseLeave={() => !isMobile && setDropdownOpen(false)} // Hide dropdown when not hovering for larger screens
+                            className={`${styles.dropdownContainer} ${isMobile && dropdownOpen ? styles.dropdownContainerMobileOpen : ''}`}
+                            onClick={(e) => isMobile && handleDropdownToggle(e)}
+                            onMouseEnter={() => !isMobile && setDropdownOpen(true)}
+                            onMouseLeave={() => !isMobile && setDropdownOpen(false)}
                         >
                             <Link
                                 to={path}
                                 className={`${styles.navLink} ${menuOpen ? styles.navLinksVisible : ''}`}
-                                onClick={(e) => {
-                                    if (isMobile) {
-                                        e.preventDefault(); // Prevent default link behavior on mobile
-                                    }
-                                    handleDropdownToggle(e); // Toggle dropdown on click in mobile view
-                                }}
+                                onClick={(e) => isMobile && e.preventDefault() && handleDropdownToggle(e)}
                             >
                                 {route.name}
                             </Link>
-                            {(dropdownOpen || !isMobile) && (
+                            {(dropdownOpen && menuOpen|| !isMobile) && (
                                 <div className={`${styles.dropdownMenu} ${isMobile && dropdownOpen ? styles.dropdownMenuOpen : ''}`}>
                                     <Link to="/gemenskap" onClick={() => setMenuOpen(false)}>Social</Link>
                                     <Link to="/gemenskap/Market" onClick={() => setMenuOpen(false)}>Market</Link>
@@ -113,6 +107,7 @@ const Navigation = () => {
                         </Link>
                     );
                 })}
+
                 {isLoggedIn && (
                     <Link
                         to="#"

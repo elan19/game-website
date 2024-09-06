@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { UserContext } from '../../util/UserContext'; // Import UserContext
+
+import MongoDbModel from '../../models/mongodb';
 
 import styles from "./GameInfo.module.css";
 
@@ -7,6 +10,7 @@ const GameInfo = () => {
     const { gameId } = useParams();
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
+    const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
 
     const apiKey = process.env.REACT_APP_API_KEY;
     const baseURL = process.env.REACT_APP_BASE_URL;
@@ -35,6 +39,9 @@ const GameInfo = () => {
         return <div>No game info available</div>;
     }
 
+    // Check if the user already owns the game
+    const userOwnsGame = userData?.games?.some((userGame) => userGame === game.name);
+
     let platforms = "";
     let genres = "";
     let reqMin = "Minumum:\nUnknown";
@@ -42,6 +49,7 @@ const GameInfo = () => {
     let publishers = [];
     let ratingCount = 0;
     let ratingPercent = 0;
+    let gameCost = 9.99;
 
     if (game.ratings?.[0]) {
         ratingCount = game.ratings[0].count || 0;
@@ -70,9 +78,17 @@ const GameInfo = () => {
         <Link key={publisher.id} to={`/publisher/${publisher.id}`}>{publisher.name}</Link>
     )).reduce((prev, curr) => [prev, ', ', curr]);
 
-    const handleBuyClick = () => {
+    const handleBuyClick = async () => {
         // Add your logic for the "buy-game" button action here
-        alert("You need to login first.");
+        if (userOwnsGame) return; // Prevent action if user already owns the game
+        //alert("You need to login first.");
+        try {
+            await MongoDbModel.updateUser(userData.username, -gameCost, game.name);
+            console.log("success");
+            fetchUserData(); // Refresh user data
+        } catch (error) {
+            console.error('Failed to update user data:', error);
+        }
     };
 
     return (
@@ -103,14 +119,18 @@ const GameInfo = () => {
                 </div>
             </div>
             <div className={styles.gameBody}>
-                <div className={styles.buyGame}>
+                <div className={`${styles.buyGame} ${userOwnsGame ? styles.hide : ''}`}>
                     <h2>Köp {game.name}</h2>
                     <p>{platforms}</p>
                     <div className={styles.purchase}>
                         <div className={styles.gameCost}>
-                            <p>9,99€</p>
+                            <p>${gameCost}</p>
                         </div>
-                        <button className={styles.buyGameBtn} onClick={handleBuyClick}>Köp</button>
+                        <button className={styles.buyGameBtn} 
+                        onClick={handleBuyClick} 
+                        disabled={userOwnsGame}>
+                            Köp
+                        </button>
                     </div>
                 </div>
                 <div className={styles.recommended}>

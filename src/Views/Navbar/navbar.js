@@ -90,9 +90,9 @@ const Navigation = () => {
                             </Link>
                             {(dropdownOpen && menuOpen|| !isMobile) && (
                                 <div className={`${styles.dropdownMenu} ${isMobile && dropdownOpen ? styles.dropdownMenuOpen : ''}`}>
-                                    <Link to="/gemenskap" onClick={() => setMenuOpen(false)}>Social</Link>
-                                    <Link to="/gemenskap/Market" onClick={() => setMenuOpen(false)}>Market</Link>
-                                    <Link to="/gemenskap/events" onClick={() => setMenuOpen(false)}>Events</Link>
+                                    <Link to="/gemenskap" onClick={() => setMenuOpen(false)}>Home</Link>
+                                    <Link to="/gemenskap/social" onClick={() => setMenuOpen(false)}>Social</Link>
+                                    <Link to="/gemenskap/market" onClick={() => setMenuOpen(false)}>Market</Link>
                                 </div>
                             )}
                         </div>

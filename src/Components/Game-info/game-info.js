@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../../util/UserContext'; // Import UserContext
 
 import MongoDbModel from '../../models/mongodb';
@@ -11,6 +11,7 @@ const GameInfo = () => {
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
+    const navigate = useNavigate();
 
     const apiKey = process.env.REACT_APP_API_KEY;
     const baseURL = process.env.REACT_APP_BASE_URL;
@@ -119,23 +120,26 @@ const GameInfo = () => {
                 </div>
             </div>
             <div className={styles.gameBody}>
-                <div className={`${styles.buyGame} ${userOwnsGame ? styles.hide : ''}`}>
-                    <h2>Köp {game.name}</h2>
-                    <p>{platforms}</p>
-                    <div className={styles.purchase}>
-                        <div className={styles.gameCost}>
-                            <p>${gameCost}</p>
+                <div className={`${styles.buyGame}`}>
+                        <h2>{userOwnsGame ? `Spela ${game.name}` : `Köp ${game.name}`}</h2>
+                        <p>{platforms}</p>
+                        <div className={styles.purchase}>
+                            {!userOwnsGame && (
+                                <div className={styles.gameCost}>
+                                    <p>${gameCost}</p>
+                                </div>
+                            )}
+                            <button 
+                                className={styles.buyGameBtn} 
+                                onClick={userOwnsGame ? () => navigate('/library') : handleBuyClick}
+                            >
+                                {userOwnsGame ? 'Spela' : 'Köp'}
+                            </button>
                         </div>
-                        <button className={styles.buyGameBtn} 
-                        onClick={handleBuyClick} 
-                        disabled={userOwnsGame}>
-                            Köp
-                        </button>
-                    </div>
                 </div>
                 <div className={styles.recommended}>
-                    <h2>Rekommenderat spel</h2>
-                    <p>Från dina tidigare spel ser detta ut att vara ett spel du skulle tycka om.</p>
+                    <h2>{userOwnsGame ? `Du äger spelet` : `Rekommenderat spel`}</h2>
+                    <p>{userOwnsGame ? `Kör spelet och få chans till kort i ditt förråd.` : `Från dina tidigare spel ser detta ut att vara ett spel du skulle tycka om.`}</p>
                 </div>
                 <div className={styles.gameDesc}>
                     <h2>Om detta spel</h2>

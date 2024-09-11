@@ -9,8 +9,6 @@ const MongoDbModel = {
         try {
         const user = await app.logIn(cred);
         const response = await user.functions.getAllUsers();
-        console.log(response);
-        //const allUsers = response.json();
 
         return response;
 
@@ -24,10 +22,8 @@ const MongoDbModel = {
         const app = new Realm.App({ id: REALM_APP_ID });
         const cred = Realm.Credentials.anonymous();
         try {
-            console.log(userN);
             const user = await app.logIn(cred);
             const response = await user.functions.getOneUser(userN);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -74,7 +70,6 @@ const MongoDbModel = {
         const app = new Realm.App({ id: REALM_APP_ID });
         const cred = Realm.Credentials.anonymous();
         try {
-            console.log(userN, amount);
             const user = await app.logIn(cred);
 
             const roundedAmount = parseFloat(amount.toFixed(2));
@@ -90,13 +85,25 @@ const MongoDbModel = {
         const app = new Realm.App({ id: REALM_APP_ID });
         const cred = Realm.Credentials.anonymous();
         try {
-            console.log(userN, amount);
             const user = await app.logIn(cred);
             const response = await user.functions.updateUser({
                 username: userN,
                 amount: amount,
                 game: game
             });
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    getAllGamesFromUser: async function getAllGamesFromUser(userN) {
+        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
+        const app = new Realm.App({ id: REALM_APP_ID });
+        const cred = Realm.Credentials.anonymous();
+        try {
+            const user = await app.logIn(cred);
+            const response = await user.functions.getAllGamesFromUser(userN);
             return response;
         } catch (error) {
             console.error(error);

@@ -51,3 +51,36 @@
     background: linear-gradient(to right, #1b2838, #eee, #1b2838);
     margin-bottom: 10px;
 }
+
+
+@media (max-width: 800px) {
+    .gemenskap {
+        width: 90%;
+        display: block;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+}
+
+@media (max-width: 375px) {
+    .gemenskap {
+        width: 100%;
+        display: block;
+        margin-left: 0%;
+        margin-right: 0%;
+    }
+    .gemenskap img {
+        width: 250px;
+        height: 200px;
+        object-fit: contain;
+    }
+
+    .gemenskap:nth-child(odd) {
+        margin-left: 0%;
+    }
+    
+    .gemenskap:nth-child(even) {
+        margin-right: 0%;
+        border-left: 0px solid #1b2838;
+    }
+}

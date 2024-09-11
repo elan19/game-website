@@ -21,6 +21,7 @@ import RegisterView from './Views/Register/register';
 import ProfileView from './Views/Profile/profile';
 import EditProfile from './Views/Profile/edit-profile';
 import Library from './Views/Library/library';
+import SocialView from './Views/Gemenskap/social';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -50,6 +51,7 @@ root.render(
                   <Route path="/gemenskap" element={<GemenskapView />} />
                   <Route path="/profile" element={<ProfileView />} />
                   <Route path="/profile/edit" element={<EditProfile />} />
+                  <Route path="/gemenskap/social" element={<SocialView />} />
                 </Routes>
                 <Footer />
               </>

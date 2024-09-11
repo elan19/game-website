@@ -1,0 +1,42 @@
+.socialBackground {
+    padding: 20px;
+    width: 100%;
+    min-height: 600px;
+    box-shadow: 2px 2px 5px black;
+    background: linear-gradient(to bottom right, #384d66, #08182c);
+}
+
+.searchBar {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background-color: #213a4c;
+    outline: 1px solid #ccc;
+    border: none;
+    color: #eee;
+    border-radius: 4px;
+}
+
+.searchBar:focus {
+    border: none;
+    outline: 2px solid grey;
+}
+
+.searchResults ul {
+    list-style: none;
+    padding: 0;
+}
+
+.userItem {
+    padding: 10px;
+    background-color: #ccc;
+    border: 1px solid #333;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.userItem:hover {
+    background-color: #f0f0f0;
+}

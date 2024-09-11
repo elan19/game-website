@@ -3,6 +3,7 @@
     height: 150px;
     background-color: #171a21;
     display: absolute;
+    position: absolute;
     bottom: 0;
     padding-left: 20%;
     padding-right: 20%;

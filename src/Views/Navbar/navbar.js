@@ -18,7 +18,7 @@ const Navigation = () => {
         '/about': { name: 'About', hidden: false },
         '/gemenskap': { name: 'Gemenskap', hidden: false },
         '/login': { name: 'Login', hidden: false },
-        ...(isLoggedIn && { '/profile': { name: localStorage.getItem('username') + " ▼ $" + (userData ? userData.money : 0), hidden: false } })
+        ...(isLoggedIn && { '/profile': { name: localStorage.getItem('username') + " ▼ $" + (userData ? parseFloat(userData.money.toFixed(2)) : 0), hidden: false } })
     };
 
     const handleMenuClick = (event) => {
@@ -88,7 +88,7 @@ const Navigation = () => {
                             >
                                 {route.name}
                             </Link>
-                            {(dropdownOpen && menuOpen|| !isMobile) && (
+                            {(dropdownOpen && menuOpen || !isMobile) && (
                                 <div className={`${styles.dropdownMenu} ${isMobile && dropdownOpen ? styles.dropdownMenuOpen : ''}`}>
                                     <Link to="/gemenskap" onClick={() => setMenuOpen(false)}>Home</Link>
                                     <Link to="/gemenskap/social" onClick={() => setMenuOpen(false)}>Social</Link>

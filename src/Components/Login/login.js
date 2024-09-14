@@ -6,11 +6,13 @@ import styles from "./Login.module.css";
 
 import MongoDbModel from '../../models/mongodb';
 import { AuthContext } from '../../util/AuthContext';
+import { UserContext } from '../../util/UserContext'; // Import UserContext
 
 const LoginForm = () => {
   const { isAuthenticated, username, login, logout } = useContext(AuthContext);
   const [formUsername, setFormUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -25,6 +27,9 @@ const LoginForm = () => {
           if (response && response.username) {
             login(response.username);
             navigate('/');
+            if(!userData) {
+              fetchUserData();
+            }
           } else {
             console.error("Login unsuccessful:", response.error);
           }

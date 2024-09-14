@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from "./Register.module.css";
@@ -12,6 +12,16 @@ const RegisterForm = () => {
   const [error, setError] = useState(null); // To track error messages
 
   const navigate = useNavigate(); // useNavigate hook for redirection
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 5000); // Hide the error after 5 seconds
+
+      return () => clearTimeout(timer); // Clear timeout on component unmount
+    }
+  }, [error]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

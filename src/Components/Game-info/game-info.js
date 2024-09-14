@@ -84,7 +84,7 @@ const GameInfo = () => {
         if (userOwnsGame) return; // Prevent action if user already owns the game
         //alert("You need to login first.");
         try {
-            await MongoDbModel.updateUser(userData.username, -gameCost, game.name);
+            await MongoDbModel.purchaseGame(userData.username, -gameCost, game.name);
             console.log("success");
             fetchUserData(); // Refresh user data
         } catch (error) {

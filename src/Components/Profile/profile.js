@@ -15,6 +15,7 @@ const ProfileView = () => {
     useEffect(() => {
         if (!userData) {
             fetchUserData();
+            console.log(userData);
         } else {
             setLoading(false);
         }
@@ -62,7 +63,7 @@ const ProfileView = () => {
                     <div className={styles.profileInfo}>
                         <p>{userData.name}</p>
                         <p className={styles.test}>{userData.desc}</p>
-                        <p>{`Money: $${userData.money}`}</p>
+                        <p>{`Money: $${parseFloat(userData.money.toFixed(2))}`}</p>
                     </div>
                     <div className={styles.profileDetails}>
                         <h1>Details</h1>

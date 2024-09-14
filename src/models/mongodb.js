@@ -80,15 +80,38 @@ const MongoDbModel = {
         }
     },
 
-    updateUser: async function updateUser(userN, amount, game) {
+    editUser: async function editUser(userN, data) {
+        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
+        const app = new Realm.App({ id: REALM_APP_ID });
+        const cred = Realm.Credentials.anonymous();
+    
+        try {
+            const user = await app.logIn(cred);
+    
+            // You no longer need to round amounts here unless specifically for money-related updates.
+            const response = await user.functions.updateUser({
+                username: userN,
+                name: data.name,
+                desc: data.desc,
+            });
+            return response;
+        } catch (error) {
+            console.error("Error updating user:", error);
+        }
+    },
+    
+
+    purchaseGame: async function purchaseGame(userN, amount, game) {
         const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
         const app = new Realm.App({ id: REALM_APP_ID });
         const cred = Realm.Credentials.anonymous();
         try {
-            const user = await app.logIn(cred);
-            const response = await user.functions.updateUser({
+            const mongodb = await app.logIn(cred);
+
+            const roundedAmount = parseFloat(amount.toFixed(2));
+            const response = await mongodb.functions.purchaseGame({
                 username: userN,
-                amount: amount,
+                amount: roundedAmount,
                 game: game
             });
             return response;

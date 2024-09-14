@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Library.module.css';
 
 import MongoDbModel from '../../models/mongodb';
@@ -15,7 +15,6 @@ const Library = () => {
         const fetchGames = async () => {
             try {
                 const username = localStorage.getItem('username');
-                console.log(username); // Debugging: check if username is being fetched correctly
 
                 const userGames = await MongoDbModel.getAllGamesFromUser(username);
 

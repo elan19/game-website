@@ -100,6 +100,12 @@
     background-color: #06bfff;
 }
 
+.errorMessage {
+    color: #eee;
+    text-align: center;
+    font-size: 18px;
+}
+
 @media (max-width: 667px) {
     .loginForm {
         width: 100%;

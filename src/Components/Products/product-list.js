@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import styles from '../../Views/Products/Products.module.css';
 import SingleProduct from './single-product';
 
@@ -13,7 +13,8 @@ const ProductList = () => {
   const apiKey = process.env.REACT_APP_API_KEY;
   const baseURL = process.env.REACT_APP_BASE_URL;
 
-  const fetchData = async (page, query = '', genre = '') => {
+  // Memoize fetchData to avoid it being redefined on every render
+  const fetchData = useCallback(async (page, query = '', genre = '') => {
     let url = `${baseURL}/games?key=${apiKey}&page=${page}`;
   
     if (query) {
@@ -26,7 +27,6 @@ const ProductList = () => {
   
     const response = await fetch(url);
     const result = await response.json();
-    console.log(result);
   
     setProducts(result.results);
     setNext(result.next);
@@ -36,7 +36,6 @@ const ProductList = () => {
       const params = new URLSearchParams(url.search);
   
       if (!params.has('page')) {
-        // Append &page=1 if the page parameter is not present
         params.append('page', '1');
         url.search = params.toString();
       }
@@ -45,19 +44,18 @@ const ProductList = () => {
     } else {
       setPrev('https://api.rawg.io/api/games?key=7cb59c195dc14cf682ec1efef10d43ed&page=1');
     }
-    console.log(prev);
-  };
+  }, [apiKey, baseURL]); // Add apiKey and baseURL as dependencies since they are used inside fetchData
 
+  // useEffect will now trigger when page, searchQuery, or genre changes
   useEffect(() => {
     fetchData(page, searchQuery, genre);
-  }, [page, searchQuery, genre]);
+  }, [page, searchQuery, genre, fetchData]); // fetchData is now memoized and can be safely used as a dependency
 
   const handleSearch = (event) => {
     event.preventDefault();
     const searchInput = document.querySelector('input[type="text"]').value;
     setSearchQuery(searchInput);
-    fetchData(page, searchInput, genre);
-    console.log(searchInput, genre);
+    fetchData(page, searchInput, genre); // Call fetchData after updating searchQuery
   };
 
   const handlePrevPage = () => {

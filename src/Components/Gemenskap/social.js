@@ -6,7 +6,6 @@ const Social = () => {
     const [users, setUsers] = useState([]); // State to hold all users
     const [searchTerm, setSearchTerm] = useState(''); // State to hold the search query
     const [filteredUsers, setFilteredUsers] = useState([]); // State to hold filtered search results
-    const [loading, setLoading] = useState(true); // State to track loading status
     const [error, setError] = useState(null); // State to track errors
 
     // Fetch all users from MongoDB on component mount
@@ -14,13 +13,10 @@ const Social = () => {
         const fetchUsers = async () => {
             try {
                 const allUsers = await MongoDbModel.getAllUsers(); // Fetch users from your backend
-                console.log(allUsers);
                 setUsers(allUsers); // Assuming the response is an array of user objects with 'username' field
-                setLoading(false);
             } catch (err) {
                 console.error('Failed to fetch users:', err);
                 setError('Failed to load users.');
-                setLoading(false);
             }
         };
 

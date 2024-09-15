@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
@@ -22,6 +21,7 @@ import ProfileView from './Views/Profile/profile';
 import EditProfile from './Views/Profile/edit-profile';
 import Library from './Views/Library/library';
 import SocialView from './Views/Gemenskap/social';
+import UserProfileView from './Views/Profile/userProfile';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -50,6 +50,7 @@ root.render(
                   <Route path="/developer/:id" element={<DeveloperInfoView />} />
                   <Route path="/gemenskap" element={<GemenskapView />} />
                   <Route path="/profile" element={<ProfileView />} />
+                  <Route path="/profile/:username" element={<UserProfileView />} />
                   <Route path="/profile/edit" element={<EditProfile />} />
                   <Route path="/gemenskap/social" element={<SocialView />} />
                 </Routes>

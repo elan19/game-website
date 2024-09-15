@@ -29,7 +29,6 @@
 }
 
 .userItem {
-    padding: 10px;
     background-color: #ccc;
     border: 1px solid #333;
     margin-bottom: 10px;
@@ -39,4 +38,14 @@
 
 .userItem:hover {
     background-color: #f0f0f0;
+}
+
+.userLink {
+    color: black;
+    width: 100%;
+    display: inline-block;
+}
+
+.userLink:hover {
+    color: black;
 }

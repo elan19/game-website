@@ -12,7 +12,7 @@ const LoginForm = () => {
   const { isAuthenticated, username, login, logout } = useContext(AuthContext);
   const [formUsername, setFormUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
+  const { fetchUserData, deleteUserData } = useContext(UserContext); // Use UserContext
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -25,11 +25,14 @@ const LoginForm = () => {
         .then(response => {
           console.log(response);
           if (response && response.username) {
-            login(response.username);
-            navigate('/');
-            if(!userData) {
-              fetchUserData();
-            }
+            login(response.username)
+            fetchUserData()
+            .then(() => {
+              navigate('/');
+            })
+            .catch(error => {
+              console.error("Error fetching user data:", error);
+            })
           } else {
             console.error("Login unsuccessful:", response.error);
           }
@@ -41,6 +44,7 @@ const LoginForm = () => {
   };
 
   const handleLogout = () => {
+    deleteUserData();
     logout();
   };
 

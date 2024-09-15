@@ -18,7 +18,7 @@ const Navigation = () => {
         '/about': { name: 'About', hidden: false },
         '/gemenskap': { name: 'Gemenskap', hidden: false },
         '/login': { name: 'Login', hidden: false },
-        ...(isLoggedIn && { '/profile': { name: localStorage.getItem('username') + " ▼ $" + (userData ? parseFloat(userData.money.toFixed(2)) : 0), hidden: false } })
+        ...(isLoggedIn && { '/profile': { name: localStorage.getItem('username') + " ▼ $" + (userData && userData.money !== undefined ? parseFloat(userData.money.toFixed(2)) : 0), hidden: false } })
     };
 
     const handleMenuClick = (event) => {
@@ -84,15 +84,18 @@ const Navigation = () => {
                             <Link
                                 to={path}
                                 className={`${styles.navLink} ${menuOpen ? styles.navLinksVisible : ''}`}
-                                onClick={(e) => isMobile && e.preventDefault() && handleDropdownToggle(e)}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    if (isMobile) handleDropdownToggle(e);
+                                }}
                             >
                                 {route.name}
                             </Link>
                             {(dropdownOpen && menuOpen || !isMobile) && (
                                 <div className={`${styles.dropdownMenu} ${isMobile && dropdownOpen ? styles.dropdownMenuOpen : ''}`}>
-                                    <Link to="/gemenskap" onClick={() => setMenuOpen(false)}>Home</Link>
-                                    <Link to="/gemenskap/social" onClick={() => setMenuOpen(false)}>Social</Link>
-                                    <Link to="/gemenskap/market" onClick={() => setMenuOpen(false)}>Market</Link>
+                                    <Link to="/gemenskap" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Home</Link>
+                                    <Link to="/gemenskap/social" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Social</Link>
+                                    <Link to="/gemenskap/market" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Market</Link>
                                 </div>
                             )}
                         </div>
@@ -101,7 +104,10 @@ const Navigation = () => {
                             key={path}
                             className={`${styles.navLink} ${menuOpen ? styles.navLinksVisible : ''}`}
                             to={path}
-                            onClick={() => setMenuOpen(false)}
+                            onClick={() => {
+                                setMenuOpen(false);
+                                setDropdownOpen(false); // Close dropdown when a different link is clicked
+                            }}
                         >
                             {route.name}
                         </Link>

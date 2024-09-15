@@ -1,6 +1,6 @@
 .profileDiv {
     width: 100%;
-    height: 600px;
+    min-height: 75vh;
     box-shadow: 2px 2px 5px black;
     background: linear-gradient(to bottom right, #384d66, #08182c);
 }
@@ -76,7 +76,6 @@
     color: white; /* Ensure text is visible on the background */
     text-decoration: none; /* Remove underline from text */
     transition: background-color 0.2s; /* Apply transition to the background color */
-    text-decoration: none;
 }
 
 /* Hover effect for the link */
@@ -121,6 +120,12 @@
 .addMoneyButton:hover {
     background-color: #384d66;
     text-decoration: none;
+}
+
+
+.profileInfoName {
+    margin-bottom: 25px;
+    font-size: 20px;
 }
 
 @media (max-width: 800px) {

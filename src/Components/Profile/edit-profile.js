@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
-import styles from './Profile.module.css'; // Assuming you have a CSS file for styling
+
+import styles from './EditProfile.module.css'; // Assuming you have a CSS file for styling
+
+import { UserContext } from '../../util/UserContext'; // Import UserContext
 
 import defaultProfilePic from '../../images/login.jpg';
 
@@ -8,6 +12,8 @@ const EditProfile = () => {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const { fetchUserData } = useContext(UserContext); // Use UserContext
     const [formData, setFormData] = useState({
         username: '',
         name: '',
@@ -22,10 +28,10 @@ const EditProfile = () => {
                 if (data) {
                     setUserData(data);
                     setFormData({
-                        username: data.username,
-                        name: data.name,
-                        desc: data.desc,
-                        profilePic: data.profilePic,
+                        username: data.username || '',
+                        name: data.name || '',
+                        desc: data.desc || '',
+                        profilePic: data.profilePic || '',
                     });
                 } else {
                     setError('Failed to fetch user data.');
@@ -51,8 +57,10 @@ const EditProfile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await MongoDbModel.updateUser(formData.username, formData); // Assume updateUser is a method to update user data
+            await MongoDbModel.editUser(userData.username, formData); // Assume updateUser is a method to update user data
+            fetchUserData();
             alert('Profile updated successfully!');
+            navigate("/profile");
         } catch (err) {
             alert('Failed to update profile.');
         }
@@ -68,6 +76,11 @@ const EditProfile = () => {
 
     return (
         <div className={styles.editProfileDiv}>
+            <div className={styles.editProfileLinkDiv}>
+                <Link to="/profile" className={styles.editProfileLink}>
+                    Back to profile 
+                </Link>
+            </div>
             <h1>Edit Profile</h1>
             <form onSubmit={handleSubmit} className={styles.editProfileForm}>
                 <div className={styles.formGroup}>
@@ -76,9 +89,10 @@ const EditProfile = () => {
                         type="text"
                         id="username"
                         name="username"
-                        value={formData.username}
+                        value={formData.username || ''}
                         onChange={handleChange}
                         disabled
+                        className={styles.disabled}
                     />
                 </div>
                 <div className={styles.formGroup}>
@@ -87,7 +101,7 @@ const EditProfile = () => {
                         type="text"
                         id="name"
                         name="name"
-                        value={formData.name}
+                        value={formData.name || ''}
                         onChange={handleChange}
                     />
                 </div>
@@ -96,7 +110,7 @@ const EditProfile = () => {
                     <textarea
                         id="desc"
                         name="desc"
-                        value={formData.desc}
+                        value={formData.desc || ''}
                         onChange={handleChange}
                     />
                 </div>
@@ -106,7 +120,7 @@ const EditProfile = () => {
                         type="text"
                         id="profilePic"
                         name="profilePic"
-                        value={formData.profilePic}
+                        value={formData.profilePic || ''}
                         onChange={handleChange}
                     />
                 </div>

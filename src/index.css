@@ -11,11 +11,20 @@ body {
 body::after {
   content: '';
   display: block;
-  height: 150px;
+  min-height: 150px;
   /* Set same as footer's height */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@media (max-width: 667px) {
+  body::after {
+    content: '';
+    display: block;
+    min-height: 250px;
+    /* Set same as footer's height */
+  }
 }

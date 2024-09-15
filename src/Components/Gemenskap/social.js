@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Social.module.css'; // Ensure your CSS module is properly imported
 import MongoDbModel from '../../models/mongodb'; // Your MongoDB model
 
@@ -59,7 +60,9 @@ const Social = () => {
                     <ul>
                         {filteredUsers.map((user) => (
                             <li key={user._id} className={styles.userItem}>
-                                {user.username}
+                                <Link to={`/profile/${user.username}`} className={styles.userLink}>
+                                    {user.username}
+                                </Link>
                             </li>
                         ))}
                     </ul>

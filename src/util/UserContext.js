@@ -18,12 +18,20 @@ export const UserProvider = ({ children }) => {
         }
     };
 
+    const deleteUserData = async () => {
+        try {
+            setUserData(null); // Reset user data in context
+        } catch (error) {
+            console.error('Failed to delete user data:', error);
+        }
+    };
+
     useEffect(() => {
         fetchUserData();
     }, []);
 
     return (
-        <UserContext.Provider value={{ userData, setUserData, fetchUserData }}>
+        <UserContext.Provider value={{ userData, setUserData, fetchUserData, deleteUserData }}>
             {children}
         </UserContext.Provider>
     );

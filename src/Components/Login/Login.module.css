@@ -39,7 +39,7 @@
 }
 
 .input:focus {
-    border: 1px solid #06bfff;
+    border: 2px solid #06bfff;
 }
 
 .leftInputLabel {

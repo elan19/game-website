@@ -67,7 +67,7 @@ const ProfileView = () => {
                     <div className={styles.profileDetails}>
                         <h1>Details</h1>
                         <p>{`Number of Games: ${userData.games.length}`}</p>
-                        <Link to="/profile/inventory" className={styles.inventoryLink}>
+                        <Link to={`/profile/${userData.username}/inventory`} className={styles.inventoryLink}>
                             Inventory
                         </Link>
                         <p>{`Number of Friends: ${userData.friends.length}`}</p>

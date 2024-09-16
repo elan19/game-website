@@ -1,0 +1,116 @@
+.inventoryContainer {
+    width: 100%;
+    min-height: 75vh;
+}
+
+.profileHeader {
+    display: block;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-top: -25px;
+    margin-bottom: 40px;
+    background-color: #333;
+}
+
+.profilePic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+    object-fit: cover;
+    border: 1px solid white;
+}
+
+.username {
+    height: 100px;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+}
+
+.username p {
+    font-size: 28px;
+    line-height: 100px;
+    color: #eee;
+}
+
+.gameTabs {
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: rgb(9, 9, 37);
+}
+
+.gameTab {
+    background-color: #2e2e2e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 5px;
+    cursor: pointer;
+}
+
+.activeTab {
+    background-color: #1e1e1e;
+    font-weight: bold;
+}
+
+.inventoryGrid {
+    display: inline-flex;
+    grid-template-columns: repeat(auto-fill, 100px);
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 60%;
+    min-height: 500px;
+    background-color: #2e2e2e;
+}
+
+.inventoryItem {
+    width: 100px;
+    height: 100px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+.inventoryItem:hover, .selectedItem {
+    border-color: #ffae00;
+}
+
+.itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.itemDetails {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+    width: 40%;
+    min-height: 400px;
+    background-color: #2e2e2e;
+    border: 3px solid #ccc;
+    padding: 5px;
+}
+
+.itemDetailImage {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    margin-top: 100px;
+}
+
+.itemName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.itemDescription {
+    font-size: 14px;
+    color: #ccc;
+}

@@ -22,6 +22,7 @@ import EditProfile from './Views/Profile/edit-profile';
 import Library from './Views/Library/library';
 import SocialView from './Views/Gemenskap/social';
 import UserProfileView from './Views/Profile/userProfile';
+import InventoryView from './Views/Profile/inventory';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -51,6 +52,7 @@ root.render(
                   <Route path="/gemenskap" element={<GemenskapView />} />
                   <Route path="/profile" element={<ProfileView />} />
                   <Route path="/profile/:username" element={<UserProfileView />} />
+                  <Route path="/profile/:username/inventory" element={<InventoryView />} />
                   <Route path="/profile/edit" element={<EditProfile />} />
                   <Route path="/gemenskap/social" element={<SocialView />} />
                 </Routes>

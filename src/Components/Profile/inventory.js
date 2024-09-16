@@ -67,7 +67,7 @@ const InventoryView = () => {
                     ))}
                 </div>
             ) : (
-                <div>No items found for {games[selectedGameIndex]}.</div>
+                <div>No items found for {games[selectedGameIndex]}!</div>
             )}
 
             {/* Item details */}

@@ -25,7 +25,7 @@ const LoginForm = () => {
         .then(response => {
           console.log(response);
           if (response && response.username) {
-            login(response.username)
+            login(response.username, response.loginId)
             fetchUserData()
             .then(() => {
               navigate('/');

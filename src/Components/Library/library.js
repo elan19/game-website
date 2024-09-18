@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Library.module.css';
+import { useNavigate } from 'react-router-dom';
 
 import MongoDbModel from '../../models/mongodb';
 
@@ -9,6 +10,7 @@ const Library = () => {
     const [selectedGame, setSelectedGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     // Fetch user's games when component mounts
     useEffect(() => {
@@ -37,6 +39,10 @@ const Library = () => {
     // Handler for selecting a game from the list
     const handleGameClick = (game) => {
         setSelectedGame(game);
+    };
+
+    const handlePlayClick = (game) => {
+        navigate(`/game-session/CSGO`);
     };
 
     if (loading) {
@@ -75,7 +81,7 @@ const Library = () => {
                         {/* You can add more details if available */}
                         <button 
                             className={styles.playButton}
-                            onClick={() => console.log(`Playing ${selectedGame}`)}
+                            onClick={() => handlePlayClick(selectedGame)}
                         >
                             Play
                         </button>

@@ -1,46 +1,55 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../util/UserContext';
-import { Link } from 'react-router-dom';
+import MongoDbModel from '../../models/mongodb';
+import { Link, useParams } from 'react-router-dom'; // Use useParams to fetch the user ID from the URL
 import styles from './Inventory.module.css';
 import defaultProfilePic from '../../images/login.jpg';
 
-const InventoryView = () => {
-    const { userData, fetchUserData } = useContext(UserContext);
+const OtherUserInventoryView = () => {
+    const { fetchOtherUserData } = useContext(UserContext); // Assuming you have a method to fetch another user's data
+    const { username } = useParams(); // Get the username or ID from the route parameters
     const [loading, setLoading] = useState(true);
+    const [otherUserData, setOtherUserData] = useState(null); // Store the other user's data
     const [selectedGameIndex, setSelectedGameIndex] = useState(0); // Track selected game by index
     const [selectedItem, setSelectedItem] = useState(null);
-
+    const [error, setError] = useState(null);
+    
+    // Fetch the other user's data when the component mounts
     useEffect(() => {
-        if (!userData) {
-            fetchUserData();
-        } else {
-            setLoading(false);
-        }
-    }, [userData, fetchUserData]);
+        const fetchUser = async () => {
+            try {
+                const fetchedUser = await MongoDbModel.getUserProfile(username);
+                setOtherUserData(fetchedUser);
+                setLoading(false);
+            } catch (err) {
+                console.error('Failed to fetch user data:', err);
+                setError('Failed to load user profile.');
+                setLoading(false);
+            }
+        };
+
+        fetchUser();
+    }, [username, fetchOtherUserData]);
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
-    const games = userData?.games || [];
-    const inventory = userData?.inventory || [];
+    if (error) {
+        return <div>{error}</div>;
+    }
 
-    // Function to handle item selling
-    const handleSellItem = (item) => {
-        console.log(`Selling item: ${item[0]}`);
-        const updatedInventory = inventory[selectedGameIndex].filter(i => i !== item);
-        setSelectedItem(null); // Clear selected item after selling
-        console.log(updatedInventory); // Replace this with a state update or API call
-    };
+    const games = otherUserData?.games || [];
+    const inventory = otherUserData?.inventory || [];
 
     return (
         <div className={styles.inventoryContainer}>
             {/* User profile header */}
             <div className={styles.profileHeader}>
-                <img src={userData?.profilePic || defaultProfilePic} alt="Profile" className={styles.profilePic} />
+                <img src={otherUserData?.profilePic || defaultProfilePic} alt="Profile" className={styles.profilePic} />
                 <div className={styles.username}>
-                    <Link to={`/profile/${userData?.username}`} className={styles.editProfileLink}>
-                        {userData?.username || 'User'}
+                    <Link to={`/profile/${otherUserData?.username}`} className={styles.editProfileLink}>
+                        {otherUserData?.username || 'Unknown User'}
                     </Link>
                 </div>
             </div>
@@ -58,7 +67,7 @@ const InventoryView = () => {
                         </button>
                     ))
                 ) : (
-                    <div>No games found.</div>
+                    <div>No games found for this user.</div>
                 )}
             </div>
 
@@ -79,8 +88,10 @@ const InventoryView = () => {
                 </div>
             ) : (
                 <div>
+                    <div className={styles.inventoryGrid}>
                     <h2>{games[selectedGameIndex] || 'No Game Selected'}</h2>
-                    <p>No items found for {games[selectedGameIndex] || 'this game'}.</p>
+                    <p>No items found in this game.</p>
+                </div>
                 </div>
             )}
 
@@ -90,15 +101,11 @@ const InventoryView = () => {
                     <img src={defaultProfilePic} alt={selectedItem[0]} className={styles.itemDetailImage} />
                     <div className={styles.itemName}>{selectedItem[0]}</div>
                     <div className={styles.itemDescription}>{selectedItem[1]}</div>
-                    
-                    {/* Only show "Sell Item" if it's the user's inventory */}
-                    <button className={styles.sellButton} onClick={() => handleSellItem(selectedItem)}>
-                        Sell Item
-                    </button>
+                    {/* No "Sell" button here since it's another user's inventory */}
                 </div>
             )}
         </div>
     );
 };
 
-export default InventoryView;
+export default OtherUserInventoryView;

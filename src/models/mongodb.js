@@ -17,13 +17,26 @@ const MongoDbModel = {
         }
     },
 
-    getOneUser: async function getOneUser(userN) {
+    getOneUser: async function getOneUser(userN, loginId) {
         const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
         const app = new Realm.App({ id: REALM_APP_ID });
         const cred = Realm.Credentials.anonymous();
         try {
             const user = await app.logIn(cred);
-            const response = await user.functions.getOneUser(userN);
+            const response = await user.functions.getOneUser(userN, loginId);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    getUserProfile: async function getUserProfile(userN) {
+        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
+        const app = new Realm.App({ id: REALM_APP_ID });
+        const cred = Realm.Credentials.anonymous();
+        try {
+            const user = await app.logIn(cred);
+            const response = await user.functions.getUserProfile(userN);
             return response;
         } catch (error) {
             console.error(error);

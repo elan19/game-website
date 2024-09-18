@@ -9,7 +9,8 @@ export const UserProvider = ({ children }) => {
     const fetchUserData = async () => {
         try {
             const username = localStorage.getItem('username');
-            const data = await MongoDbModel.getOneUser(username);
+            const id = localStorage.getItem('loginId');
+            const data = await MongoDbModel.getOneUser(username, id);
             if (data) {
                 setUserData(data);
             }

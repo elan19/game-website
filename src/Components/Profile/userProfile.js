@@ -20,7 +20,7 @@ const UserProfileView = () => {
 
         const fetchUser = async () => {
             try {
-                const fetchedUser = await MongoDbModel.getOneUser(username);
+                const fetchedUser = await MongoDbModel.getUserProfile(username);
                 console.log(fetchedUser); // Fetch user data by username
                 setUser(fetchedUser);
                 setLoading(false);

@@ -9,7 +9,7 @@
     width: 100%;
     height: 100px;
     margin-top: -25px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     background-color: #333;
 }
 
@@ -31,14 +31,19 @@
     text-align: center;
 }
 
-.username p {
+.username a {
     font-size: 28px;
     line-height: 100px;
     color: #eee;
 }
 
+.username a:hover {
+    color: #06bfff;
+    text-decoration: none;
+}
+
 .gameTabs {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     width: 100%;
     background-color: rgb(9, 9, 37);
 }
@@ -58,13 +63,22 @@
 }
 
 .inventoryGrid {
-    display: inline-flex;
-    grid-template-columns: repeat(auto-fill, 100px);
-    gap: 10px;
+    display:inline-block;
     margin-bottom: 20px;
     width: 60%;
     min-height: 500px;
-    background-color: #2e2e2e;
+    background-color: #1e1e1e;
+}
+
+.inventorySelectedGame {
+    width: 100%;
+    height: 50px;
+    display: block;
+    font-size: 24px; /* Adjust the font size for the game title */
+    color: white;
+    margin-bottom: 10px; /* Add space between the title and items */
+    text-align: left; /* Align the game name to the left */
+    padding-left: 10px; /* Add some padding for the title */
 }
 
 .inventoryItem {
@@ -73,6 +87,13 @@
     border: 2px solid transparent;
     cursor: pointer;
     transition: border-color 0.2s;
+    display: inline-flex;
+    margin-right: 10px;
+}
+
+.inventoryItem:nth-child(1) {
+    margin-left: 10px;
+    width: 200px;
 }
 
 .inventoryItem:hover, .selectedItem {
@@ -91,8 +112,8 @@
     align-items: center;
     float: right;
     width: 40%;
-    min-height: 400px;
-    background-color: #2e2e2e;
+    min-height: 500px;
+    background-color: #1e1e1e;
     border: 3px solid #ccc;
     padding: 5px;
 }
@@ -102,7 +123,7 @@
     height: 150px;
     object-fit: cover;
     margin-bottom: 10px;
-    margin-top: 100px;
+    margin-top: 150px;
 }
 
 .itemName {
@@ -112,5 +133,5 @@
 
 .itemDescription {
     font-size: 14px;
-    color: #ccc;
+    color: #eee;
 }

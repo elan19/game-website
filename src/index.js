@@ -23,6 +23,7 @@ import Library from './Views/Library/library';
 import SocialView from './Views/Gemenskap/social';
 import UserProfileView from './Views/Profile/userProfile';
 import InventoryView from './Views/Profile/inventory';
+import GameView from './Views/Library/game';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -40,6 +41,7 @@ root.render(
                   <Route path="/" element={<ProductsView />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/library" element={<Library />} />
+                  <Route path="/game-session/:gameId" element={<GameView />} />
                   <Route path="/game-info/:gameId" element={<GameInfoView />} />
                   {!isLoggedIn && (
                     <>

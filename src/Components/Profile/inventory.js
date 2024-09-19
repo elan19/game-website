@@ -12,6 +12,7 @@ const InventoryView = () => {
 
     useEffect(() => {
         if (!userData) {
+            console.log("ok");
             fetchUserData();
         } else {
             setLoading(false);
@@ -89,9 +90,8 @@ const InventoryView = () => {
                 <div className={styles.itemDetails}>
                     <img src={defaultProfilePic} alt={selectedItem[0]} className={styles.itemDetailImage} />
                     <div className={styles.itemName}>{selectedItem[0]}</div>
-                    <div className={styles.itemDescription}>{selectedItem[1]}</div>
+                    <div className={styles.itemDescription}>{selectedItem[1]}</div>        
                     
-                    {/* Only show "Sell Item" if it's the user's inventory */}
                     <button className={styles.sellButton} onClick={() => handleSellItem(selectedItem)}>
                         Sell Item
                     </button>

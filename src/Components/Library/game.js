@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import possibleCards from './cards.js'; // Adjust path as needed
 import styles from './Library.module.css';
 
-const possibleCards = {
-    CSGO: ['AWP - Dragon Lore', 'AK47 - Vulcan', 'Glock18 - Fade'],
-    'Golf With Your Friends': ['Unicorn Horn', 'Cupcake Hat', 'Bouncy Ring'],
-    // Add more games and their respective cards
+import MongoDbModel from '../../models/mongodb';
+
+// Define rarities and their probabilities
+const rarityWeights = {
+    common: 79.92, // 79.92% chance
+    uncommon: 15.98,  // 15.98% chance
+    rare: 3.2, // 3.2% chance
+    epic: 0.64,  // 0.64% chance
+    legendary: 0.26 // 0.26% chance
 };
 
 const GameSession = () => {
@@ -13,40 +19,58 @@ const GameSession = () => {
     const [active, setActive] = useState(false);
     const [lastCard, setLastCard] = useState(null);
 
-    console.log(gameId);
-
     useEffect(() => {
         let timer;
-        console.log(active);
         if (active) {
-            const interval = 3 * 1000; //* 60 * 60 * 1000; // 3 hours in milliseconds
+            const interval = 3 * 1000; // * 60 * 60 // 3 seconds for testing
             timer = setInterval(() => {
                 rewardCard();
             }, interval);
-            console.log("inside");
-            // Trigger the first card reward immediately
         }
 
-        // Cleanup timer on component unmount
-        return () => clearInterval(timer);
+        return () => clearInterval(timer); // Cleanup the timer
     }, [active]);
 
-    const rewardCard = () => {
-        console.log("Card recieved");
+    const rewardCard = async () => {
         const cards = possibleCards[gameId];
-        console.log(cards);
-        console.log(gameId);
         if (cards) {
-            const randomCard = cards[Math.floor(Math.random() * cards.length)];
-            setLastCard(randomCard);
-            console.log(`You received: ${randomCard}`);
-            // Here, you could also update the user's inventory in MongoDB
+            const randomCard = getRandomCardByRarity(cards);
+            setLastCard(randomCard.name);
+            console.log(`You received: ${randomCard.name}`);
+            console.log(`desc: ${randomCard.desc}`);
+            console.log(gameId);
+    
+            // Update the user's inventory in MongoDB
+            try {
+                const username = localStorage.getItem('username'); // Fetch from local storage or AuthContext
+                const loginId = localStorage.getItem('loginId'); // Fetch loginId
+                await MongoDbModel.updateUserInventory(username, loginId, gameId, randomCard.name, randomCard.desc);
+
+            } catch (error) {
+                console.error('Error updating inventory:', error);
+            }
         }
+    };
+    
+
+    // Function to select a random card based on rarity
+    const getRandomCardByRarity = (cards) => {
+        // Create a pool based on the card's rarity weights
+        const pool = [];
+
+        cards.forEach(card => {
+            for (let i = 0; i < rarityWeights[card.rarity]; i++) {
+                pool.push(card);
+            }
+        });
+
+        // Select a random card from the pool
+        const randomIndex = Math.floor(Math.random() * pool.length);
+        return pool[randomIndex];
     };
 
     const handleStartPlaying = () => {
         setActive(true);
-        console.log(console.log(active));
     };
 
     return (

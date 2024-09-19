@@ -15,10 +15,8 @@ const ProfileView = () => {
     useEffect(() => {
         if (!userData) {
             fetchUserData();
-            console.log(userData);
         } else {
             setLoading(false);
-            console.log(userData);
         }
     }, [userData, fetchUserData]);
 

@@ -42,7 +42,7 @@ const Library = () => {
     };
 
     const handlePlayClick = (game) => {
-        navigate(`/game-session/CSGO`);
+        navigate(`/game-session/${game}`);
     };
 
     if (loading) {

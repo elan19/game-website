@@ -129,9 +129,11 @@
 .itemName {
     font-size: 18px;
     font-weight: bold;
+    text-align: center;
 }
 
 .itemDescription {
     font-size: 14px;
     color: #eee;
+    text-align: center;
 }

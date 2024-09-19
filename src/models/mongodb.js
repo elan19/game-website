@@ -2,27 +2,37 @@ import * as Realm from "realm-web";
 
 const MongoDbModel = {
 
-    getAllUsers: async function getAllUsers() {
+    getRealmApp: function getRealmApp() {
         const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
+        return new Realm.App({ id: REALM_APP_ID });
+    },
+
+    getCurrentUser: async function getCurrentUser() {
+        const app = this.getRealmApp();
+        if (app.currentUser) {
+            // Return the currently logged-in user
+            return app.currentUser;
+        } else {
+            // Log in anonymously if no user is logged in
+            const cred = Realm.Credentials.anonymous();
+            const user = await app.logIn(cred);
+            return user;
+        }
+    },
+
+    getAllUsers: async function getAllUsers() {
         try {
-        const user = await app.logIn(cred);
-        const response = await user.functions.getAllUsers();
-
-        return response;
-
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getAllUsers();
+            return response;
         } catch (error) {
-        console.error(error);
+            console.error(error);
         }
     },
 
     getOneUser: async function getOneUser(userN, loginId) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
         try {
-            const user = await app.logIn(cred);
+            const user = await this.getCurrentUser();
             const response = await user.functions.getOneUser(userN, loginId);
             return response;
         } catch (error) {
@@ -31,11 +41,8 @@ const MongoDbModel = {
     },
 
     getUserProfile: async function getUserProfile(userN) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
         try {
-            const user = await app.logIn(cred);
+            const user = await this.getCurrentUser();
             const response = await user.functions.getUserProfile(userN);
             return response;
         } catch (error) {
@@ -44,17 +51,13 @@ const MongoDbModel = {
     },
 
     registerUser: async function registerUser(userN, passw, email) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
         try {
-            const user = await app.logIn(cred);
+            const user = await this.getCurrentUser();
             const response = await user.functions.registerUser({
-                email: email, 
-                username: userN, 
+                email: email,
+                username: userN,
                 password: passw
             });
-
             return response;
         } catch (error) {
             console.error(error);
@@ -62,16 +65,12 @@ const MongoDbModel = {
     },
 
     loginUser: async function loginUser(userN, passw) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
         try {
-            const user = await app.logIn(cred);
+            const user = await this.getCurrentUser();
             const response = await user.functions.loginUser({ 
                 username: userN, 
                 password: passw
             });
-
             return response;
         } catch (error) {
             console.error(error);
@@ -79,12 +78,8 @@ const MongoDbModel = {
     },
 
     updateUserMoney: async function updateUserMoney(userN, amount) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
         try {
-            const user = await app.logIn(cred);
-
+            const user = await this.getCurrentUser();
             const roundedAmount = parseFloat(amount.toFixed(2));
             const response = await user.functions.updateUserMoney(userN, roundedAmount);
             return response;
@@ -94,14 +89,8 @@ const MongoDbModel = {
     },
 
     editUser: async function editUser(userN, data) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
-    
         try {
-            const user = await app.logIn(cred);
-    
-            // You no longer need to round amounts here unless specifically for money-related updates.
+            const user = await this.getCurrentUser();
             const response = await user.functions.updateUser({
                 username: userN,
                 name: data.name,
@@ -112,17 +101,12 @@ const MongoDbModel = {
             console.error("Error updating user:", error);
         }
     },
-    
 
     purchaseGame: async function purchaseGame(userN, amount, game) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
         try {
-            const mongodb = await app.logIn(cred);
-
+            const user = await this.getCurrentUser();
             const roundedAmount = parseFloat(amount.toFixed(2));
-            const response = await mongodb.functions.purchaseGame({
+            const response = await user.functions.purchaseGame({
                 username: userN,
                 amount: roundedAmount,
                 game: game
@@ -133,19 +117,25 @@ const MongoDbModel = {
         }
     },
 
-    getAllGamesFromUser: async function getAllGamesFromUser(userN) {
-        const REALM_APP_ID = process.env.REACT_APP_REALM_ID;
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const cred = Realm.Credentials.anonymous();
+    updateUserInventory: async function updateUserInventory(username, loginId, gameName, cardName, cardDesc) {
         try {
-            const user = await app.logIn(cred);
-            const response = await user.functions.getAllGamesFromUser(userN);
+            const user = await this.getCurrentUser();
+            const response = await user.functions.addCardToInventory(username, loginId, gameName, cardName, cardDesc);
             return response;
         } catch (error) {
             console.error(error);
         }
     },
 
+    getAllGamesFromUser: async function getAllGamesFromUser(userN) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getAllGamesFromUser(userN);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
 };
 
 export default MongoDbModel;

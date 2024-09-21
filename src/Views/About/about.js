@@ -1,23 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../util/AuthContext'; // Adjust the import based on your context setup
 
 import styles from './About.module.css';
 import aboutImg2 from '../../images/about-gemenskap2.png';
 
 const About = () => {
+    const navigate = useNavigate();
+    const { isLoggedIn } = useContext(AuthContext); // Adjust according to your context structure
+
+    const handleButtonClick = () => {
+        if (!isLoggedIn) {
+            navigate('/login');
+        } else {
+            navigate('/');
+        }
+    };
 
     return (
         <div className={styles.mainAbout}>
             <div className={styles.aboutContent}>
                 <div className={styles.aboutText}>
                     <p className={styles.topTextAbout}>
-                        Steam är den ultimata platsen för att spela, diskutera och skapa spel.
+                        Gamipo är den ultimata platsen för att spela, diskutera och skapa spel.
                     </p>
-                    <button className={styles.installSteamButton}>Installera steam</button>
+                    <button className={styles.CreateAccountButton}
+                    onClick={handleButtonClick}>
+                        Logga in
+                    </button>
                 </div>
                 <div className={styles.aboutImgDiv}>
                     <img className={styles.aboutImg} 
                          src="https://cdn.akamai.steamstatic.com/store/about/videos/about_hero_loop_web.png" 
-                         alt="Steam about" />
+                         alt="Gamipo about" />
                 </div>
             </div>
             <p className={styles.middleText}>Läs mer</p>
@@ -39,7 +54,7 @@ const About = () => {
                     <p>
                         Träffa nya vänner, 
                         titta på andras bilder och lägg upp dina bilder på gemenskapen! 
-                        Med över 100 miljoner potentiella vänner (och fiender) 
+                        Med mängder av potentiella vänner (och fiender) 
                         tar det roliga aldrig slut. 
                     </p>
                     <a className={styles.aboutLink} href="/gemenskap">Besök gemenskapen <span>&#8594;</span></a>

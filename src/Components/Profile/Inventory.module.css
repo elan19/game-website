@@ -10,7 +10,7 @@
     height: 100px;
     margin-top: -25px;
     margin-bottom: 30px;
-    background-color: #333;
+    background-color: #2e2e2e;
 }
 
 .profilePic {
@@ -130,10 +130,28 @@
     font-size: 18px;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .itemDescription {
     font-size: 14px;
     color: #eee;
     text-align: center;
+    margin-bottom: 25px;
+}
+
+.sellButton {
+    width: 75px;
+    height: 25px;
+    background-image: linear-gradient(to bottom, #00a008 25%, #116300 100%);
+    outline: none;
+    border: none;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sellButton:hover {
+    background-image: none;
+    background-color: #116300;
 }

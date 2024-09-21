@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logoSteam from '../../images/logo_steam.png';
+import logoSteam from '../../images/gamipo-logo3.png';
 import styles from './Navbar.module.css';
 import { AuthContext } from '../../util/AuthContext';
 import { UserContext } from '../../util/UserContext'; // Import UserContext

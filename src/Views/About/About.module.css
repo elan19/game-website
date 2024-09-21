@@ -74,7 +74,7 @@
     display: block;
 }
 
-.installSteamButton {
+.CreateAccountButton {
     background-image: linear-gradient(to right, #06bfff 50%, #2b74ff 100%);
     color: #fff;
     border: 1px solid #ccc;
@@ -91,7 +91,7 @@
     margin: 0 auto;
 }
 
-.installSteamButton:hover {
+.CreateAccountButton:hover {
     background-color: #00a6dd;
     background-image: none;
 }
@@ -192,7 +192,7 @@
 }
 
 @media (max-width:1400px) {
-    .installSteamButton {
+    .CreateAccountButton {
         width: 100%;
     }
 }

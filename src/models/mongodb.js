@@ -20,6 +20,18 @@ const MongoDbModel = {
         }
     },
 
+    // Call the rate-limiting function here before proceeding
+    checkRateLimit: async function checkRateLimit(ipAddress) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.rateLimit(ipAddress);
+            return response;
+        } catch (error) {
+            console.error("Rate limit exceeded:", error.message);
+            throw new Error("Rate limit exceeded. Please try again later.");
+        }
+    },
+
     getAllUsers: async function getAllUsers() {
         try {
             const user = await this.getCurrentUser();

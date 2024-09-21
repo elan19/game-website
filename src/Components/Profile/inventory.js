@@ -11,9 +11,15 @@ const InventoryView = () => {
     const [selectedItem, setSelectedItem] = useState(null);
 
     useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            await fetchUserData();
+            setLoading(false);
+        };
+
+        // Only fetch data if userData is not already loaded
         if (!userData) {
-            console.log("ok");
-            fetchUserData();
+            loadData();
         } else {
             setLoading(false);
         }

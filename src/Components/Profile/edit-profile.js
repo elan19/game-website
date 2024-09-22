@@ -3,17 +3,25 @@ import { Link, useNavigate } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
 
 import styles from './EditProfile.module.css'; // Assuming you have a CSS file for styling
-
 import { UserContext } from '../../util/UserContext'; // Import UserContext
 
-import defaultProfilePic from '../../images/login.jpg';
+const profileImages = [
+    'profile1.jpg',
+    'profile2.jpg',
+    'profile3.jpg',
+    'profile4.jpg',
+    'profile5.jpg',
+    'profile6.jpg',
+    'profile7.jpg',
+    'profile8.jpg',
+    'profile9.jpg',
+];
 
 const EditProfile = () => {
-    const [userData, setUserData] = useState(null);
+    const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
-    const { fetchUserData } = useContext(UserContext); // Use UserContext
     const [formData, setFormData] = useState({
         username: '',
         name: '',
@@ -22,29 +30,12 @@ const EditProfile = () => {
     });
 
     useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const data = await MongoDbModel.getOneUser(localStorage.getItem('username'));
-                if (data) {
-                    setUserData(data);
-                    setFormData({
-                        username: data.username || '',
-                        name: data.name || '',
-                        desc: data.desc || '',
-                        profilePic: data.profilePic || '',
-                    });
-                } else {
-                    setError('Failed to fetch user data.');
-                }
-            } catch (err) {
-                setError('An error occurred while fetching user data.');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchUserData();
-    }, []);
+        if (!userData) {
+            fetchUserData();
+        } else {
+            setLoading(false);
+        }
+    }, [userData, fetchUserData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -56,14 +47,30 @@ const EditProfile = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const updatedData = {
+            username: formData.username || userData.username,
+            name: formData.name || userData.name,
+            desc: formData.desc || userData.desc,
+            profilePic: formData.profilePic || userData.profilePic,
+        };
+
         try {
-            await MongoDbModel.editUser(userData.username, formData); // Assume updateUser is a method to update user data
-            fetchUserData();
+            const response = await MongoDbModel.editUser(userData.username, updatedData);
+            fetchUserData(); // Refresh user data
             alert('Profile updated successfully!');
             navigate("/profile");
         } catch (err) {
+            console.error("Failed to update profile:", err);
             alert('Failed to update profile.');
         }
+    };
+
+    const handleImageSelect = (image) => {
+        setFormData({
+            ...formData,
+            profilePic: image, // Store the selected image
+        });
     };
 
     if (loading) {
@@ -90,6 +97,7 @@ const EditProfile = () => {
                         id="username"
                         name="username"
                         value={formData.username || ''}
+                        placeholder={userData.username || ''}
                         onChange={handleChange}
                         disabled
                         className={styles.disabled}
@@ -102,6 +110,7 @@ const EditProfile = () => {
                         id="name"
                         name="name"
                         value={formData.name || ''}
+                        placeholder={userData.name || ''}
                         onChange={handleChange}
                     />
                 </div>
@@ -111,19 +120,27 @@ const EditProfile = () => {
                         id="desc"
                         name="desc"
                         value={formData.desc || ''}
+                        placeholder={userData.desc || ''}
                         onChange={handleChange}
                     />
                 </div>
+
+                {/* Image Selection */}
                 <div className={styles.formGroup}>
-                    <label htmlFor="profilePic">Profile Picture URL</label>
-                    <input
-                        type="text"
-                        id="profilePic"
-                        name="profilePic"
-                        value={formData.profilePic || ''}
-                        onChange={handleChange}
-                    />
+                    <label htmlFor="profilePic">Profile Picture</label>
+                    <div className={styles.imageSelection}>
+                        {profileImages.map((image, index) => (
+                            <img
+                                key={index}
+                                src={`/images/profile/${image}`} // Correct path for public folder
+                                alt={`Profile Pic ${index + 1}`}
+                                className={`${styles.profileImage} ${formData.profilePic === image ? styles.selectedImage : ''}`} // Apply selected class
+                                onClick={() => handleImageSelect(image)}
+                            />
+                        ))}
+                    </div>
                 </div>
+
                 <button type="submit">Save Changes</button>
             </form>
         </div>

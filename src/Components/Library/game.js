@@ -24,7 +24,7 @@ const GameSession = () => {
     useEffect(() => {
         let timer;
         if (active) {
-            const interval = 3 * 1000; // * 60 * 60 // 3 seconds for testing
+            const interval = 6 * 1000; // * 60 * 60 // 3 seconds for testing
             timer = setInterval(() => {
                 rewardCard();
             }, interval);
@@ -37,13 +37,14 @@ const GameSession = () => {
         const cards = possibleCards[gameId] || possibleCards['Rest'];
         if (cards) {
             const randomCard = getRandomCardByRarity(cards);
+            console.log(randomCard);
             setLastCard(randomCard.name);
             console.log(`You received: ${randomCard.name}`);
 
             try {
                 const username = localStorage.getItem('username');
                 const loginId = localStorage.getItem('loginId');
-                await MongoDbModel.updateUserInventory(username, loginId, gameId, randomCard.name, randomCard.desc);
+                await MongoDbModel.updateUserInventory(username, loginId, gameId, randomCard.name, randomCard.desc, randomCard.pic);
 
                 // Fetch updated user data after updating inventory
                 await fetchUserData();

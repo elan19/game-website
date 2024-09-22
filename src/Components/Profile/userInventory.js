@@ -79,10 +79,9 @@ const OtherUserInventoryView = () => {
                         <div
                             key={index}
                             className={`${styles.inventoryItem} ${selectedItem === item ? styles.selectedItem : ''}`}
-                            style={index === 0 ? { marginLeft: '10px'} : {}}
                             onClick={() => setSelectedItem(item)}
                         >
-                            <img src={defaultProfilePic} alt={item[0]} className={styles.itemImage} />
+                            <img src={`/images/inventory/${item[2]}`} alt={item[0]} className={styles.itemImage} />
                         </div>
                     ))}
                 </div>
@@ -98,7 +97,7 @@ const OtherUserInventoryView = () => {
             {/* Item details */}
             {selectedItem && (
                 <div className={styles.itemDetails}>
-                    <img src={defaultProfilePic} alt={selectedItem[0]} className={styles.itemDetailImage} />
+                    <img src={`/images/inventory/${selectedItem[2]}`} alt={selectedItem[2]} className={styles.itemDetailImage} />
                     <div className={styles.itemName}>{selectedItem[0]}</div>
                     <div className={styles.itemDescription}>{selectedItem[1]}</div>
                     {/* No "Sell" button here since it's another user's inventory */}

@@ -15,7 +15,8 @@
     padding-top: 50px;
     margin-bottom: 25px;
     color: #eee;
-    width: 80%;
+    width: 75%;
+    margin-right: 5%;
     display: inline-block;
 }
 
@@ -150,5 +151,51 @@
 
     .profileDetails {
         width: 50%;
+    }
+}
+
+@media (max-width: 450px) {
+    .profileDiv {
+        min-height: 900px;
+    }
+
+    .profileName {
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    .profileImageContainer {
+        width: 50%;
+        margin-top: 50px;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align: center;
+    }
+
+    .editProfileLink {
+        width: 80%;
+        display: block;
+        margin-left: 10%;
+    }
+
+    .addMoney {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 25px;
+    }
+
+    .addMoneyButton {
+        width: 100%;
+    }
+
+    .profileInfo {
+        width: 100%;
+        min-height: 150px;
+    }
+
+    .profileDetails {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
     }
 }

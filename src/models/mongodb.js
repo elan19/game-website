@@ -107,6 +107,7 @@ const MongoDbModel = {
                 username: userN,
                 name: data.name,
                 desc: data.desc,
+                profilePic: data.profilePic
             });
             return response;
         } catch (error) {
@@ -129,10 +130,10 @@ const MongoDbModel = {
         }
     },
 
-    updateUserInventory: async function updateUserInventory(username, loginId, gameName, cardName, cardDesc) {
+    updateUserInventory: async function updateUserInventory(username, loginId, gameName, cardName, cardDesc, cardPic) {
         try {
             const user = await this.getCurrentUser();
-            const response = await user.functions.addCardToInventory(username, loginId, gameName, cardName, cardDesc);
+            const response = await user.functions.addCardToInventory(username, loginId, gameName, cardName, cardDesc, cardPic);
             return response;
         } catch (error) {
             console.error(error);

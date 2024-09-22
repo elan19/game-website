@@ -79,6 +79,7 @@
     margin-bottom: 10px; /* Add space between the title and items */
     text-align: left; /* Align the game name to the left */
     padding-left: 10px; /* Add some padding for the title */
+    margin-top: 10px;
 }
 
 .inventoryItem {
@@ -131,6 +132,7 @@
     font-weight: bold;
     text-align: center;
     margin-bottom: 10px;
+    color: #ccc;
 }
 
 .itemDescription {

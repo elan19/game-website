@@ -44,7 +44,11 @@ const InventoryView = () => {
         <div className={styles.inventoryContainer}>
             {/* User profile header */}
             <div className={styles.profileHeader}>
-                <img src={userData?.profilePic || defaultProfilePic} alt="Profile" className={styles.profilePic} />
+                <img 
+                    src={userData.profilePic ? `/images/profile/${userData.profilePic}` : defaultProfilePic} 
+                    alt="Profile" 
+                    className={styles.profilePic} 
+                />
                 <div className={styles.username}>
                     <Link to={`/profile/${userData?.username}`} className={styles.editProfileLink}>
                         {userData?.username || 'User'}
@@ -77,10 +81,9 @@ const InventoryView = () => {
                         <div
                             key={index}
                             className={`${styles.inventoryItem} ${selectedItem === item ? styles.selectedItem : ''}`}
-                            style={index === 0 ? { marginLeft: '10px'} : {}}
                             onClick={() => setSelectedItem(item)}
                         >
-                            <img src={defaultProfilePic} alt={item[0]} className={styles.itemImage} />
+                            <img src={`/images/inventory/${item[2]}`} alt={item[0]} className={styles.itemImage} />
                         </div>
                     ))}
                 </div>
@@ -94,7 +97,7 @@ const InventoryView = () => {
             {/* Item details */}
             {selectedItem && (
                 <div className={styles.itemDetails}>
-                    <img src={defaultProfilePic} alt={selectedItem[0]} className={styles.itemDetailImage} />
+                    <img src={`/images/inventory/${selectedItem[2]}`} alt={selectedItem[2]} className={styles.itemDetailImage} />
                     <div className={styles.itemName}>{selectedItem[0]}</div>
                     <div className={styles.itemDescription}>{selectedItem[1]}</div>        
                     

@@ -15,9 +15,11 @@ const ProfileView = () => {
     useEffect(() => {
         if (!userData) {
             fetchUserData();
+            console.log(userData);
         } else {
             setLoading(false);
         }
+        console.log(userData);
     }, [userData, fetchUserData]);
 
     const addMoney = async (amount) => {
@@ -57,7 +59,7 @@ const ProfileView = () => {
                         </button>
                     </div>
                     <div className={styles.profileImageContainer}>
-                        <img src={userData.profilePic || defaultProfilePic} alt="Profile" className={styles.profileImage} />
+                        <img src={`images/profile/`+userData.profilePic || defaultProfilePic} alt="Profile" className={styles.profileImage} />
                     </div>
                     <div className={styles.profileInfo}>
                         <p>{userData.name}</p>

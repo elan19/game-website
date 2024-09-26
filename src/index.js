@@ -24,6 +24,7 @@ import SocialView from './Views/Gemenskap/social';
 import UserProfileView from './Views/Profile/userProfile';
 import InventoryView from './Views/Profile/inventory';
 import GameView from './Views/Library/game';
+import MarketView from './Views/Market/market';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -57,6 +58,7 @@ root.render(
                   <Route path="/profile/:username/inventory" element={<InventoryView />} />
                   <Route path="/profile/edit" element={<EditProfile />} />
                   <Route path="/gemenskap/social" element={<SocialView />} />
+                  <Route path="/gemenskap/market" element={<MarketView />} />
                 </Routes>
                 <Footer />
               </>

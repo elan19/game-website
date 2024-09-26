@@ -149,6 +149,51 @@ const MongoDbModel = {
             console.error(error);
         }
     },
+
+    getAllMarketItems: async function getAllMarketItems() {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getAllMarketItems();
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    setCardToMarket: async function setCardToMarket(username, loginId, gameIndex, cardName, price) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.setCardToMarket(username, loginId, gameIndex, cardName, price);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    getUserComments: async function getUserComments(username) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getComments(username);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    addUserComment: async function addUserComment(username, loginid, author, comment) {
+        try {
+            const user = await this.getCurrentUser();
+            console.log(loginid);
+            const response = await user.functions.addComment(username, loginid, author, comment);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
 };
 
 export default MongoDbModel;

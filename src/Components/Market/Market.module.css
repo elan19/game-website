@@ -1,0 +1,28 @@
+.itemImage {
+    width: 100px;
+}
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pageButton {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pageButton:hover {
+    background-color: #dcdcdc;
+}
+
+.pageButton.active {
+    background-color: #007bff;
+    color: white;
+}

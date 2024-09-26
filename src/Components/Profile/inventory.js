@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { UserContext } from '../../util/UserContext';
 import { Link } from 'react-router-dom';
+import MongoDbModel from '../../models/mongodb';
+
 import styles from './Inventory.module.css';
 import defaultProfilePic from '../../images/login.jpg';
 
@@ -9,6 +11,8 @@ const InventoryView = () => {
     const [loading, setLoading] = useState(true);
     const [selectedGameIndex, setSelectedGameIndex] = useState(0); // Track selected game by index
     const [selectedItem, setSelectedItem] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
+    const [price, setPrice] = useState(''); // Track the price entered by the user
 
     useEffect(() => {
         const loadData = async () => {
@@ -32,12 +36,41 @@ const InventoryView = () => {
     const games = userData?.games || [];
     const inventory = userData?.inventory || [];
 
-    // Function to handle item selling
+    // Function to handle opening the modal and setting the price
     const handleSellItem = (item) => {
-        console.log(`Selling item: ${item[0]}`);
-        const updatedInventory = inventory[selectedGameIndex].filter(i => i !== item);
-        setSelectedItem(null); // Clear selected item after selling
-        console.log(updatedInventory); // Replace this with a state update or API call
+        setSelectedItem(item);
+        setIsModalOpen(true);
+    };
+
+    // Function to call the MongoDB function to list the item on the market
+    const handleConfirmSell = async () => {
+        if (price === '') {
+            alert("Please enter a price.");
+            return;
+        }
+
+        try {
+            // Call MongoDB Realm function instead of Express API
+            const response = await MongoDbModel.setCardToMarket(
+                userData.username,
+                localStorage.getItem('loginId'),
+                selectedGameIndex,
+                selectedItem[0],  // Card name
+                parseFloat(price) // Price input by the user
+            );
+
+            if (response.success) {
+                alert("Item listed for sale successfully.");
+                setIsModalOpen(false);
+                setPrice('');
+                setSelectedItem(null);
+                await fetchUserData(); // Fetch updated user data after selling
+            } else {
+                alert("Failed to list item for sale: " + response.error);
+            }
+        } catch (error) {
+            console.error("Error selling item:", error);
+        }
     };
 
     return (
@@ -104,6 +137,28 @@ const InventoryView = () => {
                     <button className={styles.sellButton} onClick={() => handleSellItem(selectedItem)}>
                         Sell Item
                     </button>
+                </div>
+            )}
+
+            {/* Modal for selling an item */}
+            {isModalOpen && (
+                <div className={styles.modal}>
+                    <div className={styles.modalContent}>
+                        <h2>Set Price for {selectedItem[0]}</h2>
+                        <input 
+                            type="number" 
+                            value={price} 
+                            onChange={(e) => setPrice(e.target.value)} 
+                            placeholder="Enter price"
+                            className={styles.priceInput}
+                        />
+                        <button className={styles.confirmButton} onClick={handleConfirmSell}>
+                            Confirm
+                        </button>
+                        <button className={styles.cancelButton} onClick={() => setIsModalOpen(false)}>
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             )}
         </div>

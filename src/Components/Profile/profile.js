@@ -9,7 +9,7 @@ import MoneyModal from './MoneyModal';
 const ProfileView = () => {
     const { userData, fetchUserData } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error] = useState(null);
     const [showModal, setShowModal] = useState(false);
     
     // Comments section states
@@ -23,6 +23,7 @@ const ProfileView = () => {
             fetchUserData();
         } else {
             setLoading(false);
+            console.log(userData);
             fetchComments(); // Fetch comments when userData is available
         }
     }, [userData, fetchUserData]);
@@ -98,6 +99,11 @@ const ProfileView = () => {
                     <Link to="/profile/edit" className={styles.editProfileLink}>
                         Edit Profile
                     </Link>
+                    <div className={styles.notificationDiv}>
+                    <Link to="/profile/notification" className={styles.notificationLink}>
+                        Notifications
+                    </Link>
+                    </div>
                     <div className={styles.addMoney}>
                         <button onClick={() => setShowModal(true)} className={styles.addMoneyButton}>
                             Add Money
@@ -113,11 +119,13 @@ const ProfileView = () => {
                     </div>
                     <div className={styles.profileDetails}>
                         <h1>Details</h1>
-                        <p>{`Number of Games: ${userData.games.length}`}</p>
+                        <p>{`Games: ${userData.games.length}`}</p>
                         <Link to={`/profile/${userData.username}/inventory`} className={styles.inventoryLink}>
                             Inventory
                         </Link>
-                        <p>{`Number of Friends: ${userData.friends.length}`}</p>
+                        <Link to={`/profile/${userData.username}/friends`} className={styles.inventoryLink}>
+                            {`Friends: ${userData.friends.length}`}
+                        </Link>
                     </div>
 
                     {/* Comment section */}
@@ -127,7 +135,9 @@ const ProfileView = () => {
                             currentComments.map((comment, index) => (
                                 <div key={index} className={styles.comment}>
                                     <p>{comment[1]}</p> {/* Assuming comment[1] contains the comment text */}
-                                    <small>{`Author: ${comment[0]}`}</small> {/* Assuming comment[0] is a unique identifier */}
+                                    <Link to={`/profile/${comment[0]}`} className={styles.commentProfileLink}>
+                                        {comment[0]}
+                                    </Link>
                                 </div>
                             ))
                         ) : (

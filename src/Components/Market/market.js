@@ -8,7 +8,7 @@ const MarketView = () => {
     const [marketItems, setMarketItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Show 25 items per page
+    const itemsPerPage = 5; // Show 25 items per page
 
     useEffect(() => {
         const fetchMarketItems = async () => {

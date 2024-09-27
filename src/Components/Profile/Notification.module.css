@@ -1,0 +1,49 @@
+.notificationDiv button {
+    width: 40%;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    color: #eee;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 0.2rem;
+}
+
+.notificationDiv button:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}
+
+.notificationDiv .backProfileLinkDiv {
+    padding-top: 25px;
+    padding-left: 25px;
+}
+
+.backProfileLink {
+    width: 150px;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0 auto;
+    border: 0;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.backProfileLink:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}

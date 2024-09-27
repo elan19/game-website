@@ -1,5 +1,7 @@
 import React, { createContext, useState } from 'react';
 
+import MongoDbModel from '../models/mongodb'; // Adjust the path as needed
+
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -22,11 +24,24 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    async function logoutUser() {
+      try {
+          const username = localStorage.getItem('username');
+          const id = localStorage.getItem('loginId');
+          console.log(id);
+          console.log(username);
+          const data = await MongoDbModel.logoutUser(username, id);
+          console.log(data);
+      } catch (error) {
+          console.error('Failed to fetch user data:', error);
+      }
+  }
     // Implement logout logic
+    logoutUser();
     setIsAuthenticated(false);
     setUsername("");
     setId("");
-    localStorage.removeItem('id');
+    localStorage.removeItem('loginId');
     localStorage.removeItem('username'); // Remove username from localStorage
     localStorage.removeItem('isLoggedIn'); // Remove isLoggedIn from localStorage
     setIsLoggedIn(false); // Update state variable

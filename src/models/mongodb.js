@@ -89,6 +89,16 @@ const MongoDbModel = {
         }
     },
 
+    logoutUser: async function logoutUser(userN, loginId) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.logoutUser(userN, loginId);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     updateUserMoney: async function updateUserMoney(userN, amount) {
         try {
             const user = await this.getCurrentUser();
@@ -165,7 +175,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.setCardToMarket(username, loginId, gameIndex, cardName, price);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -176,7 +185,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.getComments(username);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -186,8 +194,40 @@ const MongoDbModel = {
     addUserComment: async function addUserComment(username, loginid, author, comment) {
         try {
             const user = await this.getCurrentUser();
-            console.log(loginid);
             const response = await user.functions.addComment(username, loginid, author, comment);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    sendFriendRequest: async function sendFriendRequest(sender, recipient) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.addFriendRequest(sender, recipient);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    friendRequestAction: async function friendRequestAction(sender, recipient, action) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.friendRequestAction(sender, recipient, action);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    getFriendRequests: async function getFriendRequests(username) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getFriendRequests(username);
             console.log(response);
             return response;
         } catch (error) {

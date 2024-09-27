@@ -1,23 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // To get the username from the route
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
-import { Link } from 'react-router-dom';
 import styles from './Profile.module.css';
 import defaultProfilePic from '../../images/login.jpg';
 
-
 const UserProfileView = () => {
-    const { username } = useParams(); // Extract the username from the route parameters
-    const [user, setUser] = useState(null); // State to hold the user data
+    const { username } = useParams();
+    const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [friendRequestStatus, setFriendRequestStatus] = useState(null);
     const navigate = useNavigate();
 
     // Comments section states
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const commentsPerPage = 10; // Show 10 comments per page
+    const commentsPerPage = 10;
 
     useEffect(() => {
         if (username === localStorage.getItem("username")) {
@@ -27,10 +26,11 @@ const UserProfileView = () => {
         const fetchUser = async () => {
             try {
                 const fetchedUser = await MongoDbModel.getUserProfile(username);
-                console.log(fetchedUser); // Fetch user data by username
+                console.log(fetchedUser);
                 setUser(fetchedUser);
                 setLoading(false);
-                fetchComments(); // Fetch comments when userData is available
+                fetchComments();
+                checkIfFriend(fetchedUser); // Check if the user is already a friend
             } catch (err) {
                 console.error('Failed to fetch user data:', err);
                 setError('Failed to load user profile.');
@@ -43,33 +43,49 @@ const UserProfileView = () => {
 
     const fetchComments = async () => {
         try {
-            const response = await MongoDbModel.getUserComments(username); // Assuming a method to fetch comments
-            const fetchedComments = response.comments; // Access the first array inside comments
+            const response = await MongoDbModel.getUserComments(username);
+            const fetchedComments = response.comments;
             setComments(fetchedComments);
-            console.log(fetchedComments);
         } catch (error) {
             console.error('Failed to fetch comments:', error);
         }
     };
 
     const handleAddComment = async () => {
-        if (!newComment.trim()) return; // Don't allow empty comments
+        if (!newComment.trim()) return;
 
         try {
             await MongoDbModel.addUserComment(user.username, localStorage.getItem('loginId'), localStorage.getItem("username"), newComment);
             setNewComment('');
-            fetchComments(); // Refresh comments after adding a new one
+            fetchComments();
         } catch (error) {
             console.error('Failed to add comment:', error);
         }
     };
 
-    // Calculate the comments for the current page
+    const checkIfFriend = async (fetchedUser) => {
+        const currentUser = localStorage.getItem("username");
+        if (fetchedUser.friends.includes(currentUser)) {
+            setFriendRequestStatus("friends");
+        } else if (fetchedUser.friendRequests.some(request => request.sender === currentUser && request.status === "pending")) {
+            setFriendRequestStatus("pending");
+        }  else {
+            setFriendRequestStatus('');
+        }
+    };
+
+    const handleSendFriendRequest = async () => {
+        try {
+            await MongoDbModel.sendFriendRequest(localStorage.getItem("username"), username);
+            setFriendRequestStatus("pending");
+        } catch (error) {
+            console.error('Failed to send friend request:', error);
+        }
+    };
+
     const indexOfLastComment = currentPage * commentsPerPage;
     const indexOfFirstComment = indexOfLastComment - commentsPerPage;
     const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
-
-    // Calculate total pages
     const totalPages = Math.ceil(comments.length / commentsPerPage);
 
     const handleNextPage = () => {
@@ -92,7 +108,26 @@ const UserProfileView = () => {
         <div className={styles.profileDiv}>
             {user ? (
                 <div className={styles.profileContainer}>
-                    <h1 className={styles.profileName}>{user.username}'s profile</h1>
+                    <h1 className={styles.profileName}>
+                        {user.username}'s profile
+                        <p className={styles.status}>
+                            {user.status === "Online" ? (
+                                <><p className={styles.onlineOrb}></p>Online</>
+                            ) : (
+                                <><p className={styles.offlineOrb}></p>Offline</>
+                            )}
+                        </p>
+                    </h1>
+
+                    {/* Friend request button */}
+                    {friendRequestStatus === "pending" ? (
+                        <button disabled className={styles.friendRequestButton}>Friend Request Pending</button>
+                    ) : friendRequestStatus === "friends" ? (
+                        <button disabled className={styles.friendRequestButton}>Already Friends</button>
+                    ) : (
+                        <button onClick={handleSendFriendRequest} className={styles.friendRequestButton}>Add Friend</button>
+                    )}
+
                     <div className={styles.profileImageContainer}>
                         <img src={user.profilePic || defaultProfilePic} alt="Profile" className={styles.profileImage} />
                     </div>
@@ -102,11 +137,11 @@ const UserProfileView = () => {
                     </div>
                     <div className={styles.profileDetails}>
                         <h1>Details</h1>
-                        <p>{`Number of Games: ${user.games.length}`}</p>
+                        <p>{`Games: ${user.games.length}`}</p>
                         <Link to={`/profile/${username}/inventory`} className={styles.inventoryLink}>
                             Inventory
                         </Link>
-                        <p>{`Number of Friends: ${user.friends.length}`}</p>
+                        <p>{`Friends: ${user.friends.length}`}</p>
                     </div>
 
                     {/* Comment section */}
@@ -115,8 +150,10 @@ const UserProfileView = () => {
                         {currentComments.length > 0 ? (
                             currentComments.map((comment, index) => (
                                 <div key={index} className={styles.comment}>
-                                    <p>{comment[1]}</p> {/* Assuming comment[1] contains the comment text */}
-                                    <small>{`Author: ${comment[0]}`}</small> {/* Assuming comment[0] is a unique identifier */}
+                                    <p>{comment[1]}</p>
+                                    <Link to={`/profile/${comment[0]}`} className={styles.commentProfileLink}>
+                                        {comment[0]}
+                                    </Link>
                                 </div>
                             ))
                         ) : (

@@ -8,6 +8,7 @@ const UserFriends = () => {
     const { username } = useParams();
     const [user, setUser] = useState(null);
     const [friends, setFriends] = useState([]);
+    const [friendsData, setFriendsData] = useState([]); // New state for preloaded friends data
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [hoveredFriend, setHoveredFriend] = useState(null);
@@ -17,8 +18,15 @@ const UserFriends = () => {
             try {
                 const friendsList = await MongoDbModel.getUserFriends(username);
                 const fetchedUser = await MongoDbModel.getUserProfile(username);
+                
+                // Preload all friends' profile data
+                const friendsData = await Promise.all(
+                    friendsList.friends.map(friend => MongoDbModel.getUserProfile(friend.username))
+                );
+
                 setUser(fetchedUser);
                 setFriends(friendsList.friends);
+                setFriendsData(friendsData); // Store all the friends' data
                 setLoading(false);
             } catch (err) {
                 console.error("Failed to fetch friends", err);
@@ -50,14 +58,13 @@ const UserFriends = () => {
                                 onMouseEnter={() => setHoveredFriend(friend.username)}
                                 onMouseLeave={() => setHoveredFriend(null)}
                             >
-                                (
-                                    <Link to={`/profile/${friend.username}`} className={styles.friendLink}>
-                                        {friend.username}
-                                    </Link>
-                                )
+                                <Link to={`/profile/${friend.username}`} className={styles.friendLink}>
+                                    {friend.username}
+                                </Link>
                                 {hoveredFriend === friend.username && (
                                     <div className={styles.profileCardContainer}>
-                                        <ProfileCard username={friend.username} />
+                                        {/* Pass preloaded friend data to ProfileCard */}
+                                        <ProfileCard user={friendsData.find(f => f.username === friend.username)} />
                                     </div>
                                 )}
                                 <span className={friend.status === "Online" ? styles.online : styles.offline}>

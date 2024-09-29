@@ -25,7 +25,7 @@ const UserProfileView = () => {
 
         const fetchUser = async () => {
             try {
-                const fetchedUser = await MongoDbModel.getOneUser('user2', '67b5489687e58b97');
+                const fetchedUser = await MongoDbModel.getUserProfile(username);
                 console.log(fetchedUser);
                 setUser(fetchedUser);
                 setLoading(false);

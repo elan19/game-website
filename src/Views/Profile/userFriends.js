@@ -2,17 +2,17 @@ import React, { useContext, useEffect } from 'react';
 
 import styles from './Profile.module.css';
 
-import UserProfile from '../../Components/Profile/userProfile';
+import UserFriends from '../../Components/Profile/userFriends';
 
-function UserProfileView() {
+function UserFriendsView() {
 
     return (
         <div>
             <main className={styles.main}>
-                <UserProfile />
+                <UserFriends />
             </main>
         </div>
     );
 }
 
-export default UserProfileView
+export default UserFriendsView

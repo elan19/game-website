@@ -234,6 +234,17 @@ const MongoDbModel = {
             console.error(error);
         }
     },
+
+    getUserFriends: async function getUserFriends(username) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getUserFriends(username);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
 };
 
 export default MongoDbModel;

@@ -1,0 +1,45 @@
+.container {
+    padding: 20px;
+}
+
+.friendList {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friendContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.friend {
+    display: inline-flex;
+    justify-content: space-between;
+    height: 50px;
+    background-color: #171a21;
+    width: 200px;
+    margin-right: 25px;
+}
+
+.friendLink {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #eee;
+    line-height: 50px;
+}
+
+.online {
+    color: green;
+}
+
+.offline {
+    color: red;
+}
+
+.profileCardContainer {
+    position: absolute;
+    top: 0;
+    left: -150px; /* Adjust as needed to position it to the left */
+    z-index: 10;
+}
+

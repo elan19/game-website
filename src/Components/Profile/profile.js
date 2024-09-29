@@ -19,12 +19,16 @@ const ProfileView = () => {
     const commentsPerPage = 10; // Show 10 comments per page
 
     useEffect(() => {
-        if (!userData) {
-            fetchUserData();
+        const updateUserData = async () => {
+            await fetchUserData();
+            setLoading(false);
+        };
+    
+        if (!userData || !userData.email) { // Check for key properties
+            updateUserData();
         } else {
             setLoading(false);
-            console.log(userData);
-            fetchComments(); // Fetch comments when userData is available
+            fetchComments(); // Only fetch comments if user data is available
         }
     }, [userData, fetchUserData]);
 
@@ -110,7 +114,11 @@ const ProfileView = () => {
                         </button>
                     </div>
                     <div className={styles.profileImageContainer}>
-                        <img src={`images/profile/` + userData.profilePic || defaultProfilePic} alt="Profile" className={styles.profileImage} />
+                    <img 
+                        src={userData.profilePic ? `/images/profile/${userData.profilePic}` : defaultProfilePic} 
+                        alt="Profile" 
+                        className={styles.profileImage} 
+                    />
                     </div>
                     <div className={styles.profileInfo}>
                         <p>{userData.name}</p>

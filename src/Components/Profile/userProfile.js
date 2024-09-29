@@ -25,7 +25,7 @@ const UserProfileView = () => {
 
         const fetchUser = async () => {
             try {
-                const fetchedUser = await MongoDbModel.getUserProfile(username);
+                const fetchedUser = await MongoDbModel.getOneUser('user2', '67b5489687e58b97');
                 console.log(fetchedUser);
                 setUser(fetchedUser);
                 setLoading(false);
@@ -129,7 +129,11 @@ const UserProfileView = () => {
                     )}
 
                     <div className={styles.profileImageContainer}>
-                        <img src={user.profilePic || defaultProfilePic} alt="Profile" className={styles.profileImage} />
+                        <img 
+                            src={user.profilePic ? `/images/profile/${user.profilePic}` : defaultProfilePic} 
+                            alt="Profile" 
+                            className={styles.profileImage} 
+                        />
                     </div>
                     <div className={styles.profileInfo}>
                         <p className={styles.profileInfoName}>{user.name}</p>
@@ -141,7 +145,9 @@ const UserProfileView = () => {
                         <Link to={`/profile/${username}/inventory`} className={styles.inventoryLink}>
                             Inventory
                         </Link>
-                        <p>{`Friends: ${user.friends.length}`}</p>
+                        <Link to={`/profile/${user.username}/friends`} className={styles.inventoryLink}>
+                            {`Friends: ${user.friends.length}`}
+                        </Link>
                     </div>
 
                     {/* Comment section */}

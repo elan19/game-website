@@ -9,8 +9,8 @@ import defaultProfilePic from '../../images/login.jpg';
 const InventoryView = () => {
     const { userData, fetchUserData } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-    const [selectedGameIndex, setSelectedGameIndex] = useState(0); // Track selected game by index
-    const [selectedItem, setSelectedItem] = useState(null);
+    const [selectedGame, setSelectedGame] = useState(null); // Track selected game by name
+    const [selectedCard, setSelectedCard] = useState(null); // Track selected card
     const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
     const [price, setPrice] = useState(''); // Track the price entered by the user
 
@@ -21,7 +21,6 @@ const InventoryView = () => {
             setLoading(false);
         };
 
-        // Only fetch data if userData is not already loaded
         if (!userData) {
             loadData();
         } else {
@@ -33,12 +32,14 @@ const InventoryView = () => {
         return <div>Loading...</div>;
     }
 
-    const games = userData?.games || [];
     const inventory = userData?.inventory || [];
 
+    // Get unique game names from the inventory
+    const gamesFromInventory = [...new Set(inventory.map(item => item.gameName))];
+
     // Function to handle opening the modal and setting the price
-    const handleSellItem = (item) => {
-        setSelectedItem(item);
+    const handleSellItem = (card) => {
+        setSelectedCard(card);
         setIsModalOpen(true);
     };
 
@@ -50,12 +51,11 @@ const InventoryView = () => {
         }
 
         try {
-            // Call MongoDB Realm function instead of Express API
             const response = await MongoDbModel.setCardToMarket(
                 userData.username,
                 localStorage.getItem('loginId'),
-                selectedGameIndex,
-                selectedItem[0],  // Card name
+                selectedGame,  // Selected game name
+                selectedCard.cardName,  // Card name
                 parseFloat(price) // Price input by the user
             );
 
@@ -63,7 +63,7 @@ const InventoryView = () => {
                 alert("Item listed for sale successfully.");
                 setIsModalOpen(false);
                 setPrice('');
-                setSelectedItem(null);
+                setSelectedCard(null);
                 await fetchUserData(); // Fetch updated user data after selling
             } else {
                 alert("Failed to list item for sale: " + response.error);
@@ -91,50 +91,49 @@ const InventoryView = () => {
 
             {/* Game tabs */}
             <div className={styles.gameTabs}>
-                {games.length > 0 ? (
-                    games.map((game, index) => (
+                {gamesFromInventory.length > 0 ? (
+                    gamesFromInventory.map((game, index) => (
                         <button
                             key={index}
-                            onClick={() => setSelectedGameIndex(index)}
-                            className={`${styles.gameTab} ${selectedGameIndex === index ? styles.activeTab : ''}`}
+                            onClick={() => setSelectedGame(game)}
+                            className={`${styles.gameTab} ${selectedGame === game ? styles.activeTab : ''}`}
                         >
-                            {game} ({inventory[index] ? inventory[index].length : 0})
+                            {game}
                         </button>
                     ))
                 ) : (
-                    <div>No games found.</div>
+                    <div>No games found in inventory.</div>
                 )}
             </div>
 
             {/* Inventory grid */}
-            {games.length > 0 && inventory[selectedGameIndex]?.length > 0 ? (
+            {selectedGame && inventory.find(item => item.gameName === selectedGame)?.cards.length > 0 ? (
                 <div className={styles.inventoryGrid}>
-                    <h1 className={styles.inventorySelectedGame}>{games[selectedGameIndex]}</h1>
-                    {inventory[selectedGameIndex].map((item, index) => (
+                    <h1 className={styles.inventorySelectedGame}>{selectedGame}</h1>
+                    {inventory.find(item => item.gameName === selectedGame).cards.map((card, index) => (
                         <div
                             key={index}
-                            className={`${styles.inventoryItem} ${selectedItem === item ? styles.selectedItem : ''}`}
-                            onClick={() => setSelectedItem(item)}
+                            className={`${styles.inventoryItem} ${selectedCard === card ? styles.selectedItem : ''}`}
+                            onClick={() => setSelectedCard(card)}
                         >
-                            <img src={`/images/inventory/${item[2]}`} alt={item[0]} className={styles.itemImage} />
+                            <img src={`/images/inventory/${card.cardPic}`} alt={card.cardName} className={styles.itemImage} />
                         </div>
                     ))}
                 </div>
             ) : (
                 <div>
-                    <h2>{games[selectedGameIndex] || 'No Game Selected'}</h2>
-                    <p>No items found for {games[selectedGameIndex] || 'this game'}.</p>
+                    <h2>{selectedGame || 'No Game Selected'}</h2>
                 </div>
             )}
 
             {/* Item details */}
-            {selectedItem && (
+            {selectedCard && (
                 <div className={styles.itemDetails}>
-                    <img src={`/images/inventory/${selectedItem[2]}`} alt={selectedItem[2]} className={styles.itemDetailImage} />
-                    <div className={styles.itemName}>{selectedItem[0]}</div>
-                    <div className={styles.itemDescription}>{selectedItem[1]}</div>        
+                    <img src={`/images/inventory/${selectedCard.cardPic}`} alt={selectedCard.cardPic} className={styles.itemDetailImage} />
+                    <div className={styles.itemName}>{selectedCard.cardName}</div>
+                    <div className={styles.itemDescription}>{selectedCard.cardDesc}</div>        
                     
-                    <button className={styles.sellButton} onClick={() => handleSellItem(selectedItem)}>
+                    <button className={styles.sellButton} onClick={() => handleSellItem(selectedCard)}>
                         Sell Item
                     </button>
                 </div>
@@ -144,7 +143,7 @@ const InventoryView = () => {
             {isModalOpen && (
                 <div className={styles.modal}>
                     <div className={styles.modalContent}>
-                        <h2>Set Price for {selectedItem[0]}</h2>
+                        <h2>Set Price for {selectedCard.cardName}</h2>
                         <input 
                             type="number" 
                             value={price} 

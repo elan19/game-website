@@ -281,6 +281,19 @@
     background-color: #384d66;
 }
 
+.friendRequestButton {
+    width: 100px;
+    height: 30px;
+    background-color: green;
+    border: none;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.friendRequestButton:hover {
+    background-color: lightgreen;
+}
+
 @media (max-width: 800px) {
     .profileDiv {
         min-height: 600px;
@@ -323,10 +336,15 @@
         text-align: center;
     }
 
+    .addComment textarea{
+        margin-bottom: 25px;
+    }
+
     .addComment button {
         width: 50%;
         display: block;
         margin: 0 auto;
+        margin-bottom: 15px;
     }
 }
 
@@ -402,5 +420,10 @@
         width: 50%;
         display: block;
         margin: 0 auto;
+    }
+
+    .friendRequestButton {
+        width: 70%;
+        margin-left: 15%;
     }
 }

@@ -153,12 +153,6 @@
     .editProfileForm {
         width: 75%;
     }
-}
-
-@media (max-width: 450px) {
-    .editProfileForm {
-        width: 100%;
-    }
 
     .editProfileDiv .editProfileLinkDiv  {
         padding-left: 0px;
@@ -167,5 +161,11 @@
 
     .editProfileLink {
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 450px) {
+    .editProfileForm {
+        width: 100%;
     }
 }

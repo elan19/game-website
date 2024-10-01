@@ -181,6 +181,18 @@ const MongoDbModel = {
         }
     },
 
+    buyMarketItem: async function buyMarketItem(buyerUsername, buyerLoginId, marketItemId) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.buyMarketItem(buyerUsername, buyerLoginId, marketItemId);
+            console.log(marketItemId.toString());
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     getUserComments: async function getUserComments(username) {
         try {
             const user = await this.getCurrentUser();
@@ -239,6 +251,18 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.getUserFriends(username);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    removeFriend: async function removeFriend(username, loginId, userToRemove) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.removeFriend(username, loginId, userToRemove);
+            console.log(loginId);
             console.log(response);
             return response;
         } catch (error) {

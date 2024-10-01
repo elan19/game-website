@@ -34,7 +34,7 @@ const possibleCards = {
         { name: 'Dragon Rocker Launcher', desc: `This is a skin for the Rocket Launcher item`, rarity: 'legendary' },
     ],
     
-    'Rest': [
+    'Gamipo': [
         { name: 'Boring Card', desc: `This is a boring card. Guess there are no drops for this game`, pic: `boring_card.png`, rarity: 'common' },
         { name: 'Laugh Card', desc: `This is a laughing card. Guess there are no drops for this game`, pic: `laugh_card.png`, rarity: 'common' },
         { name: 'Smile Card', desc: `This is a smile card. Guess there are no drops for this game`, pic: `smile_card.png`, rarity: 'common' },

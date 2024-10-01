@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ProfileCard from '../../util/ProfileCard.js';
+import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
 import styles from './Friends.module.css'; // Assuming a CSS module for styling
 
 const UserFriends = () => {
     const { username } = useParams();
     const [user, setUser] = useState(null);
+    const { userData, fetchUserData } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
     const [friendsData, setFriendsData] = useState([]); // New state for preloaded friends data
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [hoveredFriend, setHoveredFriend] = useState(null);
+    const loggedInUser = localStorage.getItem('username'); // Get the logged-in user's ID
 
     useEffect(() => {
         const fetchFriends = async () => {
             try {
                 const friendsList = await MongoDbModel.getUserFriends(username);
                 const fetchedUser = await MongoDbModel.getUserProfile(username);
-                
+
                 // Preload all friends' profile data
                 const friendsData = await Promise.all(
                     friendsList.friends.map(friend => MongoDbModel.getUserProfile(friend.username))
@@ -37,6 +40,23 @@ const UserFriends = () => {
 
         fetchFriends();
     }, [username]);
+
+    const handleRemoveFriend = async (friendUsername) => {
+        const confirmed = window.confirm(`Do you really want to remove ${friendUsername} as your friend?`);
+        if (confirmed) {
+            try {
+                // Call backend to remove the friend
+                await MongoDbModel.removeFriend(username, localStorage.getItem('loginId'), friendUsername);
+                
+                // Update the local state after removing the friend
+                setFriends(friends.filter(friend => friend.username !== friendUsername));
+                setFriendsData(friendsData.filter(friendData => friendData.username !== friendUsername));
+                fetchUserData();
+            } catch (err) {
+                console.error('Failed to remove friend:', err);
+            }
+        }
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -61,15 +81,27 @@ const UserFriends = () => {
                                 <Link to={`/profile/${friend.username}`} className={styles.friendLink}>
                                     {friend.username}
                                 </Link>
+
                                 {hoveredFriend === friend.username && (
                                     <div className={styles.profileCardContainer}>
                                         {/* Pass preloaded friend data to ProfileCard */}
                                         <ProfileCard user={friendsData.find(f => f.username === friend.username)} />
                                     </div>
                                 )}
+                                
                                 <span className={friend.status === "Online" ? styles.online : styles.offline}>
                                     {friend.status}
                                 </span>
+
+                                {/* Only show the remove button if the logged-in user is viewing their own friends list */}
+                                {username === loggedInUser && (
+                                    <button 
+                                        className={styles.removeButton} 
+                                        onClick={() => handleRemoveFriend(friend.username)}
+                                    >
+                                        &#x2716; {/* Unicode for 'X' symbol */}
+                                    </button>
+                                )}
                             </div>
                         </li>
                     ))}

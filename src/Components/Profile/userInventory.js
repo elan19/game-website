@@ -46,7 +46,8 @@ const OtherUserInventoryView = () => {
         <div className={styles.inventoryContainer}>
             {/* User profile header */}
             <div className={styles.profileHeader}>
-                <img src={otherUserData?.profilePic || defaultProfilePic} alt="Profile" className={styles.profilePic} />
+                <img src={otherUserData.profilePic ? `/images/profile/${otherUserData.profilePic}` : defaultProfilePic}  alt="Profile" className={styles.profilePic} />
+                
                 <div className={styles.username}>
                     <Link to={`/profile/${otherUserData?.username}`} className={styles.editProfileLink}>
                         {otherUserData?.username || 'Unknown User'}
@@ -89,7 +90,6 @@ const OtherUserInventoryView = () => {
                 <div>
                     <div className={styles.inventoryGrid}>
                     <h2>{games[selectedGameIndex] || 'No Game Selected'}</h2>
-                    <p>No items found in this game.</p>
                 </div>
                 </div>
             )}

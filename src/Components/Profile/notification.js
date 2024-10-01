@@ -32,6 +32,7 @@ const NotificationView = () => {
             await MongoDbModel.friendRequestAction(sender, userData.username, 'accept');
             const requests = await MongoDbModel.getFriendRequests(localStorage.getItem('username')); // Fetch friend requests
             setFriendRequests(requests.friendRequests); // Extract the array from the response
+            fetchUserData();
         } catch (error) {
             console.error('Failed to accept friend request:', error);
         }
@@ -42,6 +43,7 @@ const NotificationView = () => {
             await MongoDbModel.friendRequestAction(sender, userData.username, 'decline');
             const requests = await MongoDbModel.getFriendRequests(localStorage.getItem('username')); // Fetch friend requests
             setFriendRequests(requests.friendRequests); // Extract the array from the response
+            fetchUserData();
         } catch (error) {
             console.error('Failed to reject friend request:', error);
         }
@@ -62,7 +64,7 @@ const NotificationView = () => {
                     Back to profile 
                 </Link>
             </div>
-            <h1>Friend Requests</h1>
+            <h1>Notifications</h1>
             {friendRequests.length > 0 ? (
                 friendRequests.map((request, index) => (
                     <div key={index} className={styles.request}>

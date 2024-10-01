@@ -34,26 +34,35 @@ const GameSession = () => {
     }, [active]);
 
     const rewardCard = async () => {
-        const cards = possibleCards[gameId] || possibleCards['Rest'];
+        let adjustedGameId = gameId;
+    
+        // Check if gameId exists in possibleCards, if not default to 'Gamipo'
+        if (!possibleCards[gameId]) {
+            adjustedGameId = 'Gamipo';
+        }
+    
+        const cards = possibleCards[adjustedGameId];
+    
         if (cards) {
             const randomCard = getRandomCardByRarity(cards);
             console.log(randomCard);
             setLastCard(randomCard.name);
             console.log(`You received: ${randomCard.name}`);
-
+    
             try {
                 const username = localStorage.getItem('username');
                 const loginId = localStorage.getItem('loginId');
-                await MongoDbModel.updateUserInventory(username, loginId, gameId, randomCard.name, randomCard.desc, randomCard.pic);
-
+                // Pass adjustedGameId instead of gameId
+                const test = await MongoDbModel.updateUserInventory(username, loginId, adjustedGameId, randomCard.name, randomCard.desc, randomCard.pic);
+    
                 // Fetch updated user data after updating inventory
                 await fetchUserData();
-
             } catch (error) {
                 console.error('Error updating inventory:', error);
             }
         }
     };
+    
     
 
     // Function to select a random card based on rarity

@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useParams } from 'react-router-dom';
 
 import styles from './Profile.module.css';
 import { UserContext } from '../../util/UserContext';
@@ -10,8 +10,6 @@ function InventoryView() {
     const { username } = useParams(); // Get the username from the URL
     const { userData } = useContext(UserContext); // Get the logged-in user's data
 
-    console.log(username);
-    console.log(userData);
     const isOwnProfile = userData && username && userData.username === username; // Check if the username matches the logged-in user
 
     return (

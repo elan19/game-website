@@ -77,7 +77,7 @@ const NotificationView = () => {
                     </div>
                 ))
             ) : (
-                <p>No friend requests at this time.</p>
+                <p className={styles.noFriend}>No friend requests at this time.</p>
             )}
         </div>
     );

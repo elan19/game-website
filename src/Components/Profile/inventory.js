@@ -13,11 +13,13 @@ const InventoryView = () => {
     const [selectedCard, setSelectedCard] = useState(null); // Track selected card
     const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
     const [price, setPrice] = useState(''); // Track the price entered by the user
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 450);
 
     useEffect(() => {
         const loadData = async () => {
             setLoading(true);
             await fetchUserData();
+            console.log(userData);
             setLoading(false);
         };
 
@@ -27,6 +29,17 @@ const InventoryView = () => {
             setLoading(false);
         }
     }, [userData, fetchUserData]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 450);
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -121,13 +134,13 @@ const InventoryView = () => {
                     ))}
                 </div>
             ) : (
-                <div>
-                    <h2>{selectedGame || 'No Game Selected'}</h2>
+                <div className={styles.inventoryGrid}>
+                    <h2 className={styles.noGameSelectedH2}>{selectedGame || 'No Game Selected'}</h2>
                 </div>
             )}
 
             {/* Item details */}
-            {selectedCard && (
+            {selectedCard && !isMobile && (
                 <div className={styles.itemDetails}>
                     <img src={`/images/inventory/${selectedCard.cardPic}`} alt={selectedCard.cardPic} className={styles.itemDetailImage} />
                     <div className={styles.itemName}>{selectedCard.cardName}</div>
@@ -139,11 +152,28 @@ const InventoryView = () => {
                 </div>
             )}
 
-            {/* Modal for selling an item */}
-            {isModalOpen && (
+            {/* Modal for the selected item - Only show on mobile */}
+            {selectedCard && isMobile && (
                 <div className={styles.modal}>
+                    <button className={styles.closeButton} onClick={() => setSelectedCard(null) && setIsModalOpen(null)}>X</button>
+                    <div className={styles.itemDetails}>
+                        <img src={`/images/inventory/${selectedCard.cardPic}`} alt={selectedCard.cardPic} className={styles.itemDetailImage} />
+                        <div className={styles.itemName}>{selectedCard.cardName}</div>
+                        <div className={styles.itemDescription}>{selectedCard.cardDesc}</div>        
+                        
+                        <button className={styles.sellButton} onClick={() => handleSellItem(selectedCard)}>
+                            Sell Item
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Modal for selling an item */}
+            {isModalOpen && selectedCard &&(
+                <div className={styles.sellModal}>
                     <div className={styles.modalContent}>
-                        <h2>Set Price for {selectedCard.cardName}</h2>
+                        <button className={styles.closeButtonSellItem} onClick={() => setIsModalOpen(false)}>X</button>
+                        <h2>Sell price '{selectedCard.cardName}'</h2>
                         <input 
                             type="number" 
                             value={price} 
@@ -160,6 +190,7 @@ const InventoryView = () => {
                     </div>
                 </div>
             )}
+
         </div>
     );
 };

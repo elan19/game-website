@@ -3,12 +3,12 @@ import { useParams, Link } from 'react-router-dom';
 import ProfileCard from '../../util/ProfileCard.js';
 import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
-import styles from './Friends.module.css'; // Assuming a CSS module for styling
+import styles from './userFriends.module.css'; // Assuming a CSS module for styling
 
 const UserFriends = () => {
     const { username } = useParams();
     const [user, setUser] = useState(null);
-    const { userData, fetchUserData } = useContext(UserContext);
+    const { fetchUserData } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
     const [friendsData, setFriendsData] = useState([]); // New state for preloaded friends data
     const [loading, setLoading] = useState(true);

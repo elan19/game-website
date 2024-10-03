@@ -2,6 +2,12 @@
     padding: 20px;
 }
 
+.container h1 {
+    color: #eee;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
 .friendList {
     list-style-type: none;
     padding: 0;
@@ -57,5 +63,24 @@
 
 .removeButton:hover {
     color: darkred;
+}
+
+
+@media (max-width: 800px) {
+    .friendContainer {
+        width: 100%;
+    }
+
+    .friend {
+        width: 40%;
+    }
+    
+}
+
+@media (max-width: 450px) {
+    .friend {
+        width: 100%;
+    }
+    
 }
 

@@ -11,7 +11,7 @@ const PublisherInfo = () => {
     const [products, setProducts] = useState([]);
     const [next, setNext] = useState(null);
     const [prev, setPrev] = useState(null);
-    const { isAuthenticated, username, login, logout } = useContext(AuthContext);
+    const { isAuthenticated } = useContext(AuthContext);
 
     const apiKey = process.env.REACT_APP_API_KEY;
     const baseURL = process.env.REACT_APP_BASE_URL;
@@ -42,7 +42,7 @@ const PublisherInfo = () => {
         };
 
         fetchData();
-    }, [id]);
+    }, [id, apiKey, baseURL]);
 
     const handlePrevClick = async () => {
         if (prev !== null) {

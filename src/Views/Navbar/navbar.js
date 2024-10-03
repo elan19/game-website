@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import logoSteam from '../../images/gamipo-logo3.png';
+import logoGamipo from '../../images/gamipo-logo3.png';
 import styles from './Navbar.module.css';
 import { AuthContext } from '../../util/AuthContext';
 import { UserContext } from '../../util/UserContext'; // Import UserContext
@@ -60,7 +60,7 @@ const Navigation = () => {
         <div className={styles.bottomNav}>
             <nav className={styles.nav}>
                 <Link to="/">
-                    <img className={styles.navPic} src={logoSteam} alt="steam_logo" />
+                    <img className={styles.navPic} src={logoGamipo} alt="steam_logo" />
                 </Link>
                 <div className={styles.hamburgMenu} onClick={handleMenuClick}>
                     <div className={`${styles.bar1} ${menuOpen ? styles.changeBar1 : ''}`}></div>

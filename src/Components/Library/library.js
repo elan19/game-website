@@ -78,7 +78,6 @@ const Library = () => {
                 {selectedGame ? (
                     <div>
                         <h2>{selectedGame}</h2>
-                        {/* You can add more details if available */}
                         <button 
                             className={styles.playButton}
                             onClick={() => handlePlayClick(selectedGame)}
@@ -91,6 +90,7 @@ const Library = () => {
                 )}
             </div>
         </div>
+
     );
 };
 

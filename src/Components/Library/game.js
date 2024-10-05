@@ -1,115 +1,128 @@
-import React, { useState, useEffect, useContext  } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
 import possibleCards from './cards.js'; // Adjust path as needed
-import styles from './Library.module.css';
+import styles from './GameSession.module.css';
 import { UserContext } from '../../util/UserContext'; // Import UserContext
-
 import MongoDbModel from '../../models/mongodb';
 
-// Define rarities and their probabilities
 const rarityWeights = {
-    common: 79.92, // 79.92% chance
-    uncommon: 15.98,  // 15.98% chance
-    rare: 3.2, // 3.2% chance
-    epic: 0.64,  // 0.64% chance
-    legendary: 0.26 // 0.26% chance
+    common: 79.92,
+    uncommon: 15.98,
+    rare: 3.2,
+    epic: 0.64,
+    legendary: 0.26
 };
 
 const GameSession = () => {
     const { gameId } = useParams();
     const [active, setActive] = useState(false);
     const [lastCard, setLastCard] = useState(null);
+    const [progress, setProgress] = useState(0);
     const { fetchUserData } = useContext(UserContext);
+    const navigate = useNavigate(); // Initialize useNavigate hook
+
+    const totalInterval = 6 * 1000; // 6 seconds for testing (replace with 3 hours)
 
     useEffect(() => {
-        let timer;
+        let timerId;
+
         if (active) {
-            const interval = 6 * 1000; // * 60 * 60 // 3 seconds for testing
-            timer = setInterval(() => {
-                rewardCard();
-            }, interval);
+            timerId = setInterval(() => {
+                setProgress(prev => {
+                    if (prev >= 100) {
+                        rewardCard();
+                        return 0; // Reset progress when it reaches 100%
+                    }
+                    return prev + 1; // Increment progress
+                });
+            }, totalInterval / 100); // Increment based on the total interval divided by 100 steps
         }
 
-        return () => clearInterval(timer); // Cleanup the timer
+        return () => clearInterval(timerId); // Cleanup
     }, [active]);
 
     const rewardCard = async () => {
         let adjustedGameId = gameId;
-    
-        // Check if gameId exists in possibleCards, if not default to 'Gamipo'
+
         if (!possibleCards[gameId]) {
             adjustedGameId = 'Gamipo';
         }
-    
+
         const cards = possibleCards[adjustedGameId];
-    
+
         if (cards) {
             const randomCard = getRandomCardByRarity(cards);
-            console.log(randomCard);
             setLastCard(randomCard.name);
-            console.log(`You received: ${randomCard.name}`);
-    
+
             try {
                 const username = localStorage.getItem('username');
                 const loginId = localStorage.getItem('loginId');
-                // Pass adjustedGameId instead of gameId
-                const test = await MongoDbModel.updateUserInventory(username, loginId, adjustedGameId, randomCard.name, randomCard.desc, randomCard.pic);
-    
-                // Fetch updated user data after updating inventory
+
+                await MongoDbModel.updateUserInventory(username, loginId, adjustedGameId, randomCard.name, randomCard.desc, randomCard.pic);
+
                 await fetchUserData();
             } catch (error) {
                 console.error('Error updating inventory:', error);
             }
         }
     };
-    
-    
 
-    // Function to select a random card based on rarity
-    const totalSlots = 1000; // Total slots you want
+    const totalSlots = 1000;
 
-    // Calculate the number of slots for each rarity based on the weights
     const calculateSlotsByRarity = () => {
         const slotsByRarity = {};
         for (const rarity in rarityWeights) {
             const weight = rarityWeights[rarity];
-            const slots = Math.round((weight / 100) * totalSlots); // Calculate slots based on weight percentage
+            const slots = Math.round((weight / 100) * totalSlots);
             slotsByRarity[rarity] = slots;
         }
         return slotsByRarity;
     };
 
-    // Function to select a random card based on rarity
     const getRandomCardByRarity = (cards) => {
         const slotsByRarity = calculateSlotsByRarity();
         const pool = [];
 
-        // Fill the pool based on the calculated slots
         for (const rarity in slotsByRarity) {
             const cardGroup = cards.filter(card => card.rarity === rarity);
             const slots = slotsByRarity[rarity];
 
-            // Add cards to the pool based on the calculated number of slots
             for (let i = 0; i < slots; i++) {
                 const randomCard = cardGroup[Math.floor(Math.random() * cardGroup.length)];
                 pool.push(randomCard);
             }
         }
-        console.log(pool);
-        // Select a random card from the pool
+
         const randomIndex = Math.floor(Math.random() * pool.length);
         return pool[randomIndex];
     };
-
-
 
     const handleStartPlaying = () => {
         setActive(true);
     };
 
+    // Handle navigating back to the library
+    const handleBackToLibrary = () => {
+        navigate('/library');
+    };
+
+    // Generate inline style for circular progress
+    const circleStyle = {
+        background: `conic-gradient(#4caf50 ${progress * 3.6}deg, #ddd 0deg)`
+    };
+
     return (
         <div className={styles.gameSessionContainer}>
             <h2>Playing {gameId}</h2>
+
+            <div className={styles.progressCircleContainer}>
+                <div className={styles.progressCircle} style={circleStyle}>
+                    <div className={styles.circleFill}>
+                        {lastCard && <p className={styles.cardReward}>{lastCard}</p>}
+                    </div>
+                </div>
+            </div>
+
             <button 
                 className={styles.playButton} 
                 onClick={handleStartPlaying}
@@ -118,11 +131,12 @@ const GameSession = () => {
                 {active ? 'Game is Active' : 'Start Playing'}
             </button>
 
-            {lastCard && (
-                <div className={styles.cardReward}>
-                    <p>You received a card: {lastCard}</p>
-                </div>
-            )}
+            <button 
+                className={styles.backButton} 
+                onClick={handleBackToLibrary}
+            >
+                Back to Library
+            </button>
 
             <p>Keep playing to receive a new card every 3 hours!</p>
         </div>

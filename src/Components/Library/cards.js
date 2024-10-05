@@ -4,7 +4,8 @@ const possibleCards = {
         { name: 'AK-47 Case Hardened', desc: `A little color never hurt anyone`, pic: `case_csgo.png`, rarity: 'epic' },
         { name: 'Desert Eagle Hypnotic', desc: `You're not getting sleepy, you're passing out from blood loss`, pic: `case_csgo.png`, rarity: 'epic' },
         { name: 'Weapon Case', desc: `Just a case`, pic: `case_csgo.png`, rarity: 'common' },
-        { name: 'Glock-18 - Dragon Tattoo', desc: `In a fairy tale the knight always slays the dragon... but this is the real world`, pic: `case_csgo.png`, rarity: 'common' }
+        { name: 'Glock-18 - Zeus', desc: `Unleash the fury of the gods with electric blue bolts coursing through this divine sidearm, striking down your enemies with every shot.`, pic: `case_csgo.png`, rarity: 'common' },
+        { name: 'USP-S - Dreamer', desc: `Unleash the fury of the gods with electric blue bolts coursing through this divine sidearm, striking down your enemies with every shot.`, pic: `case_csgo.png`, rarity: 'common' }
     ],
 
     'Golf With Your Friends': [

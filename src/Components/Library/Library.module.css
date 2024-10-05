@@ -1,0 +1,73 @@
+.libraryContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 20px;
+    background-color: #1b2838; /* Matching the dark theme */
+    color: #c7d5e0; /* Light text color for readability */
+    height: 80vh; /* Use most of the vertical space */
+}
+
+.gameList {
+    width: 30%;
+    border-right: 1px solid #394b59; /* Dark border for separation */
+    padding-right: 15px;
+}
+
+.gameList h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #c7d5e0;
+}
+
+.gameList ul {
+    list-style-type: none;
+    padding: 0;
+    max-height: 70vh;
+    overflow-y: auto; /* Scroll if list is too long */
+}
+
+.gameItem {
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #394b59;
+    font-size: 1.2em;
+    transition: background-color 0.2s ease;
+}
+
+.gameItem:hover {
+    background-color: #3e4b59; /* Highlight on hover */
+}
+
+.gameDetails {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #2a3a4b; /* A darker background for details */
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+}
+
+.gameDetails h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.playButton {
+    padding: 12px 30px;
+    background-color: #5cb85c;
+    color: white;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.playButton:hover {
+    background-color: #4cae4c;
+}

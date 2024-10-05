@@ -1,0 +1,277 @@
+.mainAbout {
+    background-color: #1d2024;
+    width: 100%;
+    max-width: 100%;
+    min-height: 700px;
+    margin: 0;
+}
+
+.aboutContent {
+    width: 100%;
+    min-height: 700px;
+}
+
+.aboutText {
+    background-image: radial-gradient(circle closest-side, rgba(0, 111, 255, 0.13), transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 30%;
+    margin-left: 20%;
+    float: left;
+    height: 400px;
+    margin-top: 50px;
+    color: #eee;
+}
+
+.aboutLink {
+    color: #00a6dd;
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.aboutLink span {
+    transition: 0.2s;
+}
+
+.aboutLink:hover span {
+    margin-left: 15px;
+}
+
+.aboutLink:hover {
+    color: #00a6dd;
+    text-decoration: none;
+}
+
+.middle {
+    margin-left: 37.5%;
+    margin-right: 37.5%;
+    background-image: none;
+    margin-top: 0;
+    width: 25%;
+    font-size: 1.2rem;
+}
+
+.aboutText p {
+    margin-bottom: 25px;
+}
+
+.topTextAbout {
+    padding-top: 100px;
+    font-size: 24px;
+    padding-bottom: 50px;
+    margin-bottom: 0;
+}
+
+.aboutImgDiv {
+    width: 30%;
+    margin-right: 20%;
+    float: right;
+}
+
+.aboutImg {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 200px;
+    display: block;
+}
+
+.CreateAccountButton {
+    background-image: linear-gradient(to right, #06bfff 50%, #2b74ff 100%);
+    color: #fff;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    box-sizing: border-box;
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 0.2rem;
+    height: 40px;
+    width: 40%;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.CreateAccountButton:hover {
+    background-color: #00a6dd;
+    background-image: none;
+}
+
+.topTextAbout {
+    padding-bottom: 0;
+}
+
+.middleDiv {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.middleText {
+    color: #6b6b6b;
+}
+
+.aboutContentShopInfo {
+    text-align: center;
+    background-image: radial-gradient(ellipse farthest-side, rgba(0, 111, 255, 0.15), transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100%;
+    min-height: 700px;
+}
+
+.aboutContentShopInfo h1 {
+    color: #eee;
+    font-size: 2.5rem;
+    padding-top: 200px;
+}
+
+.aboutTextMiddle {
+    background-image: radial-gradient(circle closest-side, rgba(0, 111, 255, 0.13), transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 30%;
+    margin-left: 20%;
+    float: left;
+    height: 400px;
+    margin-top: 50px;
+    color: #eee;
+    margin-left: 37.5%;
+    margin-right: 37.5%;
+    background-image: none;
+    margin-top: 0;
+    width: 25%;
+    font-size: 1.2rem;
+}
+
+.aboutContentGemenskapInfo {
+    width: 100%;
+    min-height: 700px;
+}
+
+.aboutContentGemenskapInfo h1 {
+    color: #eee;
+    font-size: 2.5rem;
+    padding-top: 200px;
+}
+
+.aboutTextLeftAboutGemenskap {
+    background-image: radial-gradient(circle closest-side, rgba(0, 111, 255, 0.13), transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 30%;
+    margin-left: 20%;
+    float: left;
+    height: 400px;
+    margin-top: 50px;
+    color: #eee;
+    width: 35%;
+    margin-left: 15%;
+}
+
+.aboutTextLeftAboutGemenskap p {
+    width: 80%;
+}
+
+.aboutTextRightAboutGemenskap {
+    background-image: radial-gradient(circle closest-side, rgba(0, 111, 255, 0.13), transparent);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 30%;
+    margin-left: 20%;
+    float: left;
+    height: 400px;
+    margin-top: 50px;
+    color: #eee;
+    margin-top: 200px;
+}
+
+.aboutImgDivRightAboutGemenskap {
+    width: 30%;
+    margin-right: 20%;
+    float: right;
+    margin-top: 200px;
+}
+
+@media (max-width:1400px) {
+    .CreateAccountButton {
+        width: 100%;
+    }
+}
+
+@media (max-width:800px) {
+
+    .aboutContent {
+        min-height: 550px;
+    }
+
+    .aboutText {
+        width: 80%;
+        margin-left: 10%;
+        height: 400px;
+        margin-top: 100px;
+        z-index: 5;
+        position: relative;
+    }
+
+    .aboutImgDiv {
+        position: absolute;
+        z-index: 1;
+        top: 120px;
+        right: 0px;
+        margin-right: 10%;
+        width: 25%;
+        min-width: 150px;
+    }
+
+    .aboutImg {
+        margin-top: 50px;
+    }
+
+    .installSteamButton {
+        font-size: 18px;
+        margin-left: 10%;
+        width: 60%;
+    }
+
+    .aboutContentShopInfo {
+        min-height: 500px;
+    }
+
+    .aboutTextMiddle {
+        height: auto;
+    }
+
+    .aboutTextMiddle {
+        width: 60%;
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .aboutTextLeftAboutGemenskap {
+        width: 80%;
+        margin-left: 10%;
+        position: relative;
+    }
+
+    .aboutImgDivRightAboutGemenskap {
+        margin-top: 0;
+        position: relative;
+    }
+
+}
+
+@media (max-width: 520px) {
+    .aboutImgDivRightAboutGemenskap {
+        position: absolute;
+        bottom: 700px;
+        right: 0px;
+        margin-right: 10%;
+    }
+
+}

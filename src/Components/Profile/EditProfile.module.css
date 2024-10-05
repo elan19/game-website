@@ -1,0 +1,171 @@
+.editProfileDiv {
+    width: 100%;
+    min-height: 75vh;
+    box-shadow: 2px 2px 5px black;
+    background: linear-gradient(to bottom right, #384d66, #08182c);
+    text-align: center;
+}
+
+.editProfileDiv h1 {
+    color: #eee;
+}
+
+.editProfileDiv label {
+    color: #ccc;
+}
+
+.editProfileForm {
+    width: 45%;
+    min-height: 500px;
+    margin: 0 auto;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.editProfileForm input {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    font-family: 'Merriweather';
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6rem;
+    box-sizing: border-box;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 1.4rem;
+    background-color: #32353c;
+    outline: none;
+    color: #eee;
+}
+
+.editProfileForm input:hover {
+    background-color: #393c44;
+}
+
+.editProfileForm input:focus {
+    border: 1px solid #06bfff;
+}
+
+.editProfileForm .disabled {
+    opacity: 0.3;
+    border: 2px solid rgb(255, 0, 0, 1);
+    text-align: center;
+}
+
+.editProfileForm .disabled:hover {
+    background-color: #32353c;
+}
+
+.editProfileForm textarea {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    font-family: 'Merriweather';
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6rem;
+    box-sizing: border-box;
+    width: 80%;
+    min-height: 100px;
+    margin-left: 10%;
+    margin-bottom: 1.4rem;
+    background-color: #32353c;
+    outline: none;
+    color: #eee;
+}
+
+.editProfileForm textarea:hover {
+    background-color: #393c44;
+}
+
+.editProfileForm textarea:focus {
+    border: 1px solid #06bfff;
+}
+
+.editProfileDiv button {
+    width: 40%;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    color: #eee;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 0.2rem;
+}
+
+.editProfileDiv button:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}
+
+.editProfileDiv .editProfileLinkDiv {
+    padding-top: 25px;
+    padding-left: 25px;
+}
+
+.editProfileLink {
+    width: 150px;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: block;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+}
+
+.editProfileLink:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}
+
+
+.profileImage {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #555;
+    display: inline-block;
+}
+
+.selectedImage {
+    border-color: #06bfff;
+}
+
+@media (max-width: 800px) {
+    .editProfileForm {
+        width: 75%;
+    }
+
+    .editProfileDiv .editProfileLinkDiv  {
+        padding-left: 0px;
+        margin-bottom: 25px;
+    }
+
+    .editProfileLink {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 450px) {
+    .editProfileForm {
+        width: 100%;
+    }
+}

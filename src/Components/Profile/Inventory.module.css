@@ -1,0 +1,312 @@
+/* General styles */
+.inventoryContainer {
+    width: 100%;
+    min-height: 75vh;
+}
+
+.profileHeader {
+    display: block;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    margin-top: -25px;
+    margin-bottom: 30px;
+    background-color: #2e2e2e;
+}
+
+.profilePic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-right: 20px;
+    object-fit: cover;
+    border: 1px solid white;
+}
+
+.username {
+    height: 100px;
+    display: inline-block;
+    position: absolute;
+    text-align: center;
+}
+
+.username a {
+    font-size: 28px;
+    line-height: 100px;
+    color: #eee;
+}
+
+.username a:hover {
+    color: #06bfff;
+    text-decoration: none;
+}
+
+.gameTabs {
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: rgb(9, 9, 37);
+}
+
+.gameTab {
+    background-color: #2e2e2e;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 5px;
+    cursor: pointer;
+}
+
+.activeTab {
+    background-color: #1e1e1e;
+    font-weight: bold;
+}
+
+.inventoryGrid {
+    display: inline-block;
+    margin-bottom: 20px;
+    width: 60%;
+    min-height: 60vh;
+    background-color: #1e1e1e;
+}
+
+.inventorySelectedGame {
+    width: 100%;
+    height: 50px;
+    display: block;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 10px;
+    text-align: left;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+
+.inventoryItem {
+    width: 100px;
+    height: 100px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    display: inline-flex;
+    margin-right: 10px;
+}
+
+.inventoryItem:nth-child(1) {
+    margin-left: 10px;
+    width: 200px;
+}
+
+.inventoryItem:hover, .selectedItem {
+    border-color: #06bfff;
+}
+
+.itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.itemDetails {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    float: right;
+    width: 40%;
+    min-height: 60vh;
+    background-color: #1e1e1e;
+    border: 3px solid #ccc;
+    padding: 5px;
+}
+
+.itemDetailImage {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    margin-top: 150px;
+}
+
+.itemName {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.itemDescription {
+    font-size: 14px;
+    color: #eee;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.sellModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it's above all other elements */
+}
+
+.modalContent {
+    width: 90%;
+    max-width: 400px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modalContent h2 {
+    color: #eee;
+}
+
+.priceInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: white;
+}
+
+.confirmButton, .cancelButton {
+    background-color: #06bfff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.cancelButton {
+    background-color: #ff4040;
+}
+
+.closeButtonSellItem {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+}
+
+.sellButton {
+    background-color: #06bfff;
+    color: #2e2e2e;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.4s ease;
+}
+
+.sellButton:hover {
+    background-color: rgb(9, 9, 37);
+    color: #ccc;
+}
+
+.sellButton:active {
+    background-color: rgb(9, 9, 37);
+}
+
+.sellButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 174, 0, 0.5);
+}
+
+.noGameSelectedH2 {
+    color: #eee;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+
+/* Modal styles for mobile view only */
+@media only screen and (max-width: 450px) {
+    .inventoryGrid {
+        width: 100%; /* Full width on mobile */
+    }
+    
+    .itemDetailImage {
+        margin-top: 20px; /* Adjust for smaller screens */
+    }
+
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .closeButton {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        background: none;
+        border: none;
+        font-size: 30px;
+        color: white;
+        cursor: pointer;
+    }
+
+    .itemDetails {
+        max-width: 400px;
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        width: 100%; /* Full width when item is selected */
+        margin-top: 20px; /* Add some space */
+        margin-bottom: 20px;
+        min-height: 95vh;
+    }
+
+    .itemDetailImage {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .itemName {
+        font-size: 18px;
+        font-weight: bold;
+        color: #ccc;
+        margin: 20px 0 10px;
+    }
+
+    .itemDescription {
+        font-size: 14px;
+        color: #eee;
+    }
+
+    .modalContent {
+        width: 100%;
+        max-width: none; /* Full width on mobile */
+        padding: 20px;
+        box-sizing: border-box; /* Ensure padding is inside the width */
+    }
+}
+

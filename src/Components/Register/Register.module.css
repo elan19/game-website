@@ -1,0 +1,137 @@
+.registerForm {
+    background-color: #181a21;
+    width: 30%;
+    min-width: 500px;
+    margin: 0 auto;
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+
+.h1Registrera {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    width: 30%;
+    margin-bottom: 50px;
+    padding-top: 50px;
+    color: #eee;
+}
+
+.input {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    font-family: 'Merriweather';
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 0.2rem;
+    padding: 0.6rem;
+    box-sizing: border-box;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 1.4rem;
+    background-color: #32353c;
+    outline: none;
+    color: #eee;
+}
+
+.input:hover {
+    background-color: #393c44;
+}
+
+.input:focus {
+    border: 1px solid #06bfff;
+}
+
+.leftInputLabel {
+    display: block;
+    font-size: 1rem;
+    margin-left: 10%;
+    color: #1999ff;
+    float: left;
+    text-align: left;
+    position: relative;
+    width: 100%;
+}
+
+.LeftInputLabel::after {
+    content: ":";
+}
+
+.button {
+    color: #444;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    box-sizing: border-box;
+    display: block;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.4rem;
+    text-align: center;
+    border-radius: 0.2rem;
+    height: 40px;
+    width: 40%;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.loginButton {
+    background-image: linear-gradient(90deg, #06bfff 0%, #2d73ff 100%);
+}
+
+.marginBottom {
+    margin-bottom: 25px;
+}
+
+.loginButton:hover {
+    background-image: linear-gradient(90deg, #06bfff 60%, #2d73ff 100%);
+}
+
+.button:active {
+    background: linear-gradient(to bottom right, #5fb2e2, #1b2838);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.registerButton {
+    color: #444;
+    font-size: 1.2rem;
+}
+
+.registerButton:hover {
+    background-color: #06bfff;
+}
+
+.errorMessage {
+    color: #eee;
+    text-align: center;
+    font-size: 18px;
+}
+
+@media (max-width: 667px) {
+    .loginForm {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .input-label {
+        margin-left: 0;
+    }
+
+    .loginButton {
+        font-size: 1rem;
+        width: 50%;
+    }
+
+    .registerButton {
+        font-size: 1rem;
+        width: 50%;
+    }
+
+    .registerForm {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .leftInputLabel {
+        width: 90%;
+    }
+}

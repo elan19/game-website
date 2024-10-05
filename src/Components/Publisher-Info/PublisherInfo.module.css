@@ -1,0 +1,86 @@
+.mapHeading {
+    margin-bottom: 25px;
+    margin-top: 25px;
+    border-bottom: none;
+    text-align: left;
+    color: #eee;
+}
+
+.publisherDesc {
+    width: 100%;
+    background: linear-gradient(to right, #2b3b4a, #566574);
+    margin-bottom: 25px;
+    margin-top: 0;
+    padding-top: 0;
+    border-radius: 10px;
+}
+
+.publisherDesc p {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    color: #ccc;
+}
+
+.publisherDesc h3 {
+    margin-left: 1%;
+    font-size: 14px;
+    text-decoration: underline;
+    color: #eee;
+}
+
+.prevPage {
+    width: 100px;
+    height: 50px;
+    color: #eee;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s, border-radius 0.3s;
+}
+
+.prevPage:hover {
+    box-shadow: -40px 0 10px -5px inset rgba(255, 255, 255, 0.2);
+    border-radius: 0 15px 15px 0;
+}
+
+.nextPage {
+    width: 100px;
+    height: 50px;
+    color: #eee;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    cursor: pointer;
+    float: right;
+    clear: both;
+    transition: box-shadow 0.3s, border-radius 0.3s;
+}
+
+.nextPage:hover {
+    box-shadow: 40px 0 10px -5px inset rgba(255, 255, 255, 0.2);
+    border-radius: 15px 0 0 15px;
+}
+
+.backToRec {
+    color: #06bfff;
+    margin: 0;
+}
+
+
+
+@media (max-width: 667px) {
+    .mapHeading {
+        text-align: center;
+    }
+
+    .backToRec {
+        text-align: center;
+        background: #384d66;
+        border-radius: 5px;
+    }
+}

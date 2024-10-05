@@ -1,0 +1,429 @@
+.profileDiv {
+    width: 100%;
+    min-height: 75vh;
+    box-shadow: 2px 2px 5px black;
+    background: linear-gradient(to bottom right, #384d66, #08182c);
+}
+
+.profileContainer {
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Ensure the comment section is below any floated elements */
+.profileContainer::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.profileName {
+    text-align: center;
+    padding-top: 50px;
+    margin-bottom: 25px;
+    color: #eee;
+    width: 75%;
+    margin-right: 5%;
+    display: inline-block;
+}
+
+.status {
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    color: #eee;
+}
+
+.onlineOrb, .offlineOrb {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.onlineOrb {
+    background-color: green;
+}
+
+.offlineOrb {
+    background-color: red;
+}
+
+
+.profileImageContainer {
+    margin-left: 100px;
+    width: 175px;
+    float: left;
+}
+
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 5%;
+    object-fit: cover;
+    border: 1px solid white;
+}
+
+.profileImageContainer {
+    margin-right: 20px;
+}
+
+.profileInfo {
+    width: 25%;
+    min-height: 200px;
+    float: left;
+    padding-top: 60px;
+    text-align: center;
+    color: #eee;
+}
+
+.profileDetails {
+    width: 25%;
+    min-height: 175px;
+    float: right;
+    margin-top: 50px;
+    margin-right: 25px;
+    text-align: center;
+    box-shadow: -2px 2px 5px black;
+    color: #eee;
+}
+
+.profileDetails h1 {
+    color: #888;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.profileDetails p {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.profileDetails a {
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Base styles for the link */
+.editProfileLink {
+    width: 100px;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    color: white; /* Ensure text is visible on the background */
+    text-decoration: none; /* Remove underline from text */
+    transition: background-color 0.2s; /* Apply transition to the background color */
+}
+
+/* Hover effect for the link */
+.editProfileLink:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}
+
+/* Ensure no text decoration on hover */
+.editProfileLink a {
+    text-decoration: none;
+    color: #ccc;
+}
+
+.notificationDiv {
+    width: 100px;
+    height: 40px;
+    margin-left: 80%;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.notificationLink {
+    width: 100px;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    color: white; /* Ensure text is visible on the background */
+    text-decoration: none; /* Remove underline from text */
+    transition: background-color 0.2s; /* Apply transition to the background color */
+}
+
+.notificationLink:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}
+
+
+
+.addMoney {
+    width: 100px;
+    height: 40px;
+    margin-left: 80%;
+    text-align: right;
+}
+
+.addMoneyButton {
+    width: 100px;
+    height: 40px;
+    background-color: #08182c;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center; /* Center text horizontally */
+    line-height: 40px; /* Center text vertically */
+    color: white; /* Ensure text is visible on the background */
+    text-decoration: none; /* Remove underline from text */
+    transition: background-color 0.2s; /* Apply transition to the background color */
+    text-decoration: none;
+}
+
+/* Hover effect for the link */
+.addMoneyButton:hover {
+    background-color: #384d66;
+    text-decoration: none;
+}
+
+
+.profileInfoName {
+    margin-bottom: 25px;
+    font-size: 20px;
+}
+
+
+/* Comment Section */
+.commentSection {
+    width: 50%;
+    margin-top: 40px;
+    margin-left: 10px;
+    display: block;
+}
+
+.commentH2 {
+    margin-left: 100px;
+}
+
+.comment {
+    width: 100%;
+    height: 75px;
+    background-color: #2e3d50;
+    padding: 15px;
+    margin-bottom: 10px;
+    color: #eee;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px black;
+}
+
+.commentProfileLink {
+    margin: 0;
+    padding: 0;
+}
+
+.addComment textarea {
+    width: 100%;
+    height: 75px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 2px 2px 5px black;
+    background-color: #1e2a38;
+    color: #fff;
+}
+
+.addComment button {
+    width: 20%;
+    background-color: #08182c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+    margin-left: 40%;
+    margin-bottom: 25px;
+}
+
+.addComment button:hover {
+    background-color: #384d66;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.pagination button {
+    background-color: #08182c;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    cursor: pointer;
+    margin: 5px 5px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.pagination button:hover {
+    background-color: #384d66;
+}
+
+.friendRequestButton {
+    width: 100px;
+    height: 30px;
+    background-color: green;
+    border: none;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.friendRequestButton:hover {
+    background-color: lightgreen;
+}
+
+@media (max-width: 800px) {
+    .profileDiv {
+        min-height: 600px;
+    }
+
+    .profileName {
+        width: 55%;
+        margin-right: 15%;
+    }
+
+    .profileImageContainer {
+        width: 35%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    .addMoney {
+        margin-left: 70%;
+    }
+
+    .notificationDiv {
+        margin-left: 70%;
+    }
+
+    .profileDetails {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 50px;
+    }
+
+    .commentSection {
+        width: 90%;
+        margin-left: 5%;
+        padding-bottom: 10px;
+    }
+
+    .commentH2 {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .addComment textarea{
+        margin-bottom: 25px;
+    }
+
+    .addComment button {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 450px) {
+    .profileDiv {
+        min-height: 900px;
+    }
+
+    .profileName {
+        width: 100%;
+        margin-right: 0%;
+    }
+
+    .profileImageContainer {
+        width: 50%;
+        margin-top: 50px;
+        margin-left: 25%;
+        margin-right: 25%;
+        text-align: center;
+    }
+
+    .editProfileLink {
+        width: 80%;
+        display: block;
+        margin-left: 10%;
+    }
+
+    .addMoney {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 25px;
+    }
+    
+
+    .addMoneyButton {
+        width: 100%;
+    }
+
+    .notificationDiv {
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 25px;
+    }
+
+    .notificationLink {
+        width: 100%;
+    }
+
+    .profileInfo {
+        width: 100%;
+        min-height: 150px;
+    }
+
+    .profileDetails {
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-bottom: 50px;
+    }
+
+    .commentSection {
+        width: 90%;
+        margin-left: 5%;
+        padding-bottom: 10px;
+    }
+
+    .commentH2 {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .addComment button {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .friendRequestButton {
+        width: 70%;
+        margin-left: 15%;
+    }
+}

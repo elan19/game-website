@@ -14,6 +14,7 @@ const InventoryView = () => {
     const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
     const [price, setPrice] = useState(''); // Track the price entered by the user
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 450);
+    const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(() => {
         const loadData = async () => {
@@ -62,7 +63,13 @@ const InventoryView = () => {
             alert("Please enter a price.");
             return;
         }
-
+    
+        if (isProcessing) {
+            return; // Prevent duplicate clicks
+        }
+    
+        setIsProcessing(true); // Disable the button
+    
         try {
             const response = await MongoDbModel.setCardToMarket(
                 userData.username,
@@ -71,7 +78,7 @@ const InventoryView = () => {
                 selectedCard.cardName,  // Card name
                 parseFloat(price) // Price input by the user
             );
-
+    
             if (response.success) {
                 alert("Item listed for sale successfully.");
                 setIsModalOpen(false);
@@ -83,6 +90,8 @@ const InventoryView = () => {
             }
         } catch (error) {
             console.error("Error selling item:", error);
+        } finally {
+            setIsProcessing(false); // Re-enable the button
         }
     };
 
@@ -115,7 +124,9 @@ const InventoryView = () => {
                         </button>
                     ))
                 ) : (
-                    <div>No games found in inventory.</div>
+                    <div className={styles.noGames}>
+                        <p>No games or items found.</p>
+                        </div>
                 )}
             </div>
 
@@ -181,7 +192,11 @@ const InventoryView = () => {
                             placeholder="Enter price"
                             className={styles.priceInput}
                         />
-                        <button className={styles.confirmButton} onClick={handleConfirmSell}>
+                        <button
+                            className={styles.confirmButton}
+                            onClick={handleConfirmSell}
+                            disabled={isProcessing} // Disable the button while processing
+                        >
                             Confirm
                         </button>
                         <button className={styles.cancelButton} onClick={() => setIsModalOpen(false)}>

@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import * as Realm from "realm-web";
 
 import styles from "./Login.module.css";
 
@@ -12,6 +11,7 @@ const LoginForm = () => {
   const { isAuthenticated, username, login, logout } = useContext(AuthContext);
   const [formUsername, setFormUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(''); // Error message state
   const { fetchUserData, deleteUserData } = useContext(UserContext); // Use UserContext
   const navigate = useNavigate();
 
@@ -25,20 +25,21 @@ const LoginForm = () => {
         .then(response => {
           console.log(response);
           if (response && response.username) {
-            login(response.username, response.loginId)
+            login(response.username, response.loginId);
             fetchUserData()
-            .then(() => {
-              navigate('/');
-            })
-            .catch(error => {
-              console.error("Error fetching user data:", error);
-            })
+              .then(() => {
+                navigate('/');
+              })
+              .catch(error => {
+                console.error("Error fetching user data:", error);
+              });
           } else {
-            console.error("Login unsuccessful:", response.error);
+            setErrorMessage("Incorrect username or password."); // Set error message
           }
         })
         .catch(error => {
           console.error("Error logging in:", error);
+          setErrorMessage("Something went wrong. Please try again."); // Handle other errors
         });
     }
   };
@@ -65,6 +66,7 @@ const LoginForm = () => {
               type="text"
               placeholder="Username"
               value={formUsername}
+              maxLength={"20"}
               onChange={(e) => setFormUsername(e.target.value)}
             />
             <label className={styles.leftInputLabel} htmlFor="password">Password</label>
@@ -75,13 +77,17 @@ const LoginForm = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            
+            {/* Display error message if login fails */}
+            {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
+
             <input
               type="submit"
               value="Logga in"
               name="login"
               className={`${styles.button} ${styles.loginButton} ${styles.marginBottom}`}
             />
-            <Link to="/register"  className={styles.registerLink}>
+            <Link to="/register" className={styles.registerLink}>
               <input
                 type="button"
                 value="Registrera användare"

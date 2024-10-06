@@ -104,6 +104,12 @@
     text-decoration: none;
 }
 
+.errorMessage {
+    color: red;
+    text-align: center;
+    margin: 25px 0;
+}
+
 @media (max-width: 667px) {
     .loginForm {
         width: 100%;

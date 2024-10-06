@@ -20,7 +20,7 @@ const profileImages = [
 const EditProfile = () => {
     const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error] = useState(null);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         username: '',
@@ -56,7 +56,7 @@ const EditProfile = () => {
         };
 
         try {
-            const response = await MongoDbModel.editUser(userData.username, updatedData);
+            await MongoDbModel.editUser(userData.username, updatedData);
             fetchUserData(); // Refresh user data
             alert('Profile updated successfully!');
             navigate("/profile");
@@ -112,6 +112,7 @@ const EditProfile = () => {
                         value={formData.name || ''}
                         placeholder={userData.name || ''}
                         onChange={handleChange}
+                        maxLength={"20"}
                     />
                 </div>
                 <div className={styles.formGroup}>
@@ -122,6 +123,7 @@ const EditProfile = () => {
                         value={formData.desc || ''}
                         placeholder={userData.desc || ''}
                         onChange={handleChange}
+                        maxLength={"200"}
                     />
                 </div>
 

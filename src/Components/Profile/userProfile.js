@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
 import styles from './Profile.module.css';
@@ -18,6 +18,17 @@ const UserProfileView = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const commentsPerPage = 10;
 
+    // Move fetchComments outside useEffect and use useCallback to memoize it
+    const fetchComments = useCallback(async () => {
+        try {
+            const response = await MongoDbModel.getUserComments(username);
+            const fetchedComments = response.comments;
+            setComments(fetchedComments);
+        } catch (error) {
+            console.error('Failed to fetch comments:', error);
+        }
+    }, [username]);
+
     useEffect(() => {
         if (username === localStorage.getItem("username")) {
             navigate("/profile");
@@ -29,7 +40,7 @@ const UserProfileView = () => {
                 console.log(fetchedUser);
                 setUser(fetchedUser);
                 setLoading(false);
-                fetchComments();
+                fetchComments(); // Fetch comments once the user is loaded
                 checkIfFriend(fetchedUser); // Check if the user is already a friend
             } catch (err) {
                 console.error('Failed to fetch user data:', err);
@@ -39,17 +50,7 @@ const UserProfileView = () => {
         };
 
         fetchUser();
-    }, [username]); // Re-run the effect if the username changes
-
-    const fetchComments = async () => {
-        try {
-            const response = await MongoDbModel.getUserComments(username);
-            const fetchedComments = response.comments;
-            setComments(fetchedComments);
-        } catch (error) {
-            console.error('Failed to fetch comments:', error);
-        }
-    };
+    }, [username, navigate, fetchComments]);
 
     const handleAddComment = async () => {
         if (!newComment.trim()) return;
@@ -137,7 +138,7 @@ const UserProfileView = () => {
                     </div>
                     <div className={styles.profileInfo}>
                         <p className={styles.profileInfoName}>{user.name}</p>
-                        <p>{user.desc}</p>
+                        <p className={styles.profileInfoDesc}>{user.desc}</p>
                     </div>
                     <div className={styles.profileDetails}>
                         <h1>Details</h1>
@@ -163,7 +164,7 @@ const UserProfileView = () => {
                                 </div>
                             ))
                         ) : (
-                            <p>No comments yet. Be the first to comment!</p>
+                            <p className={styles.noComments}>No comments yet. Be the first to comment!</p>
                         )}
 
                         {/* Pagination controls */}
@@ -182,6 +183,7 @@ const UserProfileView = () => {
                             <textarea
                                 value={newComment}
                                 onChange={(e) => setNewComment(e.target.value)}
+                                maxLength={"750"}
                                 placeholder="Write a comment..."
                                 rows="3"
                             />

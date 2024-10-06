@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../util/AuthContext'; // Adjust the import based on your context setup
 
 import styles from './About.module.css';
+import gamigoLogo from '../../images/aboutGamigoLogo.png';
 import aboutImg2 from '../../images/about-gemenskap2.png';
 
 const About = () => {
@@ -13,7 +14,7 @@ const About = () => {
         if (!isLoggedIn) {
             navigate('/login');
         } else {
-            navigate('/');
+            navigate('/gemenskap/social');
         }
     };
 
@@ -24,19 +25,20 @@ const About = () => {
                     <p className={styles.topTextAbout}>
                         Gamipo är den ultimata platsen för att spela, diskutera och skapa spel.
                     </p>
-                    <button className={styles.CreateAccountButton}
-                    onClick={handleButtonClick}>
-                        Logga in
+                    <button className={styles.CreateAccountButton} onClick={handleButtonClick}>
+                        {isLoggedIn ? 'Be Social' : 'Logga in'}
                     </button>
                 </div>
                 <div className={styles.aboutImgDiv}>
                     <img className={styles.aboutImg} 
-                         src="https://cdn.akamai.steamstatic.com/store/about/videos/about_hero_loop_web.png" 
+                         src={gamigoLogo} 
                          alt="Gamipo about" />
                 </div>
             </div>
-            <p className={styles.middleText}>Läs mer</p>
-            <p className={styles.middleText}>&#8595;</p>
+            <div className={styles.middleDiv}>
+                <p className={styles.middleText}>Läs mer</p>
+                <p className={styles.middleText}>&#8595;</p>
+            </div>
             <div className={styles.aboutContentShopInfo}>
                 <h1>Få tillgång till spel direkt</h1>
                 <div className={styles.aboutTextMiddle}>

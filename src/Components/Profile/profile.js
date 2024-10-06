@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
 import { Link } from 'react-router-dom';
@@ -18,6 +18,16 @@ const ProfileView = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const commentsPerPage = 10; // Show 10 comments per page
 
+    const fetchComments = useCallback(async () => {
+        try {
+            const response = await MongoDbModel.getUserComments(userData.username);
+            const fetchedComments = response.comments;
+            setComments(fetchedComments);
+        } catch (error) {
+            console.error('Failed to fetch comments:', error);
+        }
+    }, [userData.username]);
+
     useEffect(() => {
         const updateUserData = async () => {
             await fetchUserData();
@@ -30,17 +40,7 @@ const ProfileView = () => {
             setLoading(false);
             fetchComments(); // Only fetch comments if user data is available
         }
-    }, [userData, fetchUserData]);
-
-    const fetchComments = async () => {
-        try {
-            const response = await MongoDbModel.getUserComments(userData.username); // Assuming a method to fetch comments
-            const fetchedComments = response.comments; // Access the first array inside comments
-            setComments(fetchedComments);
-        } catch (error) {
-            console.error('Failed to fetch comments:', error);
-        }
-    };
+    }, [userData, fetchUserData, fetchComments]);
 
     const handleAddComment = async () => {
         if (!newComment.trim()) return; // Don't allow empty comments
@@ -61,7 +61,11 @@ const ProfileView = () => {
     const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
 
     // Calculate total pages
-    const totalPages = Math.ceil(comments.length / commentsPerPage);
+    let totalPages = Math.ceil(comments.length / commentsPerPage);
+
+    if (totalPages < 1) {
+        totalPages = 1;
+    }
 
     const handleNextPage = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -120,8 +124,8 @@ const ProfileView = () => {
                     />
                     </div>
                     <div className={styles.profileInfo}>
-                        <p>{userData.name}</p>
-                        <p className={styles.test}>{userData.desc}</p>
+                        <p className={styles.profileInfoName}>{userData.name}</p>
+                        <p className={styles.profileInfoDesc}>{userData.desc}</p>
                         <p>{`Money: $${parseFloat(userData.money.toFixed(2))}`}</p>
                     </div>
                     <div className={styles.profileDetails}>
@@ -148,7 +152,7 @@ const ProfileView = () => {
                                 </div>
                             ))
                         ) : (
-                            <p>No comments yet. Be the first to comment!</p>
+                            <p className={styles.noComments}>No comments yet. Be the first to comment!</p>
                         )}
 
                         {/* Pagination controls */}
@@ -167,6 +171,7 @@ const ProfileView = () => {
                             <textarea
                                 value={newComment}
                                 onChange={(e) => setNewComment(e.target.value)}
+                                maxLength={"750"}
                                 placeholder="Write a comment..."
                                 rows="3"
                             />

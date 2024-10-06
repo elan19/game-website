@@ -91,7 +91,7 @@ const Navigation = () => {
                             >
                                 {route.name}
                             </Link>
-                            {(dropdownOpen && menuOpen || !isMobile) && (
+                            {((dropdownOpen && menuOpen) || !isMobile) && (
                                 <div className={`${styles.dropdownMenu} ${isMobile && dropdownOpen ? styles.dropdownMenuOpen : ''}`}>
                                     <Link to="/gemenskap" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Home</Link>
                                     <Link to="/gemenskap/social" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Social</Link>

@@ -234,6 +234,11 @@
     margin-top: 10px;
 }
 
+.noGames p{
+    color: #eee;
+    margin-left: 10px;
+}
+
 
 /* Modal styles for mobile view only */
 @media only screen and (max-width: 450px) {

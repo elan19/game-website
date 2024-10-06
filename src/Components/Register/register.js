@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import styles from "./Register.module.css";
-
 import MongoDbModel from '../../models/mongodb';
 
 const RegisterForm = () => {
@@ -10,6 +9,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState(null); // To track error messages
+  const [successMessage, setSuccessMessage] = useState(null); // To track success message
 
   const navigate = useNavigate(); // useNavigate hook for redirection
 
@@ -22,6 +22,16 @@ const RegisterForm = () => {
       return () => clearTimeout(timer); // Clear timeout on component unmount
     }
   }, [error]);
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        navigate('/login'); // Redirect after 3 seconds
+      }, 3000); // Redirect after 3 seconds
+
+      return () => clearTimeout(timer); // Clear timeout on component unmount
+    }
+  }, [successMessage, navigate]); // Dependency array ensures this runs when successMessage changes
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,9 +48,8 @@ const RegisterForm = () => {
       MongoDbModel.registerUser(user.username, user.password, user.email)
         .then(response => {
           if (response && response.result) {
-            // If registration is successful, navigate to the login page
-            console.log("Registration successful!");
-            navigate('/login'); // Redirect to login page
+            // If registration is successful, set success message
+            setSuccessMessage("Registration successful! Redirecting to login page...");
           } else {
             // If registration failed, set the error message
             setError(response.error || "Registration failed");
@@ -65,6 +74,7 @@ const RegisterForm = () => {
               type="text"
               placeholder="Username"
               value={formUsername}
+              maxLength={"20"}
               onChange={(e) => setFormUsername(e.target.value)}
             />
             <label className={styles.leftInputLabel} htmlFor="password">Password</label>
@@ -90,6 +100,9 @@ const RegisterForm = () => {
             />
             {error && (
               <div className={styles.errorMessage}>{error}</div>
+            )}
+            {successMessage && (
+              <div className={styles.successMessage}>{successMessage}</div>
             )}
           </form>
         </div>

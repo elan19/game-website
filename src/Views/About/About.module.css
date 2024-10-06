@@ -7,8 +7,9 @@
 }
 
 .aboutContent {
-    width: 100%;
+    max-width: 1200px;
     min-height: 700px;
+    margin: 0 auto;
 }
 
 .aboutText {
@@ -17,7 +18,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     width: 30%;
-    margin-left: 20%;
+    margin-left: 10%;
     float: left;
     height: 400px;
     margin-top: 50px;
@@ -65,12 +66,14 @@
 
 .aboutImgDiv {
     width: 30%;
-    margin-right: 20%;
+    margin-right: 10%;
     float: right;
 }
 
 .aboutImg {
-    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 200px;
     display: block;
 }
 
@@ -100,8 +103,13 @@
     padding-bottom: 0;
 }
 
-.middleText {
+.middleDiv {
+    width: 100%;
+    height: auto;
     text-align: center;
+}
+
+.middleText {
     color: #6b6b6b;
 }
 
@@ -141,8 +149,9 @@
 }
 
 .aboutContentGemenskapInfo {
-    width: 100%;
+    max-width: 1200px;
     min-height: 700px;
+    margin: 0 auto;
 }
 
 .aboutContentGemenskapInfo h1 {
@@ -157,13 +166,12 @@
     background-repeat: no-repeat;
     background-position: center center;
     width: 30%;
-    margin-left: 20%;
+    margin-left: 10%;
     float: left;
     height: 400px;
     margin-top: 50px;
     color: #eee;
     width: 35%;
-    margin-left: 15%;
 }
 
 .aboutTextLeftAboutGemenskap p {
@@ -186,7 +194,7 @@
 
 .aboutImgDivRightAboutGemenskap {
     width: 30%;
-    margin-right: 20%;
+    margin-right: 10%;
     float: right;
     margin-top: 200px;
 }
@@ -220,6 +228,10 @@
         margin-right: 10%;
         width: 25%;
         min-width: 150px;
+    }
+
+    .aboutImg {
+        margin-top: 50px;
     }
 
     .installSteamButton {

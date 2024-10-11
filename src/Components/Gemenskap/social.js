@@ -46,7 +46,7 @@ const Social = () => {
 
     return (
         <div className={styles.socialBackground}>
-            <h2>Search for Users</h2>
+            <h2 className={styles.searchH2}>Search for Users</h2>
             <input
                 type="text"
                 placeholder="Search by username..."

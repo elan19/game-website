@@ -37,7 +37,6 @@ const UserProfileView = () => {
         const fetchUser = async () => {
             try {
                 const fetchedUser = await MongoDbModel.getUserProfile(username);
-                console.log(fetchedUser);
                 setUser(fetchedUser);
                 setLoading(false);
                 fetchComments(); // Fetch comments once the user is loaded

@@ -317,6 +317,7 @@
     border: none;
     transition: background-color 0.2s;
     cursor: pointer;
+    color: #08182c;
 }
 
 .friendRequestButton:hover {

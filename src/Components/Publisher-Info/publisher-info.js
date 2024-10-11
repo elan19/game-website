@@ -75,7 +75,7 @@ const PublisherInfo = () => {
     return (
         <div>
             <a className={styles.backToRec} href="/">
-                Tillbaka till rekommenderade spel
+                Back to recommended games
             </a>
             <h2 className={styles.mapHeading}>{publisher.name}</h2>
             <div className={styles.publisherDesc}>

@@ -23,10 +23,10 @@ const About = () => {
             <div className={styles.aboutContent}>
                 <div className={styles.aboutText}>
                     <p className={styles.topTextAbout}>
-                        Gamipo är den ultimata platsen för att spela, diskutera och skapa spel.
+                        Gamipo is the ultimate place to buy, discuss and play games.
                     </p>
                     <button className={styles.CreateAccountButton} onClick={handleButtonClick}>
-                        {isLoggedIn ? 'Be Social' : 'Logga in'}
+                        {isLoggedIn ? 'Be Social' : 'Log in'}
                     </button>
                 </div>
                 <div className={styles.aboutImgDiv}>
@@ -36,30 +36,27 @@ const About = () => {
                 </div>
             </div>
             <div className={styles.middleDiv}>
-                <p className={styles.middleText}>Läs mer</p>
+                <p className={styles.middleText}>Read more</p>
                 <p className={styles.middleText}>&#8595;</p>
             </div>
             <div className={styles.aboutContentShopInfo}>
-                <h1>Få tillgång till spel direkt</h1>
+                <h1>Get access to games immediately</h1>
                 <div className={styles.aboutTextMiddle}>
                     <p>
-                        Med mängder av spel från AAA till indie och allt däremellan. 
-                        Njut av exklusiva erbjudanden, 
-                        automatiska speluppdateringar och andra bra förmåner. 
+                        With a wide range of games from AAA to indie and everything in between. 
+                        Enjoy exclusive offers, fast access and other great perks.
                     </p>
-                    <a className={styles.aboutLink} href="/">Bläddra i butiken <span>&#8594;</span></a>
+                    <a className={styles.aboutLink} href="/">Browse the store <span>&#8594;</span></a>
                 </div>
             </div>
             <div className={styles.aboutContentGemenskapInfo}>
                 <div className={styles.aboutTextLeftAboutGemenskap}>
-                    <h1>Gå med i gemenskapen</h1>
+                    <h1>Join the community</h1>
                     <p>
-                        Träffa nya vänner, 
-                        titta på andras bilder och lägg upp dina bilder på gemenskapen! 
-                        Med mängder av potentiella vänner (och fiender) 
-                        tar det roliga aldrig slut. 
+                        Meet new friends, check out others' photos, and share your own in the community! 
+                        With plenty of potential friends (and enemies), the fun never ends.
                     </p>
-                    <a className={styles.aboutLink} href="/gemenskap">Besök gemenskapen <span>&#8594;</span></a>
+                    <a className={styles.aboutLink} href="/gemenskap">Visit the community<span>&#8594;</span></a>
                 </div>
                 <div className={styles.aboutImgDivRightAboutGemenskap}>
                     <img className={styles.aboutImg} src={aboutImg2} alt="Gemenskap" />

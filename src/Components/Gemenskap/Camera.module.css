@@ -1,0 +1,51 @@
+.container {
+    width: 100%;
+}
+
+.inputDiv {
+    width: 100%;
+    display: flex;
+}
+
+.chooseFileDiv {
+    width: 100%;
+    text-align: center;
+}
+
+.previewImage {
+    max-width: 300px; /* Adjust the size as needed */
+    max-height: 300px; /* Adjust the size as needed */
+    object-fit: cover; /* Ensures the image is contained */
+    margin-top: 10px; /* Add some space above the preview */
+}
+
+.h2Camera {
+    color: #eee;
+    text-align: center;
+}
+
+.cameraInput {
+    color: #5fb2e2;
+    margin-bottom: 25px;
+    padding-left: 50px;
+    
+}
+
+
+.cameraButton {
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+    background-color: #213a4c;
+    color: #5fb2e2;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    margin: 0 auto;
+}
+
+.cameraButton:hover {
+    background-color: #5fb2e2;
+    color: #eee;
+}

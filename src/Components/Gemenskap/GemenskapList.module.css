@@ -12,6 +12,7 @@
     object-fit: contain;
     display: block;
     margin: 0 auto;
+    margin-top: 25px;
 }
 
 .gemenskap:nth-child(odd) {
@@ -43,6 +44,7 @@
 
 .gemenskapH2 {
     text-align: center;
+    color: #eee;
 }
 
 .gameDescH2Border {

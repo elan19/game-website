@@ -184,7 +184,7 @@ const InventoryView = () => {
                 <div className={styles.sellModal}>
                     <div className={styles.modalContent}>
                         <button className={styles.closeButtonSellItem} onClick={() => setIsModalOpen(false)}>X</button>
-                        <h2>Sell price '{selectedCard.cardName}'</h2>
+                        <h2 className={styles.sellCardH2}>Sell price '{selectedCard.cardName}'</h2>
                         <input 
                             type="number" 
                             value={price} 

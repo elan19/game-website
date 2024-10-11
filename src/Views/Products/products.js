@@ -9,7 +9,7 @@ class ProductsView extends React.Component {
         return (
             <div>
                 <header className={styles.header}>
-                    <label className={styles.searchText}>Sök efter spel eller produkt</label>
+                    <label className={styles.searchText}>Search for game or product</label>
                 </header>
                 <main className={styles.main}>
                     <ProductList />

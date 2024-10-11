@@ -187,8 +187,20 @@
     border-radius: 5px;
 }
 
+.confirmButton {
+    color: #2e2e2e;
+}
+
 .cancelButton {
     background-color: #ff4040;
+}
+
+.confirmButton:hover {
+    background-color: #00a6dd;
+}
+
+.cancelButton:hover {
+    background-color: #ff1e1e;
 }
 
 .closeButtonSellItem {
@@ -237,6 +249,10 @@
 .noGames p{
     color: #eee;
     margin-left: 10px;
+}
+
+.sellCardH2 {
+    color: #ccc;
 }
 
 

@@ -16,7 +16,7 @@ const Navigation = () => {
         '/': { name: 'Shop', hidden: false },
         ...(isLoggedIn && { '/library': { name: 'Library', hidden: false } }),
         '/about': { name: 'About', hidden: false },
-        '/gemenskap': { name: 'Gemenskap', hidden: false },
+        '/gemenskap': { name: 'Community', hidden: false },
         '/login': { name: 'Login', hidden: false },
         ...(isLoggedIn && { '/profile': { name: localStorage.getItem('username') + " ▼ $" + (userData && userData.money !== undefined ? parseFloat(userData.money.toFixed(2)) : 0), hidden: false } })
     };

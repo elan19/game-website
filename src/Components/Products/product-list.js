@@ -85,7 +85,7 @@ const ProductList = () => {
       <div className={styles.search}>
         <form>
           <input className={styles.searchBar} type="text" name="search" />
-          <input className={styles.searchBtn} onClick={handleSearch} type="submit" value="Sök" />
+          <input className={styles.searchBtn} onClick={handleSearch} type="submit" value="Search" />
           <select 
             className={styles.genreSelect} 
             value={genre} 
@@ -104,7 +104,7 @@ const ProductList = () => {
           </select>
         </form>
       </div>
-      <h3 className={styles.gameListH3}>Utvalda och rekommenderas</h3>
+      <h3 className={styles.gameListH3}>Featured and recommended</h3>
       <div>
         {products.map((product) => (
           <SingleProduct key={product.id} product={product} />

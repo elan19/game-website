@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { listOfFiles, UploadcareSimpleAuthSchema } from '@uploadcare/rest-client';
-
-import SingleGemenskap from './single-gemenskap'; // Assume you have this component
-import styles from './GemenskapList.module.css'; // Assuming you have a CSS file for styling
+import { useNavigate } from 'react-router-dom';
+import SingleGemenskap from './single-gemenskap'; 
+import styles from './GemenskapList.module.css';
 
 const GemenskapList = () => {
     const [gemenskaps, setGemenskaps] = useState([]);
+    const navigate = useNavigate(); // Initialize useHistory for navigation
     const uploadKey = process.env.REACT_APP_UPLOADKEY;
     const secretUploadKey = process.env.REACT_APP_SECRETUPLOADKEY;
 
@@ -28,14 +29,14 @@ const GemenskapList = () => {
     }, [uploadKey, secretUploadKey]);
 
     const handleButtonClick = () => {
-        window.location.hash = 'camera';
+        navigate('/gemenskap/camera'); // Use history.push to navigate to camera page
     };
 
     return (
         <div>
-            <h2 className={styles.gemenskapH2}>Gemenskap</h2>
+            <h2 className={styles.gemenskapH2}>Community</h2>
             <button className={styles.picBtn} onClick={handleButtonClick}>
-                Lägg till bild
+                Add picture
             </button>
             <div className={styles.SingleGemenskap}>
                 {gemenskaps.map((gemenskap) => (

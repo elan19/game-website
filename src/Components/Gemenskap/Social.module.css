@@ -18,6 +18,10 @@
     border-radius: 4px;
 }
 
+.searchH2 {
+    color: #eee;
+}
+
 .searchBar:focus {
     border: none;
     outline: 2px solid grey;

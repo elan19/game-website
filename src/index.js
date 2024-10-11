@@ -27,6 +27,7 @@ import GameView from './Views/Library/game';
 import MarketView from './Views/Market/market';
 import NotificationView from './Views/Profile/notification';
 import UserFriendsView from './Views/Profile/userFriends';
+import CameraView from './Views/Gemenskap/camera';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -55,6 +56,7 @@ root.render(
                   <Route path="/publisher/:id" element={<PublisherInfoView />} />
                   <Route path="/developer/:id" element={<DeveloperInfoView />} />
                   <Route path="/gemenskap" element={<GemenskapView />} />
+                  <Route path="/gemenskap/camera" element={<CameraView />} />
                   <Route path="/profile" element={<ProfileView />} />
                   <Route path="/profile/:username" element={<UserProfileView />} />
                   <Route path="/profile/:username/inventory" element={<InventoryView />} />

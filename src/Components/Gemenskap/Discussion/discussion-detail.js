@@ -5,12 +5,13 @@ import MongoDbModel from '../../../models/mongodb';
 import styles from './DiscussionDetail.module.css';
 
 const DiscussionDetail = () => {
-    const { userData } = useContext(UserContext);
+    const { userData, fetchUserData } = useContext(UserContext);
     const { discussionId } = useParams(); // Get the discussionId from the URL
     const [discussion, setDiscussion] = useState(null);
     const [comments, setComments] = useState([]);
     const [commentContent, setCommentContent] = useState(''); // Define commentContent state
     const [loading, setLoading] = useState(true);
+    const [loadingUserData, setLoadingUserData] = useState(true);
     const navigate = useNavigate(); // Use navigate for navigation
 
     useEffect(() => {
@@ -28,6 +29,25 @@ const DiscussionDetail = () => {
 
         fetchDiscussionDetails();
     }, [discussionId]);
+
+    useEffect(() => {
+        const updateUserData = async () => {
+            try {
+                setLoadingUserData(true); // Set loading user data to true
+                await fetchUserData(); // Fetch user data
+                console.log(userData);
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            } finally {
+                setLoadingUserData(false); // Finish loading user data
+            }
+        };
+    
+        // Only fetch user data if it's not already loaded and if it's not being fetched
+        if (!userData?.email && !loadingUserData) {
+            updateUserData();
+        }
+    }, [userData, fetchUserData, loadingUserData]);
 
     const handleTagClick = (tag) => {
         // Navigate to the discussion list page with the selected tag as a query parameter

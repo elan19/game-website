@@ -9,6 +9,7 @@ const DiscussionComp = () => {
     const [discussions, setDiscussions] = useState([]);
     const [filteredDiscussions, setFilteredDiscussions] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [loadingUserData, setLoadingUserData] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
@@ -18,31 +19,38 @@ const DiscussionComp = () => {
 
     useEffect(() => {
         const fetchDiscussions = async () => {
-            setLoading(true);
             try {
                 const allDiscussions = await MongoDbModel.getAllDiscussions();
                 setDiscussions(allDiscussions);
                 setFilteredDiscussions(allDiscussions);
             } catch (error) {
                 console.error('Error fetching discussions:', error);
+            } finally {
+                setLoading(false); // Finish loading discussions
             }
-            setLoading(false);
         };
 
+        fetchDiscussions();
+    }, []); // Fetch discussions only once when the component mounts
+
+    useEffect(() => {
         const updateUserData = async () => {
-            setLoading(true);
-            await fetchUserData();
-            setLoading(false);
+            try {
+                setLoadingUserData(true); // Set loading user data to true
+                await fetchUserData(); // Fetch user data
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            } finally {
+                setLoadingUserData(false); // Finish loading user data
+            }
         };
-    
+
         if (!userData || !userData.email) {
             updateUserData();
         } else {
-            setLoading(false);
+            setLoadingUserData(false);
         }
-
-        fetchDiscussions();
-    }, [userData, fetchUserData]);
+    }, [userData, fetchUserData]); // Fetch user data when `userData` changes
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);

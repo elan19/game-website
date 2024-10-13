@@ -9,7 +9,7 @@ const Navigation = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1050);
-    const { userData } = useContext(UserContext); // Access user data from context
+    const { userData, deleteUserData } = useContext(UserContext); // Access user data from context
     const { isLoggedIn, logout } = useContext(AuthContext);
 
     const routes = {
@@ -31,6 +31,7 @@ const Navigation = () => {
     const handleLogoutClick = (event) => {
         event.preventDefault();
         logout();
+        deleteUserData();
     };
 
     const handleDropdownToggle = (event) => {

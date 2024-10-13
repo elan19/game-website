@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
             }
     
             const ipAddress = await fetchIPAddress();
-            await MongoDbModel.checkRateLimit(ipAddress);  // Send both username and IP
+            await MongoDbModel.checkRateLimit(ipAddress);  // Send IP
         } catch (error) {
             console.error('Failed to fetch user data:', error);
         }

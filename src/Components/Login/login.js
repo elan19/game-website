@@ -20,10 +20,9 @@ const LoginForm = () => {
 
     const submitButtonValue = event.nativeEvent.submitter.value;
 
-    if (submitButtonValue === 'Logga in') {
+    if (submitButtonValue === 'Login') {
       MongoDbModel.loginUser(formUsername, password)
         .then(response => {
-          console.log(response);
           if (response && response.username) {
             login(response.username, response.loginId);
             fetchUserData()
@@ -83,14 +82,14 @@ const LoginForm = () => {
 
             <input
               type="submit"
-              value="Logga in"
+              value="Login"
               name="login"
               className={`${styles.button} ${styles.loginButton} ${styles.marginBottom}`}
             />
             <Link to="/register" className={styles.registerLink}>
               <input
                 type="button"
-                value="Registrera användare"
+                value="Register account"
                 name="register"
                 className={`${styles.button} ${styles.registerButton} ${styles.marginBottom}`}
               />

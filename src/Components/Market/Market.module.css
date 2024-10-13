@@ -110,6 +110,7 @@
     background-color: #213a4c;
     border: none;
     font-size: 14px;
+    padding: 5px;
 }
 
 .searchBar:focus {

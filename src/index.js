@@ -28,6 +28,9 @@ import MarketView from './Views/Market/market';
 import NotificationView from './Views/Profile/notification';
 import UserFriendsView from './Views/Profile/userFriends';
 import CameraView from './Views/Gemenskap/camera';
+import DiscussionView from './Views/Gemenskap/discussion';
+import CreateDiscussionView from './Views/Gemenskap/create-discussion';
+import DiscussionDetailiew from './Views/Gemenskap/discussion-detail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -65,6 +68,10 @@ root.render(
                   <Route path="/profile/:username/friends" element={<UserFriendsView />} />
                   <Route path="/gemenskap/social" element={<SocialView />} />
                   <Route path="/gemenskap/market" element={<MarketView />} />
+                  <Route path="/gemenskap/discussion" element={<DiscussionView />} />
+                  <Route path="/gemenskap/discussions" element={<DiscussionView />} />
+                  <Route path="/gemenskap/discussion/create-discussion" element={<CreateDiscussionView />} />
+                  <Route path="/gemenskap/discussions/:discussionId" element={<DiscussionDetailiew />} />
                 </Routes>
                 <Footer />
               </>

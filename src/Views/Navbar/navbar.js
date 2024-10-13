@@ -8,7 +8,7 @@ import { UserContext } from '../../util/UserContext'; // Import UserContext
 const Navigation = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 900);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 1050);
     const { userData } = useContext(UserContext); // Access user data from context
     const { isLoggedIn, logout } = useContext(AuthContext);
 
@@ -40,7 +40,7 @@ const Navigation = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 900);
+            setIsMobile(window.innerWidth <= 1050);
         };
 
         window.addEventListener('resize', handleResize);
@@ -66,6 +66,7 @@ const Navigation = () => {
                     <div className={`${styles.bar1} ${menuOpen ? styles.changeBar1 : ''}`}></div>
                     <div className={`${styles.bar2} ${menuOpen ? styles.changeBar2 : ''}`}></div>
                     <div className={`${styles.bar3} ${menuOpen ? styles.changeBar3 : ''}`}></div>
+                    <div className={`${styles.bar4} ${menuOpen ? styles.changeBar4 : ''}`}></div>
                 </div>
 
                 {Object.keys(routes).map((path) => {
@@ -95,6 +96,7 @@ const Navigation = () => {
                                 <div className={`${styles.dropdownMenu} ${isMobile && dropdownOpen ? styles.dropdownMenuOpen : ''}`}>
                                     <Link to="/gemenskap" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Home</Link>
                                     <Link to="/gemenskap/social" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Social</Link>
+                                    <Link to="/gemenskap/discussion" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Discussion</Link>
                                     <Link to="/gemenskap/market" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Market</Link>
                                 </div>
                             )}

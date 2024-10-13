@@ -9,9 +9,8 @@ import MoneyModal from './MoneyModal';
 const ProfileView = () => {
     const { userData, fetchUserData } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-    const [error] = useState(null);
     const [showModal, setShowModal] = useState(false);
-    
+
     // Comments section states
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
@@ -23,18 +22,20 @@ const ProfileView = () => {
             const response = await MongoDbModel.getUserComments(userData.username);
             const fetchedComments = response.comments;
             setComments(fetchedComments);
+            console.log("fetching");
         } catch (error) {
             console.error('Failed to fetch comments:', error);
         }
-    }, [userData.username]);
+    }, [userData?.username]);
 
     useEffect(() => {
         const updateUserData = async () => {
+            setLoading(true);
             await fetchUserData();
             setLoading(false);
         };
     
-        if (!userData || !userData.email) { // Check for key properties
+        if (!userData || !userData.email) { // Check for key properties to determine if userData is incomplete
             updateUserData();
         } else {
             setLoading(false);
@@ -46,7 +47,6 @@ const ProfileView = () => {
         if (!newComment.trim()) return; // Don't allow empty comments
 
         try {
-            
             await MongoDbModel.addUserComment(userData.username, localStorage.getItem('loginId'), userData.username, newComment);
             setNewComment('');
             fetchComments(); // Refresh comments after adding a new one
@@ -62,10 +62,7 @@ const ProfileView = () => {
 
     // Calculate total pages
     let totalPages = Math.ceil(comments.length / commentsPerPage);
-
-    if (totalPages < 1) {
-        totalPages = 1;
-    }
+    if (totalPages < 1) totalPages = 1;
 
     const handleNextPage = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);
@@ -88,8 +85,8 @@ const ProfileView = () => {
         return <div>Loading...</div>;
     }
 
-    if (error) {
-        return <div>{error}</div>;
+    if (!userData || !userData.username) {
+        return <div>No user data found. Please log in.</div>;
     }
 
     return (
@@ -100,91 +97,86 @@ const ProfileView = () => {
                     onAddMoney={addMoney}
                 />
             )}
-            {userData ? (
-                <div className={styles.profileContainer}>
-                    <h1 className={styles.profileName}>{userData.username}</h1>
-                    <Link to="/profile/edit" className={styles.editProfileLink}>
-                        Edit Profile
-                    </Link>
-                    <div className={styles.notificationDiv}>
+            <div className={styles.profileContainer}>
+                <h1 className={styles.profileName}>{userData.username}</h1>
+                <Link to="/profile/edit" className={styles.editProfileLink}>
+                    Edit Profile
+                </Link>
+                <div className={styles.notificationDiv}>
                     <Link to="/profile/notification" className={styles.notificationLink}>
                         Notifications
                     </Link>
-                    </div>
-                    <div className={styles.addMoney}>
-                        <button onClick={() => setShowModal(true)} className={styles.addMoneyButton}>
-                            Add Money
-                        </button>
-                    </div>
-                    <div className={styles.profileImageContainer}>
+                </div>
+                <div className={styles.addMoney}>
+                    <button onClick={() => setShowModal(true)} className={styles.addMoneyButton}>
+                        Add Money
+                    </button>
+                </div>
+                <div className={styles.profileImageContainer}>
                     <img 
                         src={userData.profilePic ? `/images/profile/${userData.profilePic}` : defaultProfilePic} 
                         alt="Profile" 
                         className={styles.profileImage} 
                     />
-                    </div>
-                    <div className={styles.profileInfo}>
-                        <p className={styles.profileInfoName}>{userData.name}</p>
-                        <p className={styles.profileInfoDesc}>{userData.desc}</p>
-                        <p>{`Money: $${parseFloat(userData.money.toFixed(2))}`}</p>
-                    </div>
-                    <div className={styles.profileDetails}>
-                        <h1>Details</h1>
-                        <p>{`Games: ${userData.games.length}`}</p>
-                        <Link to={`/profile/${userData.username}/inventory`} className={styles.inventoryLink}>
-                            Inventory
-                        </Link>
-                        <Link to={`/profile/${userData.username}/friends`} className={styles.inventoryLink}>
-                            {`Friends: ${userData.friends.length}`}
-                        </Link>
+                </div>
+                <div className={styles.profileInfo}>
+                    <p className={styles.profileInfoName}>{userData.name}</p>
+                    <p className={styles.profileInfoDesc}>{userData.desc}</p>
+                    <p>{`Money: $${parseFloat(userData.money.toFixed(2))}`}</p>
+                </div>
+                <div className={styles.profileDetails}>
+                    <h1>Details</h1>
+                    <p>{`Games: ${userData.games.length}`}</p>
+                    <Link to={`/profile/${userData.username}/inventory`} className={styles.inventoryLink}>
+                        Inventory
+                    </Link>
+                    <Link to={`/profile/${userData.username}/friends`} className={styles.inventoryLink}>
+                        {`Friends: ${userData.friends.length}`}
+                    </Link>
+                </div>
+
+                {/* Comment section */}
+                <div className={styles.commentSection}>
+                    <h2 className={styles.commentH2}>Comments</h2>
+                    {currentComments.length > 0 ? (
+                        currentComments.map((comment, index) => (
+                            <div key={index} className={styles.comment}>
+                                <p>{comment[1]}</p> {/* Assuming comment[1] contains the comment text */}
+                                <Link to={`/profile/${comment[0]}`} className={styles.commentProfileLink}>
+                                    {comment[0]}
+                                </Link>
+                            </div>
+                        ))
+                    ) : (
+                        <p className={styles.noComments}>No comments yet. Be the first to comment!</p>
+                    )}
+
+                    {/* Pagination controls */}
+                    <div className={styles.pagination}>
+                        <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+                            Previous
+                        </button>
+                        <span>{`Page ${currentPage} of ${totalPages}`}</span>
+                        <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                            Next
+                        </button>
                     </div>
 
-                    {/* Comment section */}
-                    <div className={styles.commentSection}>
-                        <h2 className={styles.commentH2}>Comments</h2>
-                        {currentComments.length > 0 ? (
-                            currentComments.map((comment, index) => (
-                                <div key={index} className={styles.comment}>
-                                    <p>{comment[1]}</p> {/* Assuming comment[1] contains the comment text */}
-                                    <Link to={`/profile/${comment[0]}`} className={styles.commentProfileLink}>
-                                        {comment[0]}
-                                    </Link>
-                                </div>
-                            ))
-                        ) : (
-                            <p className={styles.noComments}>No comments yet. Be the first to comment!</p>
-                        )}
-
-                        {/* Pagination controls */}
-                        <div className={styles.pagination}>
-                            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
-                                Previous
-                            </button>
-                            <span>{`Page ${currentPage} of ${totalPages}`}</span>
-                            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                                Next
-                            </button>
-                        </div>
-
-                        {/* Add new comment */}
-                        <div className={styles.addComment}>
-                            <textarea
-                                value={newComment}
-                                onChange={(e) => setNewComment(e.target.value)}
-                                maxLength={"750"}
-                                placeholder="Write a comment..."
-                                rows="3"
-                            />
-                            <button onClick={handleAddComment} disabled={!newComment.trim()}>
-                                Post Comment
-                            </button>
-                        </div>
+                    {/* Add new comment */}
+                    <div className={styles.addComment}>
+                        <textarea
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            maxLength={"750"}
+                            placeholder="Write a comment..."
+                            rows="3"
+                        />
+                        <button onClick={handleAddComment} disabled={!newComment.trim()}>
+                            Post Comment
+                        </button>
                     </div>
                 </div>
-                
-            ) : (
-                <div>No user data found.</div>
-            )}
+            </div>
         </div>
     );
 };

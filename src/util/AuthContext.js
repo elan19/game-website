@@ -28,10 +28,7 @@ const AuthProvider = ({ children }) => {
       try {
           const username = localStorage.getItem('username');
           const id = localStorage.getItem('loginId');
-          console.log(id);
-          console.log(username);
-          const data = await MongoDbModel.logoutUser(username, id);
-          console.log(data);
+          await MongoDbModel.logoutUser(username, id);
       } catch (error) {
           console.error('Failed to fetch user data:', error);
       }

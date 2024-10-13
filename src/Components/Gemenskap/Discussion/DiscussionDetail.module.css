@@ -1,0 +1,163 @@
+/* DiscussionDetail.module.css */
+
+.discussionDetailContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    color: #f1f1f1;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.discussionDetailContainer h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #61dafb;
+}
+
+.discussionDetailContainer p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #dcdcdc;
+    margin-bottom: 20px;
+}
+
+strong {
+    color: #61dafb;
+}
+
+.genres {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.genre {
+    background-color: #333;
+    border: 1px solid transparent;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    color: #f0f0f0;
+    transition: background-color 0.3s, border 0.3s; /* Smooth transitions */
+}
+
+.genre:hover {
+    cursor: pointer;
+    color: #61dafb;
+    border: 1px solid #61dafb;
+}
+
+.commentsSection {
+    margin-top: 30px;
+}
+
+.discussionDetailContainer h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #61dafb;
+    padding-bottom: 5px;
+    color: #61dafb;
+}
+
+.comment {
+    background-color: #2a2a2a;
+    border: 1px solid #333;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.comment strong {
+    color: #61dafb;
+}
+
+.comment p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.commentFormContainer {
+    margin-top: 20px;
+}
+
+.profileLink {
+    margin: 0;
+    color: #61dafb;
+}
+
+.profileLink:hover {
+    color: #61dafb;
+
+}
+
+.discussionDetailContainer textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background-color: #2a2a2a;
+    color: #f1f1f1;
+    font-size: 1rem;
+    resize: vertical;
+    height: 100px;
+    outline: none;
+    margin-bottom: 10px;
+}
+
+
+.discussionDetailContainer textarea:focus {
+    border: 1px solid #61dafb;
+}
+
+.discussionDetailContainer textarea::placeholder {
+    color: #7a7a7a;
+}
+
+.discussionDetailContainer .button {
+    background-color: #61dafb;
+    color: #1e1e1e;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.discussionDetailContainer .button:hover {
+    background-color: #0092bb;
+}
+
+.backButton {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 10px 20px; /* Add padding */
+    background-color: #213a4c; /* Change background color */
+    color: white; /* Change text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    float: right;
+}
+
+.backButton:hover {
+    background-color: #0092bb; /* Darker shade on hover */
+}
+
+
+
+@media (max-width: 450px) {
+    .discussionDetailContainer .genre {
+        cursor: pointer;
+        color: #61dafb;
+        border: 1px solid #61dafb;
+    }
+
+    .backButton {
+        float: none;
+    }
+}

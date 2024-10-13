@@ -1,0 +1,91 @@
+.createDiscussionContainer {
+    width: 60%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #171a21;
+    border-radius: 8px;
+    color: #eee;
+}
+
+.createDiscussionForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.createDiscussionForm input,
+.createDiscussionForm textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1em;
+    color: #eee;
+    background-color: #213a4c;
+    border: none;
+    font-size: 14px;
+}
+
+.createDiscussionForm select {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 1em;
+    background-color: #213a4c;
+    min-height: 150px;
+    border: none;
+}
+
+.createDiscussionForm select option {
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+
+
+.submitButton {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background-color: #2980b9;
+}
+
+.backButton {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 10px 20px; /* Add padding */
+    background-color: #213a4c; /* Change background color */
+    color: white; /* Change text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Add rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+    float: right;
+}
+
+.backButton:hover {
+    background-color: #0092bb; /* Darker shade on hover */
+}
+
+@media (max-width: 667px) {
+    .createDiscussionContainer {
+        width: 90%;
+    }
+}
+
+@media (max-width: 450px) {
+    .createDiscussionContainer {
+        width: 100%;
+    }
+
+    .createDiscussionForm select option {
+        padding-bottom: 15px;
+        padding-top: 15px;
+        height: 50px;
+        text-align: center;
+    }
+
+    .backButton {
+        float: none;
+    }
+}

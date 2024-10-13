@@ -269,6 +269,61 @@ const MongoDbModel = {
             console.error(error);
         }
     },
+
+    getLastClaimDate: async function getLastClaimDate(userN, loginId) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getLastClaimDate(userN, loginId);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    getAllDiscussions: async function getAllDiscussions() {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getAllDiscussions();
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    getDiscussionById: async function addDigetDiscussionByIdscussion(discussionId) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.getDiscussionById(discussionId);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    addDiscussion: async function addDiscussion(newDiscussion, userN, loginId) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.addDiscussion(newDiscussion, userN, loginId);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
+    addCommentToDiscussion: async function addCommentToDiscussion(discussionId, commentData) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.addCommentToDiscussion(discussionId, commentData.content, commentData.author, commentData.loginId);
+            console.log(response);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+    
 };
 
 export default MongoDbModel;

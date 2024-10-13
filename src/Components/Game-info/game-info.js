@@ -105,23 +105,23 @@ const GameInfo = () => {
                     ) : (
                         <img className={styles.rightDivInfoImg} src={game.background_image} alt={game.name} />
                     )}
-                    <p>Genomsnittlig recension: <span>{game.rating} av 5</span></p>
-                    <p>Topp recensioner: <span>{ratingCount} ({ratingPercent}%)</span></p>
-                    <p>Antal recensioner: <span>{game.ratings_count}</span></p>
+                    <p>Average reviews: <span>{game.rating} av 5</span></p>
+                    <p>Top reviews: <span>{ratingCount} ({ratingPercent}%)</span></p>
+                    <p>Total reviews: <span>{game.ratings_count}</span></p>
                     <br />
-                    <p>Utgivningsdatum: <span>{game.released}</span></p>
+                    <p>Release date: <span>{game.released}</span></p>
                     <br />
-                    <p>Utvecklare: 
+                    <p>Developer: 
                         <Link to={`/developer/${game.developers[0].id}`}>
                             {game.developers[0].name}
                         </Link>
                     </p>
-                    <p>Utgivare: {publishersHTML}</p>
+                    <p>Publisher: {publishersHTML}</p>
                 </div>
             </div>
             <div className={styles.gameBody}>
                 <div className={`${styles.buyGame}`}>
-                        <h2>{userOwnsGame ? `Spela ${game.name}` : `Köp ${game.name}`}</h2>
+                        <h2>{userOwnsGame ? `Play ${game.name}` : `Buy ${game.name}`}</h2>
                         <p>{platforms}</p>
                         <div className={styles.purchase}>
                             {!userOwnsGame && (
@@ -133,37 +133,37 @@ const GameInfo = () => {
                                 className={styles.buyGameBtn} 
                                 onClick={userOwnsGame ? () => navigate('/library') : handleBuyClick}
                             >
-                                {userOwnsGame ? 'Spela' : 'Köp'}
+                                {userOwnsGame ? 'Play' : 'Buy'}
                             </button>
                         </div>
                 </div>
                 <div className={styles.recommended}>
-                    <h2>{userOwnsGame ? `Du äger spelet` : `Rekommenderat spel`}</h2>
-                    <p>{userOwnsGame ? `Kör spelet och få chans till kort i ditt förråd.` : `Från dina tidigare spel ser detta ut att vara ett spel du skulle tycka om.`}</p>
+                    <h2>{userOwnsGame ? `You own the game` : `Recommended game`}</h2>
+                    <p>{userOwnsGame ? `Play the game and get a chance to recieve cards to your inventory.` : `From the look of it this seems to be a game you would like.`}</p>
                 </div>
                 <div className={styles.gameDesc}>
-                    <h2>Om detta spel</h2>
+                    <h2>About this game</h2>
                     <div className={styles.gameDescH2Border}></div>
                     <p>{game.description_raw}</p>
                 </div>
                 <div className={styles.gameLinks}>
-                    <p>Titel: <span>{game.name}</span></p>
+                    <p>Title: <span>{game.name}</span></p>
                     <p>Genre: <span>{genres}</span></p>
-                    <p>Utvecklare: 
+                    <p>Developer: 
                         <Link to={`/developer/${game.developers[0].id}`} target="_blank">
                             {game.developers[0].name}
                         </Link>
                     </p>
-                    <p>Utgivare: {publishersHTML}</p>
-                    <p>Utgivningsdatum: <span>{game.released}</span></p>
+                    <p>Publisher: {publishersHTML}</p>
+                    <p>Release date: <span>{game.released}</span></p>
                     <div className={styles.allLinks}>
-                        <a className={styles.link} href={game.website} target="_blank" rel="noopener noreferrer">Gå till webbplatsen</a>
-                        <a className={styles.link} href={`https://www.twitch.tv/directory/game/${game.name}`} target="_blank" rel="noopener noreferrer">Länk till twitch</a>
-                        <a className={styles.link} href={`https://www.youtube.com/results?search_query=${game.name}`} target="_blank" rel="noopener noreferrer">Sök på Youtube</a>
+                        <a className={styles.link} href={game.website} target="_blank" rel="noopener noreferrer">Go to website</a>
+                        <a className={styles.link} href={`https://www.twitch.tv/directory/game/${game.name}`} target="_blank" rel="noopener noreferrer">Link to twitch</a>
+                        <a className={styles.link} href={`https://www.youtube.com/results?search_query=${game.name}`} target="_blank" rel="noopener noreferrer">Search on Youtube</a>
                     </div>
                 </div>
                 <div className={styles.gameReq}>
-                    <h2>Systemkrav: </h2>
+                    <h2>System requirements: </h2>
                     <div className={styles.gameDescH2Border}></div>
                     <div className={styles.reqMin}>
                         <pre>{reqMin}</pre>

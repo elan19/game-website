@@ -44,7 +44,7 @@ const RegisterForm = () => {
     };
 
     const submitButtonValue = event.nativeEvent.submitter.value;
-    if (submitButtonValue === 'Registrera användare') {
+    if (submitButtonValue === 'Register account') {
       MongoDbModel.registerUser(user.username, user.password, user.email)
         .then(response => {
           if (response && response.result) {
@@ -95,7 +95,7 @@ const RegisterForm = () => {
             />
             <input
               type="submit"
-              value="Registrera användare"
+              value="Register account"
               className={`${styles.button} ${styles.registerButton} ${styles.marginBottom}`}
             />
             {error && (

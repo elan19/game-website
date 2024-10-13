@@ -1,0 +1,293 @@
+.discussionContainer {
+    padding: 20px;
+    color: #f0f0f0; /* Light text */
+}
+
+.discussionList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Space between discussion items */
+}
+
+.discussionItem {
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #444; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    background-color: #171a21;
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s; /* Smooth transitions */
+}
+
+.discussionItem:hover {
+    background-color: #3a3a3a; /* Darker background on hover */
+}
+
+.discussionItem h3 {
+    margin: 0 0 10px 0; /* Space below title */
+    font-size: 18px; /* Title font size */
+}
+
+.discussionItem p {
+    margin: 0; /* Remove default margin */
+    font-size: 14px; /* Content font size */
+}
+
+.additionalInfo {
+    display: inline-flex;
+    width: 25%;
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-end; /* Align items to the right */
+    font-size: 0.9em; /* Adjust font size as needed */
+    color: #888; /* Change color to fit your theme */
+    margin-left: 15px; /* Space between content and additional info */
+}
+
+
+.discussionForm {
+    display: flex;
+}
+
+.genres {
+    width: 70%;
+    display: inline-flex;
+}
+
+.genre {
+    display: inline-block; /* Make genre inline */
+    padding: 6px 12px; /* Increase padding for a button-like feel */
+    background-color: #333; /* Background color for genre */
+    border-radius: 4px; /* Rounded corners for genre */
+    font-size: 14px; /* Slightly larger font size for better readability */
+    color: #f0f0f0; /* Light text */
+    margin-top: 10px; /* Space above genre label */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s, border 0.3s; /* Smooth transitions */
+    border: 1px solid transparent; /* Add border for visual structure */
+    margin-right: 5px;
+}
+
+.genre:hover {
+    background-color: #5c5c5c; /* Darker background on hover */
+    /*border: 1px solid #777; /* Add border on hover for emphasis */
+    border: 1px solid #61dafb;
+    color: #61dafb;
+}
+
+.genre:active {
+    background-color: #666;
+    border: 1px solid #61dafb;
+    color: #61dafb; /* Darker background when clicked */
+}
+
+.pagination {
+    display: flex;
+    justify-content: center; /* Center the pagination controls */
+    margin-top: 20px; /* Space above pagination */
+}
+
+.pageButton {
+    padding: 10px 15px; /* Padding for pagination buttons */
+    margin: 0 5px; /* Space between buttons */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #444; /* Button background color */
+    color: #fff; /* Button text color */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+}
+
+.pageButton:hover {
+    background-color: #555; /* Darker background on hover */
+}
+
+.pageButton:disabled {
+    background-color: #333; /* Disable button background */
+    cursor: not-allowed; /* Change cursor to not-allowed */
+}
+
+.pageButton.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.active {
+    background-color: #777;
+    border: 1px solid #61dafb;
+    color: #61dafb; /* Background color for active page */
+}
+
+
+.search {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 60%;
+    min-height: 45px;
+}
+
+.search input {
+    height: 30px;
+    margin-top: 7.5px;
+    margin-bottom: 7.5px;
+    margin-left: 7.5px;
+    border-radius: 5px;
+}
+
+.searchBar {
+    color: #eee;
+    background-color: #213a4c;
+    border: none;
+    font-size: 14px;
+    padding: 5px;
+}
+
+.searchBar:focus {
+    border: none;
+    outline: 2px solid grey;
+}
+
+.searchBtn {
+    width: 50px;
+    background-color: #213a4c;
+    color: #5fb2e2;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 50px;
+}
+
+.searchBtn:hover {
+    background-color: #5fb2e2;
+    color: #eee;
+}
+
+.activeFilters {
+    line-height: 45px;
+    padding-left: 10px;
+    color: #5fb2e2;
+}
+
+.activeGenre:hover {
+    color: #e05656;
+}
+
+.clearFilters {
+    background-color: #ff6b6b; /* Light red background */
+    color: #fff; /* White text */
+    border: none; /* Remove default border */
+    padding: 5px 5px; /* Padding for size */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.clearFilters:hover {
+    background-color: #e05656; /* Darker red on hover */
+}
+
+.clearFilters:active {
+    background-color: #c44545; /* Even darker red on click */
+}
+
+.searchCreateContainer {
+    display: flex;
+}
+
+.createDiscussionContainer {
+    width: 20%;
+    height: 40px;
+    margin-left: 12.5%;
+}
+
+.createDiscussionBtn {
+    width: 150px;
+    height: 45px;
+    background-color: #213a4c;
+    color: #5fb2e2;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+}
+
+.createDiscussionBtn:hover {
+    background-color: #5fb2e2;
+    color: #eee;
+}
+
+
+@media (max-width: 1200px) {
+    .search {
+        width: 80%;
+    }
+
+    .searchBar {
+        width: 30%;
+    }
+}
+
+@media (max-width: 1050px) {
+    .searchCreateContainer {
+        display: block;
+        min-height: 10px;
+    }
+
+    .createDiscussionContainer {
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 667px) {
+    .search {
+        width: 100%;
+    }
+
+    .searchBar {
+        width: 50%;
+    }
+
+    .genres {
+        width: 100%;
+    }
+
+    .additionalInfo {
+        width: 100%;
+        padding-right: 10px;
+    }
+
+}
+
+@media (max-width: 450px) {
+    .search {
+        width: 100%;
+    }
+
+    .searchBar {
+        width: 60%;
+    }
+
+    .discussionItem {
+        height: auto; /* Allow height to be dynamic */
+    }
+
+    .discussionContainer {
+        padding: 0px;
+    }
+
+    .pageButton {
+        padding: 8px; /* Smaller padding for mobile */
+        font-size: 12px; /* Smaller font size for mobile */
+    }
+
+    .createDiscussionContainer {
+        width: 100%;
+    }
+
+    .createDiscussionBtn {
+        margin-left: 25%;
+        width: 50%;
+    }
+}

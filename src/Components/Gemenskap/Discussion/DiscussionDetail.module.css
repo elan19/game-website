@@ -69,6 +69,9 @@ strong {
     padding: 10px;
     border-radius: 8px;
     margin-bottom: 10px;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 .comment strong {
@@ -78,6 +81,10 @@ strong {
 .comment p {
     margin: 5px 0;
     font-size: 0.9rem;
+}
+
+.discussionDetailContainer .italicFont {
+    font-style: italic;
 }
 
 .commentFormContainer {

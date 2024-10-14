@@ -96,6 +96,7 @@ const DiscussionDetail = () => {
             </button>
             <h2>{discussion.title}</h2>
             <p><strong>Game:</strong> {discussion.game}</p>
+            <p className={styles.italicFont}>Author: <Link className={styles.profileLink} to={`/profile/${discussion.author}`}>{discussion.author}</Link></p>
             {discussion.genre && discussion.genre.length > 0 && (
                 <div className={styles.genres}>
                     {discussion.genre.map((tag, index) => (
@@ -114,15 +115,20 @@ const DiscussionDetail = () => {
             <div className={styles.commentsSection}>
                 <h3>Comments</h3>
                 {comments.length > 0 ? (
-                    comments.map((comment, index) => (
-                        <div key={index} className={styles.comment}>
-                            <p>
-                                <strong>
-                                    <Link className={styles.profileLink} to={`/profile/${comment.loginId}`}>{comment.author}</Link>
-                                </strong>: {comment.content}
-                            </p>
-                        </div>
-                    ))
+                    comments.map((comment, index) => {
+                        const formattedDate = new Date(comment.createdAt).toLocaleString();
+
+                        return (
+                            <div key={index} className={styles.comment}>
+                                <p>
+                                    <strong>
+                                        <Link className={styles.profileLink} to={`/profile/${comment.loginId}`}>{comment.author}</Link>
+                                    </strong>: {comment.content}
+                                </p>
+                                <p className={styles.italicFont}>{formattedDate}</p> {/* Use formatted date here */}
+                            </div>
+                        );
+                    })
                 ) : (
                     <p>No comments yet. Be the first to comment!</p>
                 )}
@@ -135,6 +141,7 @@ const DiscussionDetail = () => {
                             value={commentContent}
                             onChange={(e) => setCommentContent(e.target.value)} // Set the comment content
                             placeholder="Add a comment..."
+                            maxLength={1000}
                             required
                         />
                         <button className={styles.button} type="submit">Comment</button>

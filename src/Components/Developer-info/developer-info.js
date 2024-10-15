@@ -35,9 +35,9 @@ const DeveloperInfo = () => {
                 console.error('Error fetching developer info:', error);
             }
         };
-
+        console.log("Yep");
         fetchData();
-    }, [id]);
+    }, [id, apiKey, baseURL]);
 
     const handlePrevClick = async () => {
         if (prev !== null) {

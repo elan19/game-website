@@ -21,7 +21,6 @@ const GameInfo = () => {
             try {
                 const response = await fetch(`${baseURL}/games/${gameId}?key=${apiKey}`);
                 const result = await response.json();
-                console.log(result);
                 setGame(result);
             } catch (error) {
                 console.error('Error fetching game info:', error);
@@ -85,7 +84,6 @@ const GameInfo = () => {
         //alert("You need to login first.");
         try {
             await MongoDbModel.purchaseGame(userData.username, -gameCost, game.name);
-            console.log("success");
             fetchUserData(); // Refresh user data
         } catch (error) {
             console.error('Failed to update user data:', error);

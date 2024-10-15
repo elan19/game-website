@@ -15,7 +15,6 @@ const NotificationView = () => {
             try {
                 const requests = await MongoDbModel.getFriendRequests(localStorage.getItem('username')); // Fetch friend requests
                 setFriendRequests(requests.friendRequests); // Extract the array from the response
-                console.log(requests.friendRequests); // Log the requests to check the structure
                 setLoading(false);
             } catch (err) {
                 console.error('Failed to fetch friend requests:', err);

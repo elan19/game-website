@@ -2,9 +2,9 @@
     width: 100%;
     min-height: 150px;
     background-color: #171a21;
-    display: absolute;
+    /*display: absolute;
     position: absolute;
-    bottom: 0;
+    bottom: 0;*/
     padding-left: 20%;
     padding-right: 20%;
     color: #555;

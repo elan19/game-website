@@ -7,7 +7,7 @@ const SingleGemenskap = ({ gemenskap }) => {
 
     return (
         <div className={styles.gemenskap}>
-            <img src={gemenskap.originalFileUrl} alt="picture" />
+            <img src={gemenskap.originalFileUrl} alt="userpic" />
             <div className={styles.gameDescH2Border}></div>
             <p>{date.toLocaleString()}</p>
         </div>

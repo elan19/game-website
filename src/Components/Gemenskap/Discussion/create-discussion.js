@@ -12,22 +12,16 @@ const CreateDiscussion = () => {
     const [content, setContent] = useState('');
     const [game, setGame] = useState('');
     const [genre, setGenre] = useState([]);
-    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
         const updateUserData = async () => {
-            setLoading(true);
             await fetchUserData();
-            setLoading(false);
         };
     
         if (!userData || !userData.email) { // Check for key properties to determine if userData is incomplete
             updateUserData();
-        } else {
-            setLoading(false);
         }
-
 
     }, [userData, fetchUserData]);
 

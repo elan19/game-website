@@ -6,20 +6,17 @@ import MongoDbModel from '../../models/mongodb'; // Assumes this contains your M
 const DAILY_REWARD_AMOUNT = 20; // Set the fixed reward amount
 
 const MoneyModal = ({ onClose, onAddMoney }) => {
-    const { userData, fetchUserData } = useContext(UserContext);
+    const { userData } = useContext(UserContext);
     const [isRewardClaimed, setIsRewardClaimed] = useState(false);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         // Check if the user has already claimed today's reward
         const checkClaimStatus = async () => {
             try {
-                console.log(userData);
                 const response = await MongoDbModel.getLastClaimDate(userData.username, userData.loginId);
                 const lastClaimDate = response?.lastClaimDate;
-                console.log(lastClaimDate);
-
-                const today = new Date().toLocaleDateString();
+    
+                const today = new Date().toISOString().split('T')[0]; // Get today's date in YYYY-MM-DD format
                 
                 // If the lastClaimDate is today, the user has already claimed the reward
                 if (lastClaimDate === today) {
@@ -27,15 +24,13 @@ const MoneyModal = ({ onClose, onAddMoney }) => {
                 }
             } catch (error) {
                 console.error("Error fetching last claim date:", error);
-            } finally {
-                setLoading(false); // Set loading to false once we have the data
             }
         };
-
+    
         if (userData?.username) {
             checkClaimStatus();
         }
-    }, [userData]);
+    }, [userData]);    
 
     const handleClaimReward = async () => {
 

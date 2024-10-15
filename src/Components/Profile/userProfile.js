@@ -86,7 +86,9 @@ const UserProfileView = () => {
     const indexOfLastComment = currentPage * commentsPerPage;
     const indexOfFirstComment = indexOfLastComment - commentsPerPage;
     const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
-    const totalPages = Math.ceil(comments.length / commentsPerPage);
+
+    let totalPages = Math.ceil(comments.length / commentsPerPage);
+    if (totalPages < 1) totalPages = 1;
 
     const handleNextPage = () => {
         if (currentPage < totalPages) setCurrentPage(currentPage + 1);

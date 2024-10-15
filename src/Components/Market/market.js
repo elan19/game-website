@@ -10,7 +10,6 @@ const MarketView = () => {
     const [filteredItems, setFilteredItems] = useState([]); // For filtered items
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const [searchQuery, setSearchQuery] = useState(""); // State for search query
     const itemsPerPage = 5; // Show 5 items per page
     const { fetchUserData } = useContext(UserContext);
 
@@ -89,7 +88,6 @@ const MarketView = () => {
     const handleSearch = (event) => {
         event.preventDefault();
         const searchInput = document.querySelector('input[type="text"]').value.toLowerCase();
-        setSearchQuery(searchInput);
 
         const filtered = marketItems.filter(item =>
             item.cardName.toLowerCase().includes(searchInput) || // Search by card name

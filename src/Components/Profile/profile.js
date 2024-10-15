@@ -22,7 +22,6 @@ const ProfileView = () => {
             const response = await MongoDbModel.getUserComments(userData.username);
             const fetchedComments = response.comments;
             setComments(fetchedComments);
-            console.log("fetching");
         } catch (error) {
             console.error('Failed to fetch comments:', error);
         }

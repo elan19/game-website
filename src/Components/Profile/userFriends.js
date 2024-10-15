@@ -7,7 +7,6 @@ import styles from './userFriends.module.css'; // Assuming a CSS module for styl
 
 const UserFriends = () => {
     const { username } = useParams();
-    const [user, setUser] = useState(null);
     const { fetchUserData } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
     const [friendsData, setFriendsData] = useState([]); // New state for preloaded friends data
@@ -20,14 +19,12 @@ const UserFriends = () => {
         const fetchFriends = async () => {
             try {
                 const friendsList = await MongoDbModel.getUserFriends(username);
-                const fetchedUser = await MongoDbModel.getUserProfile(username);
 
                 // Preload all friends' profile data
                 const friendsData = await Promise.all(
                     friendsList.friends.map(friend => MongoDbModel.getUserProfile(friend.username))
                 );
 
-                setUser(fetchedUser);
                 setFriends(friendsList.friends);
                 setFriendsData(friendsData); // Store all the friends' data
                 setLoading(false);

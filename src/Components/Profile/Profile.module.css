@@ -232,6 +232,7 @@
 
 .noComments {
     text-align: center;
+    color: #eee;
 }
 
 .commentH2 {
@@ -333,6 +334,10 @@
     word-break: break-all; /* Break long words */
     overflow-wrap: break-word;
     hyphens: auto; /* Optional: adds hyphens if breaking words */
+}
+
+.commentH2 {
+    color: #eee;
 }
 
 @media (max-width: 800px) {

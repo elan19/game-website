@@ -108,7 +108,7 @@ const MarketView = () => {
 
     return (
         <div className={styles.marketContainer}>
-            <h1>Market</h1>
+            <h1 className={styles.marketH1}>Market</h1>
 
             <div className={styles.search}>
                 <form>

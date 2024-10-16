@@ -150,7 +150,7 @@ const DiscussionComp = () => {
 
     return (
         <div className={styles.discussionContainer}>
-            <h2>Discussions</h2>
+            <h2 className={styles.discussionH2}>Discussions</h2>
 
             <div className={styles.searchCreateContainer}>
                 <div className={styles.search}>

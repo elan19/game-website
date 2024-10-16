@@ -290,4 +290,8 @@
         margin-left: 25%;
         width: 50%;
     }
+
+    .discussionH2 {
+        text-align: center;
+    }
 }

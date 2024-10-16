@@ -1,26 +1,28 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom'; // Import Link
+import { useParams, useNavigate, Link } from 'react-router-dom'; 
 import { UserContext } from '../../../util/UserContext';
 import MongoDbModel from '../../../models/mongodb';
 import styles from './DiscussionDetail.module.css';
 
 const DiscussionDetail = () => {
     const { userData, fetchUserData } = useContext(UserContext);
-    const { discussionId } = useParams(); // Get the discussionId from the URL
+    const { discussionId } = useParams(); 
     const [discussion, setDiscussion] = useState(null);
     const [comments, setComments] = useState([]);
-    const [commentContent, setCommentContent] = useState(''); // Define commentContent state
+    const [commentContent, setCommentContent] = useState(''); 
     const [loading, setLoading] = useState(true);
     const [loadingUserData, setLoadingUserData] = useState(true);
-    const navigate = useNavigate(); // Use navigate for navigation
+    const [currentPage, setCurrentPage] = useState(1); // State to track the current page
+    const commentsPerPage = 10; // Set the number of comments per page
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchDiscussionDetails = async () => {
             setLoading(true);
             try {
-                const fetchedDiscussion = await MongoDbModel.getDiscussionById(discussionId); // Fetch the discussion details
-                setDiscussion(fetchedDiscussion.discussion); // Set the discussion state
-                setComments(fetchedDiscussion.discussion.comments || []); // Set comments if available
+                const fetchedDiscussion = await MongoDbModel.getDiscussionById(discussionId);
+                setDiscussion(fetchedDiscussion.discussion);
+                setComments(fetchedDiscussion.discussion.comments || []);
             } catch (error) {
                 console.error('Error fetching discussion details:', error);
             }
@@ -33,29 +35,25 @@ const DiscussionDetail = () => {
     useEffect(() => {
         const updateUserData = async () => {
             try {
-                setLoadingUserData(true); // Set loading user data to true
-                await fetchUserData(); // Fetch user data
-                console.log(userData);
+                setLoadingUserData(true); 
+                await fetchUserData(); 
             } catch (error) {
                 console.error('Error fetching user data:', error);
             } finally {
-                setLoadingUserData(false); // Finish loading user data
+                setLoadingUserData(false); 
             }
         };
     
-        // Only fetch user data if it's not already loaded and if it's not being fetched
         if (!userData?.email && !loadingUserData) {
             updateUserData();
         }
     }, [userData, fetchUserData, loadingUserData]);
 
     const handleTagClick = (tag) => {
-        // Navigate to the discussion list page with the selected tag as a query parameter
         navigate(`/gemenskap/discussions?genre=${tag}`);
     };
 
     const addCommentToDiscussion = async (discussionId, newComment) => {
-        // Implement the function to add a comment to the discussion
         const response = await MongoDbModel.addCommentToDiscussion(discussionId, newComment);
         return response;
     };
@@ -75,10 +73,25 @@ const DiscussionDetail = () => {
             console.error(response.error);
         } else {
             setComments(prevComments => [...prevComments, newComment]);
-            setCommentContent(''); // Reset the comment input
-            console.log(response.message);
+            setCommentContent(''); 
         }
     };
+
+    const handleNextPage = () => {
+        if (currentPage < Math.ceil(comments.length / commentsPerPage)) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const indexOfLastComment = currentPage * commentsPerPage;
+    const indexOfFirstComment = indexOfLastComment - commentsPerPage;
+    const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -90,20 +103,21 @@ const DiscussionDetail = () => {
 
     return (
         <div className={styles.discussionDetailContainer}>
-            {/* Back to Discussions Button */}
             <button className={styles.backButton} onClick={() => navigate('/gemenskap/discussions')}>
                 Back to Discussions
             </button>
             <h2>{discussion.title}</h2>
             <p><strong>Game:</strong> {discussion.game}</p>
-            <p className={styles.italicFont}>Author: <Link className={styles.profileLink} to={`/profile/${discussion.author}`}>{discussion.author}</Link></p>
+            <p className={styles.italicFont}>
+                Author: <Link className={styles.profileLink} to={`/profile/${discussion.author}`}>{discussion.author}</Link>
+            </p>
             {discussion.genre && discussion.genre.length > 0 && (
                 <div className={styles.genres}>
                     {discussion.genre.map((tag, index) => (
                         <span
                             key={index}
                             className={styles.genre}
-                            onClick={() => handleTagClick(tag)} // Handle tag click
+                            onClick={() => handleTagClick(tag)}
                         >
                             {tag}
                         </span>
@@ -114,24 +128,45 @@ const DiscussionDetail = () => {
 
             <div className={styles.commentsSection}>
                 <h3>Comments</h3>
-                {comments.length > 0 ? (
-                    comments.map((comment, index) => {
+                {currentComments.length > 0 ? (
+                    currentComments.map((comment, index) => {
                         const formattedDate = new Date(comment.createdAt).toLocaleString();
 
                         return (
                             <div key={index} className={styles.comment}>
                                 <p>
                                     <strong>
-                                        <Link className={styles.profileLink} to={`/profile/${comment.loginId}`}>{comment.author}</Link>
+                                        <Link className={styles.profileLink} to={`/profile/${comment.author}`}>
+                                            {comment.author}
+                                        </Link>
                                     </strong>: {comment.content}
                                 </p>
-                                <p className={styles.italicFont}>{formattedDate}</p> {/* Use formatted date here */}
+                                <p className={styles.italicFont}>{formattedDate}</p>
                             </div>
                         );
                     })
                 ) : (
                     <p>No comments yet. Be the first to comment!</p>
                 )}
+
+                {/* Pagination Controls */}
+                <div className={styles.pagination}>
+                    <button 
+                        className={styles.paginationButton} 
+                        onClick={handlePreviousPage} 
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+                    <span>Page {currentPage} of {Math.ceil(comments.length / commentsPerPage)}</span>
+                    <button 
+                        className={styles.paginationButton} 
+                        onClick={handleNextPage} 
+                        disabled={currentPage === Math.ceil(comments.length / commentsPerPage)}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
 
             {userData && (
@@ -139,7 +174,7 @@ const DiscussionDetail = () => {
                     <form onSubmit={handleCommentSubmit}>
                         <textarea
                             value={commentContent}
-                            onChange={(e) => setCommentContent(e.target.value)} // Set the comment content
+                            onChange={(e) => setCommentContent(e.target.value)}
                             placeholder="Add a comment..."
                             maxLength={1000}
                             required

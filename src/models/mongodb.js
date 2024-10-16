@@ -164,7 +164,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.getAllMarketItems();
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -185,8 +184,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.buyMarketItem(buyerUsername, buyerLoginId, marketItemId);
-            console.log(marketItemId.toString());
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -207,7 +204,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.addComment(username, loginid, author, comment);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -218,7 +214,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.addFriendRequest(sender, recipient);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -229,7 +224,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.friendRequestAction(sender, recipient, action);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -240,7 +234,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.getFriendRequests(username);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -251,7 +244,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.getUserFriends(username);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -262,8 +254,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.removeFriend(username, loginId, userToRemove);
-            console.log(loginId);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -284,7 +274,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.getAllDiscussions();
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -295,7 +284,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.getDiscussionById(discussionId);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -306,7 +294,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.addDiscussion(newDiscussion, userN, loginId);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);
@@ -317,7 +304,6 @@ const MongoDbModel = {
         try {
             const user = await this.getCurrentUser();
             const response = await user.functions.addCommentToDiscussion(discussionId, commentData.content, commentData.author, commentData.loginId);
-            console.log(response);
             return response;
         } catch (error) {
             console.error(error);

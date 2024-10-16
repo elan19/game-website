@@ -45,6 +45,7 @@
 
 .profileCardContainer {
     position: absolute;
+    display: flex;
     top: 0;
     left: -150px; /* Adjust as needed to position it to the left */
     z-index: 10;
@@ -65,6 +66,14 @@
     color: darkred;
 }
 
+@media (max-width: 1500px) {
+    /* Ensure that the first item or items too close to the left side are handled */
+    .profileCardContainer {
+        left: 125px; /* Reset default positioning */
+        right: 0;
+    }
+}
+
 
 @media (max-width: 800px) {
     .friendContainer {
@@ -80,6 +89,11 @@
 @media (max-width: 450px) {
     .friend {
         width: 100%;
+    }
+
+    .profileCardContainer {
+        left: 200px; /* Reset default positioning */
+        right: 0;
     }
     
 }

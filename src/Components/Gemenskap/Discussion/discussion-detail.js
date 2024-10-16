@@ -93,6 +93,9 @@ const DiscussionDetail = () => {
     const indexOfFirstComment = indexOfLastComment - commentsPerPage;
     const currentComments = comments.slice(indexOfFirstComment, indexOfLastComment);
 
+    let totalPages = Math.ceil(comments.length / commentsPerPage);
+    if (totalPages < 1) totalPages = 1;
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -110,6 +113,9 @@ const DiscussionDetail = () => {
             <p><strong>Game:</strong> {discussion.game}</p>
             <p className={styles.italicFont}>
                 Author: <Link className={styles.profileLink} to={`/profile/${discussion.author}`}>{discussion.author}</Link>
+            </p>
+            <p className={styles.italicFont}>
+                Created on: {new Date(discussion.createdAt).toLocaleString()}
             </p>
             {discussion.genre && discussion.genre.length > 0 && (
                 <div className={styles.genres}>
@@ -158,7 +164,7 @@ const DiscussionDetail = () => {
                     >
                         Previous
                     </button>
-                    <span>Page {currentPage} of {Math.ceil(comments.length / commentsPerPage)}</span>
+                    <span>Page {currentPage} of {totalPages}</span>
                     <button 
                         className={styles.paginationButton} 
                         onClick={handleNextPage} 

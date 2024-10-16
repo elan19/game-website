@@ -33,9 +33,6 @@ const CreateDiscussion = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const newDiscussion = { title, content, game, genre };
-        console.log(newDiscussion);
-        console.log(userData.username);
-        console.log(userData.loginId);
         try {
             await MongoDbModel.addDiscussion(newDiscussion, userData.username, userData.loginId); // Replace with your API or DB method
             navigate('/gemenskap/discussion'); // Redirect to discussions page after creating the discussion
@@ -75,9 +72,15 @@ const CreateDiscussion = () => {
                 <select multiple onChange={handleGenreChange}>
                     <option value="Action">Action</option>
                     <option value="Adventure">Adventure</option>
-                    <option value="RPG">RPG</option>
+                    <option value="Shooter">Shooter</option>
                     <option value="Strategy">Strategy</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Puzzle">Puzzle</option>
+                    <option value="Platformer">Platformer</option>
                     <option value="Help">Help</option>
+                    <option value="Discussion">Discussion</option>
+                    <option value="Info">Info</option>
                 </select>
                 <button type="submit" className={styles.submitButton}>Create Discussion</button>
             </form>

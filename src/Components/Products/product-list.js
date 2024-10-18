@@ -44,18 +44,18 @@ const ProductList = () => {
     } else {
       setPrev('https://api.rawg.io/api/games?key=7cb59c195dc14cf682ec1efef10d43ed&page=1');
     }
-  }, [apiKey, baseURL]); // Add apiKey and baseURL as dependencies since they are used inside fetchData
+  }, [apiKey, baseURL]);
 
   // useEffect will now trigger when page, searchQuery, or genre changes
   useEffect(() => {
     fetchData(page, searchQuery, genre);
-  }, [page, searchQuery, genre, fetchData]); // fetchData is now memoized and can be safely used as a dependency
+  }, [page, searchQuery, genre, fetchData]);
 
   const handleSearch = (event) => {
     event.preventDefault();
     const searchInput = document.querySelector('input[type="text"]').value;
     setSearchQuery(searchInput);
-    fetchData(page, searchInput, genre); // Call fetchData after updating searchQuery
+    fetchData(page, searchInput, genre);
   };
 
   const handlePrevPage = () => {
@@ -100,7 +100,6 @@ const ProductList = () => {
             <option value="indie">Indie</option>
             <option value="puzzle">Puzzle</option>
             <option value="platformer">Platformer</option>
-            {/* Add more genres as needed */}
           </select>
         </form>
       </div>

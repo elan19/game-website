@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
-import styles from './Notification.module.css'; // Create a corresponding CSS module
+import styles from './Notification.module.css';
 import { Link } from 'react-router-dom';
 
 const NotificationView = () => {

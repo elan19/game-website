@@ -9,10 +9,10 @@ import defaultProfilePic from '../../images/login.jpg';
 const InventoryView = () => {
     const { userData, fetchUserData } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
-    const [selectedGame, setSelectedGame] = useState(null); // Track selected game by name
-    const [selectedCard, setSelectedCard] = useState(null); // Track selected card
-    const [isModalOpen, setIsModalOpen] = useState(false); // Track modal visibility
-    const [price, setPrice] = useState(''); // Track the price entered by the user
+    const [selectedGame, setSelectedGame] = useState(null);
+    const [selectedCard, setSelectedCard] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [price, setPrice] = useState('');
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 450);
     const [isProcessing, setIsProcessing] = useState(false);
 
@@ -74,9 +74,9 @@ const InventoryView = () => {
             const response = await MongoDbModel.setCardToMarket(
                 userData.username,
                 localStorage.getItem('loginId'),
-                selectedGame,  // Selected game name
-                selectedCard.cardName,  // Card name
-                parseFloat(price) // Price input by the user
+                selectedGame,
+                selectedCard.cardName,
+                parseFloat(price)
             );
     
             if (response.success) {

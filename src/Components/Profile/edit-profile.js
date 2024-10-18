@@ -2,8 +2,8 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
 
-import styles from './EditProfile.module.css'; // Assuming you have a CSS file for styling
-import { UserContext } from '../../util/UserContext'; // Import UserContext
+import styles from './EditProfile.module.css';
+import { UserContext } from '../../util/UserContext';
 
 const profileImages = [
     'profile1.jpg',
@@ -18,7 +18,7 @@ const profileImages = [
 ];
 
 const EditProfile = () => {
-    const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
+    const { userData, fetchUserData } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
     const [error] = useState(null);
     const navigate = useNavigate();
@@ -57,7 +57,7 @@ const EditProfile = () => {
 
         try {
             await MongoDbModel.editUser(userData.username, updatedData);
-            fetchUserData(); // Refresh user data
+            fetchUserData();
             alert('Profile updated successfully!');
             navigate("/profile");
         } catch (err) {
@@ -69,7 +69,7 @@ const EditProfile = () => {
     const handleImageSelect = (image) => {
         setFormData({
             ...formData,
-            profilePic: image, // Store the selected image
+            profilePic: image,
         });
     };
 
@@ -134,9 +134,9 @@ const EditProfile = () => {
                         {profileImages.map((image, index) => (
                             <img
                                 key={index}
-                                src={`/images/profile/${image}`} // Correct path for public folder
+                                src={`/images/profile/${image}`}
                                 alt={`Profile Pic ${index + 1}`}
-                                className={`${styles.profileImage} ${formData.profilePic === image ? styles.selectedImage : ''}`} // Apply selected class
+                                className={`${styles.profileImage} ${formData.profilePic === image ? styles.selectedImage : ''}`}
                                 onClick={() => handleImageSelect(image)}
                             />
                         ))}

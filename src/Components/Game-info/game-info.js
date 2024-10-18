@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { UserContext } from '../../util/UserContext'; // Import UserContext
-
+import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
 
 import styles from "./GameInfo.module.css";
@@ -10,7 +9,7 @@ const GameInfo = () => {
     const { gameId } = useParams();
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { userData, fetchUserData } = useContext(UserContext); // Use UserContext
+    const { userData, fetchUserData } = useContext(UserContext);
     const navigate = useNavigate();
 
     const apiKey = process.env.REACT_APP_API_KEY;
@@ -79,12 +78,11 @@ const GameInfo = () => {
     )).reduce((prev, curr) => [prev, ', ', curr]);
 
     const handleBuyClick = async () => {
-        // Add your logic for the "buy-game" button action here
-        if (userOwnsGame) return; // Prevent action if user already owns the game
+        if (userOwnsGame) return;
         //alert("You need to login first.");
         try {
             await MongoDbModel.purchaseGame(userData.username, -gameCost, game.name);
-            fetchUserData(); // Refresh user data
+            fetchUserData();
         } catch (error) {
             console.error('Failed to update user data:', error);
         }

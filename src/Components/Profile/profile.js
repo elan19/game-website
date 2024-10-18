@@ -140,7 +140,7 @@ const ProfileView = () => {
                     {currentComments.length > 0 ? (
                         currentComments.map((comment, index) => (
                             <div key={index} className={styles.comment}>
-                                <p>{comment[1]}</p> {/* Assuming comment[1] contains the comment text */}
+                                <p>{comment[1]}</p> {/* comment[1] contains the comment text */}
                                 <Link to={`/profile/${comment[0]}`} className={styles.commentProfileLink}>
                                     {comment[0]}
                                 </Link>
@@ -155,7 +155,7 @@ const ProfileView = () => {
                         <button onClick={handlePreviousPage} disabled={currentPage === 1}>
                             Previous
                         </button>
-                        <span>{`Page ${currentPage} of ${totalPages}`}</span>
+                        <span className={styles.pageSpan}>{`Page ${currentPage} of ${totalPages}`}</span>
                         <button onClick={handleNextPage} disabled={currentPage === totalPages}>
                             Next
                         </button>

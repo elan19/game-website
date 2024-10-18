@@ -5,14 +5,14 @@ import styles from "./Login.module.css";
 
 import MongoDbModel from '../../models/mongodb';
 import { AuthContext } from '../../util/AuthContext';
-import { UserContext } from '../../util/UserContext'; // Import UserContext
+import { UserContext } from '../../util/UserContext';
 
 const LoginForm = () => {
   const { isAuthenticated, username, login, logout } = useContext(AuthContext);
   const [formUsername, setFormUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // Error message state
-  const { fetchUserData, deleteUserData } = useContext(UserContext); // Use UserContext
+  const [errorMessage, setErrorMessage] = useState('');
+  const { fetchUserData, deleteUserData } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -33,12 +33,12 @@ const LoginForm = () => {
                 console.error("Error fetching user data:", error);
               });
           } else {
-            setErrorMessage("Incorrect username or password."); // Set error message
+            setErrorMessage("Incorrect username or password.");
           }
         })
         .catch(error => {
           console.error("Error logging in:", error);
-          setErrorMessage("Something went wrong. Please try again."); // Handle other errors
+          setErrorMessage("Something went wrong. Please try again.");
         });
     }
   };

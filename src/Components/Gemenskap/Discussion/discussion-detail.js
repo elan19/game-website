@@ -16,6 +16,7 @@ const DiscussionDetail = () => {
     const commentsPerPage = 10; // Set the number of comments per page
     const navigate = useNavigate(); 
 
+    // Fetch the discussion and comments for that discussion
     useEffect(() => {
         const fetchDiscussionDetails = async () => {
             setLoading(true);
@@ -32,6 +33,7 @@ const DiscussionDetail = () => {
         fetchDiscussionDetails();
     }, [discussionId]);
 
+    // Fetch the userData if needed
     useEffect(() => {
         const updateUserData = async () => {
             try {
@@ -132,28 +134,48 @@ const DiscussionDetail = () => {
             )}
             <p>{discussion.content}</p>
 
+            {/* Edit Discussion Button */}
+            {userData && discussion.author === userData.username && (
+                <button 
+                    className={styles.editButton} 
+                    onClick={() => navigate(`/gemenskap/discussions/${discussionId}/edit`)}
+                >
+                    Edit Discussion
+                </button>
+            )}
+
             <div className={styles.commentsSection}>
                 <h3>Comments</h3>
-                {currentComments.length > 0 ? (
-                    currentComments.map((comment, index) => {
-                        const formattedDate = new Date(comment.createdAt).toLocaleString();
-
-                        return (
-                            <div key={index} className={styles.comment}>
-                                <p>
-                                    <strong>
-                                        <Link className={styles.profileLink} to={`/profile/${comment.author}`}>
-                                            {comment.author}
-                                        </Link>
-                                    </strong>: {comment.content}
-                                </p>
-                                <p className={styles.italicFont}>{formattedDate}</p>
-                            </div>
-                        );
-                    })
+                
+                {/* Check if the discussion is private and the user is not the author */}
+                {discussion.private && discussion.author !== userData.username ? (
+                    <p className={styles.privateMessage}>
+                        This discussion is private. Only the author can comment.
+                    </p>
                 ) : (
-                    <p>No comments yet. Be the first to comment!</p>
+                    /* If not private, display comments */
+                    currentComments.length > 0 ? (
+                        currentComments.map((comment, index) => {
+                            const formattedDate = new Date(comment.createdAt).toLocaleString();
+
+                            return (
+                                <div key={index} className={styles.comment}>
+                                    <p>
+                                        <strong>
+                                            <Link className={styles.profileLink} to={`/profile/${comment.author}`}>
+                                                {comment.author}
+                                            </Link>
+                                        </strong>: {comment.content}
+                                    </p>
+                                    <p className={styles.italicFont}>{formattedDate}</p>
+                                </div>
+                            );
+                        })
+                    ) : (
+                        <p>No comments yet. Be the first to comment!</p>
+                    )
                 )}
+
 
                 {/* Pagination Controls */}
                 <div className={styles.pagination}>
@@ -175,7 +197,7 @@ const DiscussionDetail = () => {
                 </div>
             </div>
 
-            {userData && (
+            {userData && (!discussion.private || discussion.author === userData.username) && (
                 <div className={styles.commentFormContainer}>
                     <form onSubmit={handleCommentSubmit}>
                         <textarea

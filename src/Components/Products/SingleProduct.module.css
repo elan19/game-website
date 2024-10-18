@@ -47,8 +47,8 @@
 }
 
 .rightDiv {
-    --g: 2px;   /* the gap */
-    --s: 370px; /* the size */
+    --g: 2px;
+    --s: 370px;
 
     width: 45%;
     height: 370px;
@@ -104,8 +104,8 @@
 }
 
 .rightDivTwoImgs {
-    --g: 2px;   /* the gap */
-    --s: 370px; /* the size */
+    --g: 2px;
+    --s: 370px;
 
     width: 45%;
     height: 370px;

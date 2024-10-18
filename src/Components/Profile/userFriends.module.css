@@ -67,7 +67,6 @@
 }
 
 @media (max-width: 1500px) {
-    /* Ensure that the first item or items too close to the left side are handled */
     .profileCardContainer {
         left: 125px; /* Reset default positioning */
         right: 0;

@@ -3,7 +3,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../util/UserContext';
-import MongoDbModel from '../../../models/mongodb'; // Adjust this path as needed
+import MongoDbModel from '../../../models/mongodb';
 import styles from './CreateDiscussion.module.css';
 
 const CreateDiscussion = () => {
@@ -12,6 +12,7 @@ const CreateDiscussion = () => {
     const [content, setContent] = useState('');
     const [game, setGame] = useState('');
     const [genre, setGenre] = useState([]);
+    const [isPrivate, setIsPrivate] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -19,7 +20,7 @@ const CreateDiscussion = () => {
             await fetchUserData();
         };
     
-        if (!userData || !userData.email) { // Check for key properties to determine if userData is incomplete
+        if (!userData || !userData.email) {
             updateUserData();
         }
 
@@ -32,10 +33,10 @@ const CreateDiscussion = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const newDiscussion = { title, content, game, genre };
+        const newDiscussion = { title, content, game, genre, isPrivate };
         try {
-            await MongoDbModel.addDiscussion(newDiscussion, userData.username, userData.loginId); // Replace with your API or DB method
-            navigate('/gemenskap/discussion'); // Redirect to discussions page after creating the discussion
+            await MongoDbModel.addDiscussion(newDiscussion, userData.username, userData.loginId);
+            navigate('/gemenskap/discussion');
         } catch (error) {
             console.error('Error creating discussion:', error);
         }
@@ -68,8 +69,8 @@ const CreateDiscussion = () => {
                     value={game} 
                     onChange={(e) => setGame(e.target.value)} 
                 />
-                <label>Tags:</label>
-                <select multiple onChange={handleGenreChange}>
+                <label>Tags: <span className={styles.italic}>(Hold down CTRL to select multiple)</span></label>
+                <select multiple onChange={handleGenreChange} className={styles.multipleSelect}>
                     <option value="Action">Action</option>
                     <option value="Adventure">Adventure</option>
                     <option value="Shooter">Shooter</option>
@@ -82,6 +83,14 @@ const CreateDiscussion = () => {
                     <option value="Discussion">Discussion</option>
                     <option value="Info">Info</option>
                 </select>
+                <label>
+                <span>Private Discussion:</span>
+                    <input
+                        type="checkbox"
+                        checked={isPrivate}
+                        onChange={() => setIsPrivate(!isPrivate)}
+                    />
+                </label>
                 <button type="submit" className={styles.submitButton}>Create Discussion</button>
             </form>
         </div>

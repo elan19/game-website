@@ -6,7 +6,7 @@ import styles from './GemenskapList.module.css';
 
 const GemenskapList = () => {
     const [gemenskaps, setGemenskaps] = useState([]);
-    const navigate = useNavigate(); // Initialize useHistory for navigation
+    const navigate = useNavigate();
     const uploadKey = process.env.REACT_APP_UPLOADKEY;
     const secretUploadKey = process.env.REACT_APP_SECRETUPLOADKEY;
 
@@ -29,7 +29,7 @@ const GemenskapList = () => {
     }, [uploadKey, secretUploadKey]);
 
     const handleButtonClick = () => {
-        navigate('/gemenskap/camera'); // Use history.push to navigate to camera page
+        navigate('/gemenskap/camera');
     };
 
     return (

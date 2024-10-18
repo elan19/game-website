@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { UploadClient } from '@uploadcare/upload-client'; // Assuming you use the @uploadcare/upload-client package
+import { UploadClient } from '@uploadcare/upload-client';
 import styles from './Camera.module.css';
 
 const CameraComponent = () => {

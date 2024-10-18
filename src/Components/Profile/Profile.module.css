@@ -10,7 +10,6 @@
     margin-top: 20px;
 }
 
-/* Ensure the comment section is below any floated elements */
 .profileContainer::after {
     content: "";
     display: block;
@@ -106,7 +105,7 @@
     display: block;
 }
 
-/* Base styles for the link */
+
 .editProfileLink {
     width: 100px;
     height: 40px;
@@ -116,20 +115,18 @@
     border: 0;
     display: inline-block;
     cursor: pointer;
-    text-align: center; /* Center text horizontally */
-    line-height: 40px; /* Center text vertically */
-    color: white; /* Ensure text is visible on the background */
-    text-decoration: none; /* Remove underline from text */
-    transition: background-color 0.2s; /* Apply transition to the background color */
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
 }
 
-/* Hover effect for the link */
 .editProfileLink:hover {
     background-color: #384d66;
     text-decoration: none;
 }
 
-/* Ensure no text decoration on hover */
 .editProfileLink a {
     text-decoration: none;
     color: #ccc;
@@ -152,11 +149,11 @@
     border: 0;
     display: inline-block;
     cursor: pointer;
-    text-align: center; /* Center text horizontally */
-    line-height: 40px; /* Center text vertically */
-    color: white; /* Ensure text is visible on the background */
-    text-decoration: none; /* Remove underline from text */
-    transition: background-color 0.2s; /* Apply transition to the background color */
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
 }
 
 .notificationLink:hover {
@@ -182,11 +179,11 @@
     border: 0;
     display: inline-block;
     cursor: pointer;
-    text-align: center; /* Center text horizontally */
-    line-height: 40px; /* Center text vertically */
-    color: white; /* Ensure text is visible on the background */
-    text-decoration: none; /* Remove underline from text */
-    transition: background-color 0.2s; /* Apply transition to the background color */
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
     text-decoration: none;
 }
 
@@ -201,8 +198,6 @@
     margin-bottom: 25px;
     font-size: 20px;
     width: 100%;
-
-    /* Add these properties to handle long text */
     word-wrap: break-word;
     word-break: break-all; /* Break long words */
     overflow-wrap: break-word;
@@ -213,8 +208,6 @@
 .profileInfoDesc {
     margin-bottom: 25px;
     width: 100%;
-
-    /* Add these properties to handle long text */
     word-wrap: break-word;
     word-break: break-all; /* Break long words */
     overflow-wrap: break-word;
@@ -248,12 +241,10 @@
     color: #eee;
     border-radius: 5px;
     box-shadow: 2px 2px 5px black;
-
-    /* Add these properties to handle long text */
     word-wrap: break-word;
     word-break: break-all; /* Break long words */
     overflow-wrap: break-word;
-    hyphens: auto; /* Optional: adds hyphens if breaking words */
+    hyphens: auto; /* breaking words */
 }
 
 .commentProfileLink {
@@ -328,8 +319,6 @@
 .test {
     width: 100%;
     margin-bottom: 15px;
-
-    /* Add these properties to handle long text */
     word-wrap: break-word;
     word-break: break-all; /* Break long words */
     overflow-wrap: break-word;
@@ -337,6 +326,10 @@
 }
 
 .commentH2 {
+    color: #eee;
+}
+
+.pageSpan {
     color: #eee;
 }
 

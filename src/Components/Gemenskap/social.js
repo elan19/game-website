@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import styles from './Social.module.css'; // Ensure your CSS module is properly imported
-import MongoDbModel from '../../models/mongodb'; // Your MongoDB model
+import styles from './Social.module.css';
+import MongoDbModel from '../../models/mongodb';
 
 const Social = () => {
-    const [users, setUsers] = useState([]); // State to hold all users
-    const [searchTerm, setSearchTerm] = useState(''); // State to hold the search query
-    const [filteredUsers, setFilteredUsers] = useState([]); // State to hold filtered search results
-    const [error, setError] = useState(null); // State to track errors
+    const [users, setUsers] = useState([]);
+    const [searchTerm, setSearchTerm] = useState(''); 
+    const [filteredUsers, setFilteredUsers] = useState([]);
+    const [error, setError] = useState(null);
 
     // Fetch all users from MongoDB on component mount
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const allUsers = await MongoDbModel.getAllUsers(); // Fetch users from your backend
-                setUsers(allUsers); // Assuming the response is an array of user objects with 'username' field
+                const allUsers = await MongoDbModel.getAllUsers();
+                setUsers(allUsers);
             } catch (err) {
                 console.error('Failed to fetch users:', err);
                 setError('Failed to load users.');
@@ -41,7 +41,7 @@ const Social = () => {
     };
 
     if (error) {
-        return <p>{error}</p>; // Show error state
+        return <p>{error}</p>;
     }
 
     return (
@@ -52,7 +52,7 @@ const Social = () => {
                 placeholder="Search by username..."
                 value={searchTerm}
                 onChange={handleSearchChange}
-                className={styles.searchBar} // Add styling for the search bar
+                className={styles.searchBar}
             />
 
             <div className={styles.searchResults}>

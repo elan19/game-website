@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../util/UserContext';
-import styles from './MoneyModal.module.css'; // Create a CSS module for styling
-import MongoDbModel from '../../models/mongodb'; // Assumes this contains your MongoDB operations
+import styles from './MoneyModal.module.css';
+import MongoDbModel from '../../models/mongodb';
 
-const DAILY_REWARD_AMOUNT = 20; // Set the fixed reward amount
+const DAILY_REWARD_AMOUNT = 20; // Fixed reward amount
 
 const MoneyModal = ({ onClose, onAddMoney }) => {
     const { userData } = useContext(UserContext);
@@ -34,8 +34,8 @@ const MoneyModal = ({ onClose, onAddMoney }) => {
 
     const handleClaimReward = async () => {
 
-        onAddMoney(DAILY_REWARD_AMOUNT); // Award the fixed amount
-        onClose(); // Close the modal after claiming
+        onAddMoney(DAILY_REWARD_AMOUNT);
+        onClose();
     };
 
     return (

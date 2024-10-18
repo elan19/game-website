@@ -8,10 +8,10 @@ const RegisterForm = () => {
   const [formUsername, setFormUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
-  const [error, setError] = useState(null); // To track error messages
-  const [successMessage, setSuccessMessage] = useState(null); // To track success message
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
-  const navigate = useNavigate(); // useNavigate hook for redirection
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
@@ -48,15 +48,12 @@ const RegisterForm = () => {
       MongoDbModel.registerUser(user.username, user.password, user.email)
         .then(response => {
           if (response && response.result) {
-            // If registration is successful, set success message
             setSuccessMessage("Registration successful! Redirecting to login page...");
           } else {
-            // If registration failed, set the error message
             setError(response.error || "Registration failed");
           }
         })
         .catch(error => {
-          // Handle any error that occurs during registration
           console.error("Error registering:", error);
           setError("Error occurred during registration. Please try again.");
         });

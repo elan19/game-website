@@ -25,7 +25,7 @@ const DiscussionComp = () => {
             } catch (error) {
                 console.error('Error fetching discussions:', error);
             } finally {
-                setLoading(false); // Finish loading discussions
+                setLoading(false);
             }
         };
 
@@ -228,6 +228,9 @@ const DiscussionComp = () => {
                         </div>
                         <div className={styles.additionalInfo}>
                             <span>{discussion.comments ? discussion.comments.length : 0} Comments</span>
+                            {discussion.private && (
+                                <span className={styles.privateMessage}>Private discussion</span>
+                            )}
                             <span>Created: {new Date(discussion.createdAt).toLocaleDateString()}</span>
                         </div>
                     </div>

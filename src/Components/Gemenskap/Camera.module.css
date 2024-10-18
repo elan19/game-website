@@ -13,10 +13,10 @@
 }
 
 .previewImage {
-    max-width: 300px; /* Adjust the size as needed */
-    max-height: 300px; /* Adjust the size as needed */
-    object-fit: cover; /* Ensures the image is contained */
-    margin-top: 10px; /* Add some space above the preview */
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: cover;
+    margin-top: 10px;
 }
 
 .h2Camera {

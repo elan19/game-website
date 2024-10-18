@@ -21,7 +21,7 @@
     font-size: 1rem;
     line-height: 1.6;
     color: #dcdcdc;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 strong {
@@ -42,7 +42,7 @@ strong {
     border-radius: 5px;
     font-size: 0.9rem;
     color: #f0f0f0;
-    transition: background-color 0.3s, border 0.3s; /* Smooth transitions */
+    transition: background-color 0.3s, border 0.3s;
 }
 
 .genre:hover {
@@ -142,17 +142,33 @@ strong {
 .backButton {
     margin: 0;
     margin-bottom: 20px;
-    padding: 10px 20px; /* Add padding */
-    background-color: #213a4c; /* Change background color */
-    color: white; /* Change text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Add rounded corners */
-    cursor: pointer; /* Change cursor on hover */
+    padding: 10px 20px;
+    background-color: #213a4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     float: right;
 }
 
 .backButton:hover {
-    background-color: #0092bb; /* Darker shade on hover */
+    background-color: #0092bb;
+}
+
+.editButton {
+    margin: 0;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #213a4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+.editButton:hover {
+    background-color: #0092bb;
 }
 
 

@@ -31,6 +31,7 @@ import CameraView from './Views/Gemenskap/camera';
 import DiscussionView from './Views/Gemenskap/discussion';
 import CreateDiscussionView from './Views/Gemenskap/create-discussion';
 import DiscussionDetailiew from './Views/Gemenskap/discussion-detail';
+import EditDiscussionView from './Views/Gemenskap/edit-discussion';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -72,6 +73,7 @@ root.render(
                   <Route path="/gemenskap/discussions" element={<DiscussionView />} />
                   <Route path="/gemenskap/discussion/create-discussion" element={<CreateDiscussionView />} />
                   <Route path="/gemenskap/discussions/:discussionId" element={<DiscussionDetailiew />} />
+                  <Route path="/gemenskap/discussions/:discussionId/edit" element={<EditDiscussionView />} />
                 </Routes>
                 <Footer />
               </>

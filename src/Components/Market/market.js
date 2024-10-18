@@ -7,7 +7,7 @@ import defaultItemPic from '../../images/gamipo-logo.png';
 
 const MarketView = () => {
     const [marketItems, setMarketItems] = useState([]);
-    const [filteredItems, setFilteredItems] = useState([]); // For filtered items
+    const [filteredItems, setFilteredItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // Show 5 items per page
@@ -40,7 +40,7 @@ const MarketView = () => {
                 if (result.success) {
                     alert('Item purchased successfully');
                     setMarketItems(marketItems.filter(item => item._id !== marketItemId)); // Remove the purchased item from the UI
-                    setFilteredItems(filteredItems.filter(item => item._id !== marketItemId)); // Also update filtered items
+                    setFilteredItems(filteredItems.filter(item => item._id !== marketItemId));
                     await fetchUserData();
                 } else {
                     alert(result.error || 'Failed to purchase the item.');
@@ -51,10 +51,10 @@ const MarketView = () => {
         }
     };
 
-    // Pagination logic (same as before)
+    // Pagination logic
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem); // Use filteredItems for pagination
+    const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
 
     const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
 

@@ -300,6 +300,16 @@ const MongoDbModel = {
         }
     },
 
+    editDiscussion: async function editDiscussion(discussionId, updatedDiscussion, userN, loginId) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.editDiscussion(discussionId, updatedDiscussion, userN, loginId);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
+
     addCommentToDiscussion: async function addCommentToDiscussion(discussionId, commentData) {
         try {
             const user = await this.getCurrentUser();

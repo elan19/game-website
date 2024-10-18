@@ -2,9 +2,13 @@
     width: 60%;
     margin: 0 auto;
     padding: 20px;
-    background-color: #171a21;
+    background-color: #1e1e1e;
     border-radius: 8px;
     color: #eee;
+}
+
+.createDiscussionContainer h2 {
+    color: #61dafb;
 }
 
 .createDiscussionForm {
@@ -18,18 +22,20 @@
     padding: 10px;
     font-size: 1em;
     color: #eee;
-    background-color: #213a4c;
+    background-color: #2a2a2a;
     border: none;
     font-size: 14px;
+    border-radius: 8px;
 }
 
 .createDiscussionForm select {
     margin-bottom: 15px;
     padding: 10px;
     font-size: 1em;
-    background-color: #213a4c;
+    background-color: #2a2a2a;
     min-height: 150px;
     border: none;
+    color: #eee;
 }
 
 .createDiscussionForm select option {
@@ -41,7 +47,7 @@
 .submitButton {
     padding: 10px 20px;
     background-color: #3498db;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -54,17 +60,26 @@
 .backButton {
     margin: 0;
     margin-bottom: 20px;
-    padding: 10px 20px; /* Add padding */
-    background-color: #213a4c; /* Change background color */
-    color: white; /* Change text color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Add rounded corners */
-    cursor: pointer; /* Change cursor on hover */
+    padding: 10px 20px;
+    background-color: #213a4c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     float: right;
 }
 
 .backButton:hover {
-    background-color: #0092bb; /* Darker shade on hover */
+    background-color: #0092bb;
+}
+
+.italic {
+    font-style: italic;
+    font-size: 12px;
+}
+
+.createDiscussionForm label input {
+    margin-left: 5px;
 }
 
 @media (max-width: 667px) {
@@ -87,5 +102,9 @@
 
     .backButton {
         float: none;
+    }
+
+    .multipleSelect {
+        min-height: 50px;
     }
 }

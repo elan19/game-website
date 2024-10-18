@@ -1,46 +1,46 @@
 .discussionContainer {
     padding: 20px;
-    color: #f0f0f0; /* Light text */
+    color: #f0f0f0;
 }
 
 .discussionList {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Space between discussion items */
+    gap: 10px;
 }
 
 .discussionItem {
     padding: 15px;
     margin: 10px 0;
-    border: 1px solid #444; /* Border color */
-    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #444;
+    border-radius: 8px;
     background-color: #171a21;
-    cursor: pointer; /* Change cursor to pointer */
-    transition: background-color 0.3s; /* Smooth transitions */
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .discussionItem:hover {
-    background-color: #3a3a3a; /* Darker background on hover */
+    background-color: #3a3a3a;
 }
 
 .discussionItem h3 {
-    margin: 0 0 10px 0; /* Space below title */
-    font-size: 18px; /* Title font size */
+    margin: 0 0 10px 0;
+    font-size: 18px;
 }
 
 .discussionItem p {
-    margin: 0; /* Remove default margin */
-    font-size: 14px; /* Content font size */
+    margin: 0;
+    font-size: 14px;
 }
 
 .additionalInfo {
     display: inline-flex;
     width: 25%;
-    flex-direction: column; /* Stack items vertically */
-    align-items: flex-end; /* Align items to the right */
-    font-size: 0.9em; /* Adjust font size as needed */
-    color: #888; /* Change color to fit your theme */
-    margin-left: 15px; /* Space between content and additional info */
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.9em;
+    color: #888;
+    margin-left: 15px;
 }
 
 
@@ -54,22 +54,21 @@
 }
 
 .genre {
-    display: inline-block; /* Make genre inline */
-    padding: 6px 12px; /* Increase padding for a button-like feel */
-    background-color: #333; /* Background color for genre */
-    border-radius: 4px; /* Rounded corners for genre */
-    font-size: 14px; /* Slightly larger font size for better readability */
-    color: #f0f0f0; /* Light text */
-    margin-top: 10px; /* Space above genre label */
-    cursor: pointer; /* Change cursor to pointer */
-    transition: background-color 0.3s, border 0.3s; /* Smooth transitions */
-    border: 1px solid transparent; /* Add border for visual structure */
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #333;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #f0f0f0;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+    border: 1px solid transparent;
     margin-right: 5px;
 }
 
 .genre:hover {
-    background-color: #5c5c5c; /* Darker background on hover */
-    /*border: 1px solid #777; /* Add border on hover for emphasis */
+    background-color: #5c5c5c;
     border: 1px solid #61dafb;
     color: #61dafb;
 }
@@ -77,33 +76,33 @@
 .genre:active {
     background-color: #666;
     border: 1px solid #61dafb;
-    color: #61dafb; /* Darker background when clicked */
+    color: #61dafb;
 }
 
 .pagination {
     display: flex;
-    justify-content: center; /* Center the pagination controls */
-    margin-top: 20px; /* Space above pagination */
+    justify-content: center;
+    margin-top: 20px;
 }
 
 .pageButton {
-    padding: 10px 15px; /* Padding for pagination buttons */
-    margin: 0 5px; /* Space between buttons */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    background-color: #444; /* Button background color */
-    color: #fff; /* Button text color */
-    cursor: pointer; /* Change cursor to pointer */
-    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .pageButton:hover {
-    background-color: #555; /* Darker background on hover */
+    background-color: #555;
 }
 
 .pageButton:disabled {
-    background-color: #333; /* Disable button background */
-    cursor: not-allowed; /* Change cursor to not-allowed */
+    background-color: #333;
+    cursor: not-allowed;
 }
 
 .pageButton.active {
@@ -114,7 +113,7 @@
 .active {
     background-color: #777;
     border: 1px solid #61dafb;
-    color: #61dafb; /* Background color for active page */
+    color: #61dafb;
 }
 
 
@@ -171,23 +170,23 @@
 }
 
 .clearFilters {
-    background-color: #ff6b6b; /* Light red background */
-    color: #fff; /* White text */
-    border: none; /* Remove default border */
-    padding: 5px 5px; /* Padding for size */
-    border-radius: 5px; /* Rounded corners */
-    font-size: 14px; /* Font size */
-    font-weight: bold; /* Bold text */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease; /* Smooth transition */
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    padding: 5px 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .clearFilters:hover {
-    background-color: #e05656; /* Darker red on hover */
+    background-color: #e05656;
 }
 
 .clearFilters:active {
-    background-color: #c44545; /* Even darker red on click */
+    background-color: #c44545;
 }
 
 .searchCreateContainer {
@@ -270,7 +269,7 @@
     }
 
     .discussionItem {
-        height: auto; /* Allow height to be dynamic */
+        height: auto;
     }
 
     .discussionContainer {
@@ -278,8 +277,8 @@
     }
 
     .pageButton {
-        padding: 8px; /* Smaller padding for mobile */
-        font-size: 12px; /* Smaller font size for mobile */
+        padding: 8px;
+        font-size: 12px;
     }
 
     .createDiscussionContainer {

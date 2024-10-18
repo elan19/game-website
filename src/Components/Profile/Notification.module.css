@@ -30,7 +30,7 @@
 }
 
 .request:nth-child(even) {
-    background:  linear-gradient(to left, #384d66, #08182c);  /* Alternate background color */
+    background:  linear-gradient(to left, #384d66, #08182c);
 }
 
 .request p {

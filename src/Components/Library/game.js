@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useNavigate
-import possibleCards from './cards.js'; // Adjust path as needed
+import { useParams, useNavigate } from 'react-router-dom';
+import possibleCards from './cards.js';
 import styles from './GameSession.module.css';
-import { UserContext } from '../../util/UserContext'; // Import UserContext
+import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
 
 const rarityWeights = {
@@ -19,7 +19,7 @@ const GameSession = () => {
     const [lastCard, setLastCard] = useState(null);
     const [progress, setProgress] = useState(0);
     const { fetchUserData } = useContext(UserContext);
-    const navigate = useNavigate(); // Initialize useNavigate hook
+    const navigate = useNavigate();
 
     const totalInterval = 6 * 1000; // 6 seconds for testing (replace with 3 hours)
 

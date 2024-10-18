@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './GemenskapList.module.css'; // Assuming you have a CSS module for styling
+import styles from './GemenskapList.module.css';
 
 const SingleGemenskap = ({ gemenskap }) => {
     const date = new Date(gemenskap.datetimeUploaded);

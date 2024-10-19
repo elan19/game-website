@@ -9,7 +9,7 @@ const GameInfo = () => {
     const { gameId } = useParams();
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { userData, fetchUserData } = useContext(UserContext);
+    let { userData, fetchUserData } = useContext(UserContext);
     const navigate = useNavigate();
 
     const apiKey = process.env.REACT_APP_API_KEY;

@@ -12,8 +12,8 @@ const DiscussionDetail = () => {
     const [commentContent, setCommentContent] = useState(''); 
     const [loading, setLoading] = useState(true);
     const [loadingUserData, setLoadingUserData] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1); // State to track the current page
-    const commentsPerPage = 10; // Set the number of comments per page
+    const [currentPage, setCurrentPage] = useState(1);
+    const commentsPerPage = 10;
     const navigate = useNavigate(); 
 
     // Fetch the discussion and comments for that discussion
@@ -147,35 +147,27 @@ const DiscussionDetail = () => {
             <div className={styles.commentsSection}>
                 <h3>Comments</h3>
                 
-                {/* Check if the discussion is private and the user is not the author */}
-                {discussion.private && discussion.author !== userData.username ? (
-                    <p className={styles.privateMessage}>
-                        This discussion is private. Only the author can comment.
-                    </p>
+                {/* Display comments regardless of discussion privacy */}
+                {currentComments.length > 0 ? (
+                    currentComments.map((comment, index) => {
+                        const formattedDate = new Date(comment.createdAt).toLocaleString();
+
+                        return (
+                            <div key={index} className={styles.comment}>
+                                <p>
+                                    <strong>
+                                        <Link className={styles.profileLink} to={`/profile/${comment.author}`}>
+                                            {comment.author}
+                                        </Link>
+                                    </strong>: {comment.content}
+                                </p>
+                                <p className={styles.italicFont}>{formattedDate}</p>
+                            </div>
+                        );
+                    })
                 ) : (
-                    /* If not private, display comments */
-                    currentComments.length > 0 ? (
-                        currentComments.map((comment, index) => {
-                            const formattedDate = new Date(comment.createdAt).toLocaleString();
-
-                            return (
-                                <div key={index} className={styles.comment}>
-                                    <p>
-                                        <strong>
-                                            <Link className={styles.profileLink} to={`/profile/${comment.author}`}>
-                                                {comment.author}
-                                            </Link>
-                                        </strong>: {comment.content}
-                                    </p>
-                                    <p className={styles.italicFont}>{formattedDate}</p>
-                                </div>
-                            );
-                        })
-                    ) : (
-                        <p>No comments yet. Be the first to comment!</p>
-                    )
+                    <p>No comments yet. Be the first to comment!</p>
                 )}
-
 
                 {/* Pagination Controls */}
                 <div className={styles.pagination}>
@@ -197,7 +189,8 @@ const DiscussionDetail = () => {
                 </div>
             </div>
 
-            {userData && (!discussion.private || discussion.author === userData.username) && (
+            {/* Render comment form only if the user is the author of the discussion */}
+            {userData && discussion.author === userData.username && (
                 <div className={styles.commentFormContainer}>
                     <form onSubmit={handleCommentSubmit}>
                         <textarea

@@ -19,6 +19,7 @@ const Library = () => {
                 const username = localStorage.getItem('username');
 
                 const userGames = await MongoDbModel.getAllGamesFromUser(username);
+                console.log(userGames);
 
                 if (userGames.error) {
                     throw new Error(userGames.error);

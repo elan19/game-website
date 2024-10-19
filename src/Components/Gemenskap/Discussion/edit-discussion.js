@@ -82,8 +82,9 @@ const EditDiscussion = () => {
     }
 
     // Ensure only the author can edit the discussion
-    if (discussion.author !== userData.username) {
-        return <div>You are not authorized to edit this discussion.</div>;
+    if (userData && discussion.author !== userData.username) {
+        navigate('/gemenskap/discussions'); // Redirect immediately
+        return null; // Return null to avoid rendering anything else
     }
 
     return (

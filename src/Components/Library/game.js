@@ -18,7 +18,8 @@ const GameSession = () => {
     const [active, setActive] = useState(false);
     const [lastCard, setLastCard] = useState(null);
     const [progress, setProgress] = useState(0);
-    const { fetchUserData } = useContext(UserContext);
+    const { userData, fetchUserData } = useContext(UserContext);
+    const [loadingUserData, setLoadingUserData] = useState(true);
     const navigate = useNavigate();
 
     const totalInterval = 6 * 1000; // 6 seconds for testing (replace with 3 hours)
@@ -41,6 +42,23 @@ const GameSession = () => {
         return () => clearInterval(timerId); // Cleanup
     }, [active]);
 
+    useEffect(() => {
+        const updateUserData = async () => {
+            try {
+                setLoadingUserData(true); 
+                await fetchUserData(); 
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            } finally {
+                setLoadingUserData(false); 
+            }
+        };
+    
+        if (!userData?.email && !loadingUserData) {
+            updateUserData();
+        }
+    }, [userData, fetchUserData, loadingUserData]);
+
     const rewardCard = async () => {
         let adjustedGameId = gameId;
 
@@ -55,10 +73,7 @@ const GameSession = () => {
             setLastCard(randomCard.name);
 
             try {
-                const username = localStorage.getItem('username');
-                const loginId = localStorage.getItem('loginId');
-
-                await MongoDbModel.updateUserInventory(username, loginId, adjustedGameId, randomCard.name, randomCard.desc, randomCard.pic);
+                await MongoDbModel.updateUserInventory(userData.username, userData.loginId, adjustedGameId, randomCard.name, randomCard.desc, randomCard.pic);
 
                 await fetchUserData();
             } catch (error) {

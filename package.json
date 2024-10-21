@@ -18,9 +18,11 @@
     "react-scripts": "5.0.1",
     "realm-web": "^2.0.0",
     "uploadcare-widget": "^3.21.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "ws": "^8.18.0"
   },
   "scripts": {
+    "server": "node server.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

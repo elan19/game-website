@@ -5,13 +5,13 @@ import styles from './GameSession.module.css';
 import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
 
-const rarityWeights = {
+/*const rarityWeights = {
     common: 79.92,
     uncommon: 15.98,
     rare: 3.2,
     epic: 0.64,
     legendary: 0.26
-};
+};*/
 
 const GameSession = () => {
     const { gameId } = useParams();
@@ -59,7 +59,7 @@ const GameSession = () => {
         }
     }, [userData, fetchUserData, loadingUserData]);
 
-    const rewardCard = async () => {
+    /*const rewardCard = async () => {
         let adjustedGameId = gameId;
 
         if (!possibleCards[gameId]) {
@@ -80,9 +80,30 @@ const GameSession = () => {
                 console.error('Error updating inventory:', error);
             }
         }
+    };*/
+
+    const rewardCard = async () => {
+        let adjustedGameId = gameId;
+
+        if (!possibleCards[gameId]) {
+            adjustedGameId = 'Gamipo';
+        }
+
+        try {
+            const response = await MongoDbModel.rewardCard(userData.username, userData.loginId, adjustedGameId);
+            
+            if (response.success) {
+                setLastCard(response.card.name);
+                await fetchUserData(); // Update the user's inventory on the frontend
+            } else {
+                console.error('Error rewarding card:', response.error);
+            }
+        } catch (error) {
+            console.error('Error rewarding card:', error);
+        }
     };
 
-    const totalSlots = 1000;
+    /*const totalSlots = 1000;
 
     const calculateSlotsByRarity = () => {
         const slotsByRarity = {};
@@ -110,7 +131,7 @@ const GameSession = () => {
 
         const randomIndex = Math.floor(Math.random() * pool.length);
         return pool[randomIndex];
-    };
+    };*/
 
     const handleStartPlaying = () => {
         setActive(true);

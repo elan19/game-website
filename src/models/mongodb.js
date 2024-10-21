@@ -319,6 +319,16 @@ const MongoDbModel = {
             console.error(error);
         }
     },
+
+    rewardCard: async function rewardCard(username, loginId, gameId) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.rewardCard(username, loginId, gameId);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
     
 };
 

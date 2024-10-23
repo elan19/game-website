@@ -13,6 +13,8 @@ const client = new MongoClient(process.env.MONGODB_URL);
 
 const PORT = process.env.PORT || 4000;
 
+console.log(PORT);
+
 // Enable CORS
 app.use(cors({
     origin: 'https://gamipo.org', // Allow requests from your deployed React app's origin

@@ -16,6 +16,7 @@ const ChatView = () => {
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
     const navigate = useNavigate();
+    console.log(process.env.PORT);
 
     // Check if the logged-in user matches the username parameter
     const checkLoggedInUser = () => {

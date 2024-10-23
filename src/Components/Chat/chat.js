@@ -5,8 +5,8 @@ import { UserContext } from '../../util/UserContext';
 
 // Connect to the Socket.IO server
 const socket = io('https://game-platform-heroku-655c0a464d62.herokuapp.com/', {
-    transports: ['websocket', 'polling'],
-    withCredentials: true
+    transports: ['websocket'], // Use websockets if available
+    withCredentials: true // Include credentials if your server supports them
 });
 
 const ChatView = () => {
@@ -29,7 +29,6 @@ const ChatView = () => {
     useEffect(() => {
         console.log('Username:', username); // Log username
         console.log('Friend Name:', friendName); // Log friendName
-        console.log(process.env.PORT);
         
         // Sort the usernames to create a consistent chat room name
         const user1 = username < friendName ? username : friendName;

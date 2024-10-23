@@ -30,7 +30,7 @@
     "ws": "^8.18.0"
   },
   "scripts": {
-    "server": "node server.js",
+    "server": "node src/main.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

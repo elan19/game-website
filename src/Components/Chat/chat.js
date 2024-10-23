@@ -16,7 +16,6 @@ const ChatView = () => {
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
     const navigate = useNavigate();
-    console.log(process.env.PORT);
 
     // Check if the logged-in user matches the username parameter
     const checkLoggedInUser = () => {
@@ -30,6 +29,7 @@ const ChatView = () => {
     useEffect(() => {
         console.log('Username:', username); // Log username
         console.log('Friend Name:', friendName); // Log friendName
+        console.log(process.env.PORT);
         
         // Sort the usernames to create a consistent chat room name
         const user1 = username < friendName ? username : friendName;

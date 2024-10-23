@@ -17,7 +17,7 @@ console.log(PORT);
 
 // Enable CORS
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow requests from your deployed React app's origin
+    origin: 'https://gamipo.org/', // Allow requests from your deployed React app's origin
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true

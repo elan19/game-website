@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import ProfileCard from '../../util/ProfileCard.js';
 import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
-import styles from './userFriends.module.css'; // Assuming a CSS module for styling
+import styles from './userFriends.module.css';
 
 const UserFriends = () => {
     const { username } = useParams();
@@ -14,6 +14,7 @@ const UserFriends = () => {
     const [error, setError] = useState(null);
     const [hoveredFriend, setHoveredFriend] = useState(null);
     const loggedInUser = localStorage.getItem('username'); // Get the logged-in user's ID
+    const navigate = useNavigate(); // Initialize useNavigate
 
     useEffect(() => {
         const fetchFriends = async () => {
@@ -55,6 +56,12 @@ const UserFriends = () => {
         }
     };
 
+    const handleChatClick = (friendUsername) => {
+        const loggedInUsername = localStorage.getItem('username');
+        navigate(`/chat/${loggedInUsername}/${friendUsername}`); // Navigate to chat with usernames
+    };
+    
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -89,6 +96,14 @@ const UserFriends = () => {
                                 <span className={friend.status === "Online" ? styles.online : styles.offline}>
                                     {friend.status}
                                 </span>
+
+                                {/* Chat button to navigate to chat */}
+                                <button 
+                                    className={styles.chatButton} 
+                                    onClick={() => handleChatClick(friend.username)}
+                                >
+                                    Chat
+                                </button>
 
                                 {/* Only show the remove button if the logged-in user is viewing their own friends list */}
                                 {username === loggedInUser && (

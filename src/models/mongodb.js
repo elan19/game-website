@@ -329,6 +329,16 @@ const MongoDbModel = {
             console.error(error);
         }
     },
+
+    sendPrivateMessage: async function sendPrivateMessage(username, loginId, text) {
+        try {
+            const user = await this.getCurrentUser();
+            const response = await user.functions.sendPrivateMessage(username, loginId, text);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
+    },
     
 };
 

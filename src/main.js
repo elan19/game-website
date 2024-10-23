@@ -15,10 +15,10 @@ const PORT = process.env.PORT || 4000;
 
 // Enable CORS
 app.use(cors({
-    origin: 'https://game-platform-heroku-655c0a464d62.herokuapp.com', // Allow requests from your deployed React app's origin
+    origin: 'https://gamipo.org', // Allow requests from your deployed React app's origin
     methods: ['GET', 'POST'],
-    allowedHeaders: ['Content-Type'], // You can add more headers if needed
-    credentials: true // Allow credentials if needed
+    allowedHeaders: ['Content-Type'],
+    credentials: true
 }));
 
 var collection;

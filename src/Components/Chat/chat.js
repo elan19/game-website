@@ -9,6 +9,18 @@ const socket = io('https://game-platform-heroku-655c0a464d62.herokuapp.com/', {
     withCredentials: true // Include credentials if your server supports them
 });
 
+socket.on('connect', () => {
+    console.log('Connected to WebSocket server');
+});
+
+socket.on('connect_error', (error) => {
+    console.error('Connection Error:', error);
+});
+
+socket.on('disconnect', (reason) => {
+    console.log('Disconnected:', reason);
+});
+
 const ChatView = () => {
     const { username, friendName } = useParams(); // Extract usernames from the URL
     const { userData, fetchUserData } = useContext(UserContext);
@@ -29,6 +41,7 @@ const ChatView = () => {
     useEffect(() => {
         console.log('Username:', username); // Log username
         console.log('Friend Name:', friendName); // Log friendName
+        console.log(process.env.SERVER_PORT);
         
         // Sort the usernames to create a consistent chat room name
         const user1 = username < friendName ? username : friendName;

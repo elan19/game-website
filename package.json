@@ -32,7 +32,8 @@
   },
   "scripts": {
     "server": "node src/main.js",
-    "start": "react-scripts start",
+    "start": "npm run build && node src/main.js",
+    "frontend": "react-scripts start",
     "dev": "concurrently \"npm run server\" \"npm run start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",

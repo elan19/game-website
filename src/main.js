@@ -3,19 +3,17 @@ const express = require("express");
 const cors = require("cors");
 const http = require("http");
 const path = require("path");
-const { Server } = require("socket.io"); // Updated import for Socket.IO
+const { Server } = require("socket.io");
 const { MongoClient } = require("mongodb");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server); // Initialize Socket.IO with the server
+const io = new Server(server);
 const client = new MongoClient(process.env.MONGODB_URL, {
-    ssl: true,  // Enable SSL
+    ssl: true,
 });
 
-const PORT = process.env.SERVER_PORT || 4000;
-
-console.log(`Starting server on port: ${PORT}`);
+const PORT = process.env.PORT || 4000;
 
 // Enable CORS
 app.use(cors({
@@ -25,11 +23,19 @@ app.use(cors({
     credentials: true
 }));
 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+
+// All other GET requests redirect to the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 var collection;
 
 io.on("connection", (socket) => {
     socket.on("join", async ({ user1, user2 }) => {
-        const chatRoom = `${user1}-${user2}`; // Create a unique chat room name based on usernames
+        const chatRoom = `${user1}-${user2}`;
         try {
             let result = await collection.findOne({ "_id": chatRoom });
             if (!result) {
@@ -49,7 +55,7 @@ io.on("connection", (socket) => {
                 "messages": message
             }
         });
-        io.to(socket.activeRoom).emit("message", message); // Use 'io' instead of 'socketIo'
+        io.to(socket.activeRoom).emit("message", message);
     });
 });
 

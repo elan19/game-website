@@ -2,8 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import possibleCards from './cards.js';
 import styles from './GameSession.module.css';
-import { UserContext } from '../../util/UserContext';
-import MongoDbModel from '../../models/mongodb';
+import { UserContext } from '../../util/UserContext.js';
+import MongoDbModel from '../../models/mongodb.js';
 
 /*const rarityWeights = {
     common: 79.92,

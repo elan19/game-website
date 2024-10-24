@@ -31,9 +31,9 @@
     "ws": "^8.18.0"
   },
   "scripts": {
-    "server": "node src/main.js",
-    "start": "npm run build && node src/main.js",
-    "frontend": "react-scripts start",
+    "server": "node main.js",
+    "start": "react-scripts start",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",

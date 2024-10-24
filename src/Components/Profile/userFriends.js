@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import ProfileCard from '../../util/ProfileCard.js';
-import { UserContext } from '../../util/UserContext';
-import MongoDbModel from '../../models/mongodb';
+import { UserContext } from '../../util/UserContext.js';
+import MongoDbModel from '../../models/mongodb.js';
 import styles from './userFriends.module.css';
 
 const UserFriends = () => {

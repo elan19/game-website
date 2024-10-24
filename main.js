@@ -8,10 +8,7 @@ const { MongoClient } = require("mongodb");
 const app = express();
 const httpServer = require('http').createServer(app);
 const client = new MongoClient(process.env.MONGODB_URL, {
-    useNewUrlParser: true,      // Ensure correct URL parsing
-    useUnifiedTopology: true,   // Correct topology handling
-    tls: true,                  // Use TLS instead of SSL
-    tlsInsecure: false          // Ensure that the connection is secure
+    ssl: true,
 });
 
 const PORT = process.env.SERVER_PORT || 4000;
@@ -30,6 +27,14 @@ const io = require('socket.io')(httpServer, {
         origin: "*"
     },
     transports: ['websocket']
+});
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+
+// All other GET requests redirect to the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 var collection;

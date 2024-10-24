@@ -10,19 +10,16 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server); // Initialize Socket.IO with the server
 const client = new MongoClient(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
     ssl: true,  // Enable SSL
-    tlsAllowInvalidCertificates: true  // Allow self-signed certificates
 });
 
 const PORT = process.env.PORT || 4000;
 
-console.log(PORT);
+console.log(`Starting server on port: ${PORT}`);
 
 // Enable CORS
 app.use(cors({
-    origin: ['https://gamipo.org', 'https://game-platform-heroku-655c0a464d62.herokuapp.com'],
+    origin: '*',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true

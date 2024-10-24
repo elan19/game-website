@@ -9,18 +9,6 @@ const socket = io('https://gamipo.org', {
     withCredentials: true // Include credentials if your server supports them
 });
 
-socket.on('connect', () => {
-    console.log('Connected to WebSocket server');
-});
-
-socket.on('connect_error', (error) => {
-    console.error('Connection Error:', error);
-});
-
-socket.on('disconnect', (reason) => {
-    console.log('Disconnected:', reason);
-});
-
 const ChatView = () => {
     const { username, friendName } = useParams(); // Extract usernames from the URL
     const { userData, fetchUserData } = useContext(UserContext);

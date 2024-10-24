@@ -1,13 +1,12 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
-const http = require("http");
 const path = require("path");
-const { Server } = require("socket.io");
+
 const { MongoClient } = require("mongodb");
 
 const app = express();
-const server = http.createServer(app);
+const httpServer = require('http').createServer(app);
 const client = new MongoClient(process.env.MONGODB_URL, {
     ssl: true,
 });
@@ -23,20 +22,11 @@ app.use(cors({
 }));
 
 // Initialize Socket.IO
-const io = new Server(server, {
+const io = require('socket.io')(httpServer, {
     cors: {
-        origin: "https://gamipo.org",
-        methods: ["GET", "POST"],
-        credentials: true
-    }
-});
-
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
-
-// All other GET requests redirect to the React app
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+        origin: "*"
+    },
+    transports: ['websocket']
 });
 
 var collection;
@@ -68,7 +58,7 @@ io.on("connection", (socket) => {
     });
 });
 
-server.listen(PORT, async () => {
+httpServer.listen(PORT, async () => {
     try {
         await client.connect();
         collection = client.db("test").collection("chats");

@@ -13,7 +13,7 @@ const client = new MongoClient(process.env.MONGODB_URL, {
     ssl: true,  // Enable SSL
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.SERVER_PORT || 4000;
 
 console.log(`Starting server on port: ${PORT}`);
 

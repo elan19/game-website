@@ -33,7 +33,7 @@
   "scripts": {
     "server": "node main.js",
     "start": "react-scripts start",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
+    "heroku-postbuild": "npm install --prefix src && npm run build --prefix src",
     "dev": "concurrently \"npm run server\" \"npm run start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",

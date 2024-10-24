@@ -23,14 +23,6 @@ app.use(cors({
     credentials: true
 }));
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'build')));
-
-// All other GET requests redirect to the React app
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 var collection;
 
 io.on("connection", (socket) => {

@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import { UserContext } from '../../util/UserContext';
 
 // Connect to the Socket.IO server
-const socket = io('http://game-platform-heroku-655c0a464d62.herokuapp.com/', {
+const socket = io('http://gamipo.org', {
     transports: ['websocket'], // Use websockets if available
     withCredentials: true // Include credentials if your server supports them
 });

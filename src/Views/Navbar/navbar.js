@@ -79,7 +79,6 @@ const Navigation = () => {
                         <div
                             key={path}
                             className={`${styles.dropdownContainer} ${isMobile && dropdownOpen ? styles.dropdownContainerMobileOpen : ''}`}
-                            onClick={(e) => isMobile && handleDropdownToggle(e)}
                             onMouseEnter={() => !isMobile && setDropdownOpen(true)}
                             onMouseLeave={() => !isMobile && setDropdownOpen(false)}
                         >

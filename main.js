@@ -8,7 +8,6 @@ const { MongoClient } = require("mongodb");
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
 const client = new MongoClient(process.env.MONGODB_URL, {
     ssl: true,
 });
@@ -23,9 +22,27 @@ app.use(cors({
     credentials: true
 }));
 
+// Initialize Socket.IO
+const io = new Server(server, {
+    cors: {
+        origin: "https://gamipo.org",
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+
+// All other GET requests redirect to the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
 var collection;
 
 io.on("connection", (socket) => {
+    console.log("A user connected");
     socket.on("join", async ({ user1, user2 }) => {
         const chatRoom = `${user1}-${user2}`;
         try {

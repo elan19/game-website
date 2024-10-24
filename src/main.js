@@ -9,7 +9,12 @@ const { MongoClient } = require("mongodb");
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server); // Initialize Socket.IO with the server
-const client = new MongoClient(process.env.MONGODB_URL);
+const client = new MongoClient(process.env.MONGODB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true,  // Enable SSL
+    tlsAllowInvalidCertificates: true  // Allow self-signed certificates
+});
 
 const PORT = process.env.PORT || 4000;
 
@@ -49,11 +54,6 @@ io.on("connection", (socket) => {
         });
         io.to(socket.activeRoom).emit("message", message); // Use 'io' instead of 'socketIo'
     });
-});
-
-// Serve chat.html
-app.get("/chat", (req, res) => {
-    res.sendFile(path.join(__dirname, 'chat.html'));
 });
 
 server.listen(PORT, async () => {

@@ -1,29 +1,29 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
-const https = require("https");
+const http = require("http"); // Use 'http' instead of 'https'
 const path = require("path");
-const { Server } = require("socket.io"); // Updated import for Socket.IO
+const { Server } = require("socket.io");
 const { MongoClient } = require("mongodb");
 
 const app = express();
-const server = https.createServer(app);
+const server = http.createServer(app); // Use 'http' server
 const io = new Server(server); // Initialize Socket.IO with the server
 const client = new MongoClient(process.env.MONGODB_URL);
 
-const PORT = process.env.SERVER_PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 console.log(PORT);
 
 // Enable CORS
 app.use(cors({
-    origin: ['https://gamipo.org', 'https://game-platform-heroku-655c0a464d62.herokuapp.com'],
+    origin: '*',
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true
 }));
 
-var collection;
+let collection;
 
 io.on("connection", (socket) => {
     socket.on("join", async ({ user1, user2 }) => {
@@ -47,7 +47,7 @@ io.on("connection", (socket) => {
                 "messages": message
             }
         });
-        io.to(socket.activeRoom).emit("message", message); // Use 'io' instead of 'socketIo'
+        io.to(socket.activeRoom).emit("message", message);
     });
 });
 

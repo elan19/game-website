@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
+const http = require("http");
 const path = require("path");
-
+const { Server } = require("socket.io");
 const { MongoClient } = require("mongodb");
 
 const app = express();
-const httpServer = require('http').createServer(app);
+const server = http.createServer(app);
+const io = new Server(server);
 const client = new MongoClient(process.env.MONGODB_URL, {
     ssl: true,
 });
@@ -21,14 +23,6 @@ app.use(cors({
     credentials: true
 }));
 
-// Initialize Socket.IO
-const io = require('socket.io')(httpServer, {
-    cors: {
-        origin: "*"
-    },
-    transports: ['websocket']
-});
-
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -40,7 +34,6 @@ app.get('*', (req, res) => {
 var collection;
 
 io.on("connection", (socket) => {
-    console.log("A user connected");
     socket.on("join", async ({ user1, user2 }) => {
         const chatRoom = `${user1}-${user2}`;
         try {
@@ -66,7 +59,7 @@ io.on("connection", (socket) => {
     });
 });
 
-httpServer.listen(PORT, async () => {
+server.listen(PORT, async () => {
     try {
         await client.connect();
         collection = client.db("test").collection("chats");

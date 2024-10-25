@@ -70,8 +70,6 @@ const ChatView = () => {
         <div className={styles.container}>
             <div className={styles.header}>Chat with {friendName}</div>
             <div className={styles.messages}>
-                <p className={`${styles.receiver} ${styles.message}`}>Test</p>
-                <p className={`${styles.sender} ${styles.message}`}>Test</p>
                 {messages.map((msg, index) => (
                     <div
                         key={index}

@@ -6,7 +6,7 @@ import MongoDbModel from '../../models/mongodb'; // Import MongoDbModel
 import styles from './Chat.module.css'; // Import your styles
 
 // Connect to the Socket.IO server
-const socket = io('http://localhost:4000', {
+const socket = io('/', {
     transports: ['websocket'],
     withCredentials: true,
 });

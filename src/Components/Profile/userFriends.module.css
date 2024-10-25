@@ -51,6 +51,21 @@
     z-index: 10;
 }
 
+.chatButton {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: background-color 0.3s;
+}
+
+.chatButton:hover {
+    background-color: #0056b3; /* Darker shade for hover */
+}
+
 .removeButton {
     background: none;
     border: none;
@@ -60,6 +75,7 @@
     position: absolute;
     right: 0px;
     top: 10px;
+    z-index: 20;
 }
 
 .removeButton:hover {
@@ -68,7 +84,7 @@
 
 @media (max-width: 1500px) {
     .profileCardContainer {
-        left: 125px; /* Reset default positioning */
+        left: 200px; /* Reset default positioning */
         right: 0;
     }
 }
@@ -82,17 +98,23 @@
     .friend {
         width: 40%;
     }
+
+    .profileCardContainer {
+        left: 100%; /* Reset default positioning */
+        right: 0;
+    }
     
 }
 
-@media (max-width: 450px) {
+@media (max-width: 600px) {
     .friend {
         width: 100%;
     }
 
     .profileCardContainer {
-        left: 200px; /* Reset default positioning */
+        left: 0px; /* Reset default positioning */
         right: 0;
+        top: 50px;
     }
     
 }

@@ -1,49 +1,42 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useParams, useNavigate  } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import { UserContext } from '../../util/UserContext';
+import styles from './Chat.module.css'; // Import your styles
 
 // Connect to the Socket.IO server
 const socket = io('/', {
-    transports: ['websocket'], // Use websockets if available
-    withCredentials: true // Include credentials if your server supports them
+    transports: ['websocket'],
+    withCredentials: true,
 });
 
 const ChatView = () => {
-    const { username, friendName } = useParams(); // Extract usernames from the URL
+    const { username, friendName } = useParams();
     const { userData, fetchUserData } = useContext(UserContext);
     const [loading, setLoading] = useState(true);
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
     const navigate = useNavigate();
 
-    // Check if the logged-in user matches the username parameter
     const checkLoggedInUser = () => {
-        // Check if the friendName exists in the logged-in user's friends array
         if (!userData.friends.includes(friendName)) {
             alert('You cannot chat with this user.');
-            navigate('/profile'); // Redirect to a safe route
+            navigate('/profile');
         }
     };
 
     useEffect(() => {
-        console.log('Username:', username); // Log username
-        console.log('Friend Name:', friendName); // Log friendName
-        console.log(process.env.SERVER_PORT);
-        
-        // Sort the usernames to create a consistent chat room name
         const user1 = username < friendName ? username : friendName;
         const user2 = username < friendName ? friendName : username;
-    
-        const chatRoom = `${user1}-${user2}`; // Create a chat room name
-        socket.emit('join', { user1, user2 }); // Emit join event with sorted usernames
-    
+        const chatRoom = `${user1}-${user2}`;
+        socket.emit('join', { user1, user2 });
+
         socket.on('message', (message) => {
             setMessages(prevMessages => [...prevMessages, message]);
         });
-    
+
         return () => {
-            socket.off('message'); // Clean up the socket listener on unmount
+            socket.off('message');
         };
     }, [username, friendName]);
 
@@ -53,8 +46,8 @@ const ChatView = () => {
             await fetchUserData();
             setLoading(false);
         };
-    
-        if (!userData || !userData.email) { // Check for key properties to determine if userData is incomplete
+
+        if (!userData || !userData.email) {
             updateUserData();
         } else {
             setLoading(false);
@@ -64,10 +57,8 @@ const ChatView = () => {
 
     const sendMessage = () => {
         if (messageInput.trim()) {
-            // Pass senderId if applicable
-            console.log(messageInput);
-            socket.emit('message', { text: messageInput, sender: userData.username});
-            setMessageInput(''); // Clear the input field
+            socket.emit('message', { text: messageInput, sender: userData.username });
+            setMessageInput('');
         }
     };
 
@@ -76,23 +67,33 @@ const ChatView = () => {
     }
 
     return (
-        <div>
-            <h2>Chat with {friendName}</h2>
-            <div id="messages">
+        <div className={styles.container}>
+            <div className={styles.header}>Chat with {friendName}</div>
+            <div className={styles.messages}>
+                <p className={`${styles.receiver} ${styles.message}`}>Test</p>
+                <p className={`${styles.sender} ${styles.message}`}>Test</p>
                 {messages.map((msg, index) => (
-                    <p key={index}>{msg.sender}: {msg.text}</p>
+                    <div
+                        key={index}
+                        className={`${styles.message} ${msg.sender === userData.username ? styles.sender : styles.receiver}`}
+                    >
+                        
+                        {msg.sender}: {msg.text}
+                    </div>
                 ))}
             </div>
-            <input
-                type="text"
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-                placeholder="Type your message here..."
-            />
-            <button onClick={sendMessage}>Send</button>
+            <div className={styles.inputContainer}>
+                <input
+                    type="text"
+                    value={messageInput}
+                    onChange={(e) => setMessageInput(e.target.value)}
+                    placeholder="Type your message here..."
+                    className={styles.input}
+                />
+                <button onClick={sendMessage} className={styles.sendButton}>Send</button>
+            </div>
         </div>
     );
 };
 
 export default ChatView;
-

@@ -9,10 +9,27 @@
 }
 
 .header {
+  margin: 0;
+  padding: 0;
   margin-bottom: 20px;
-  font-size: 24px;
+  font-size: 1.5em;
   font-weight: bold;
   color: #eee;
+}
+
+.backButton {
+  margin: 0;
+  padding: 10px 20px;
+  background-color: #213a4c;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  float: right;
+}
+
+.backButton:hover {
+  background-color: #0092bb;
 }
 
 .messages {
@@ -29,6 +46,10 @@
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 5px;
+  word-wrap: break-word;
+  word-break: break-all; /* Break long words */
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .message.sender {
@@ -78,7 +99,6 @@
   width: 100%;
   margin: 0;
   height: 25px;
-  margin-right: 20px;
   margin-bottom: 10px;
   background-color: #007bff;
   color: white;
@@ -98,16 +118,20 @@
   .container {
     padding: 0px;
     height: 70vh;
-    padding-bottom: 20px;
+    padding-bottom: 15px;
   }
 
   .header {
-    text-align: center;
-    padding-top: 10px;
+    margin-left: 15px;
+    padding-top: 15px;
   }
 
   .sendButton {
     padding: 10px 40px;
     margin-right: 10px;
+  }
+
+  .backButton {
+    margin-right: 15px;
   }
 }

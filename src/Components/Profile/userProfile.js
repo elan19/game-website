@@ -173,7 +173,7 @@ const UserProfileView = () => {
                             <button onClick={handlePreviousPage} disabled={currentPage === 1}>
                                 Previous
                             </button>
-                            <span>{`Page ${currentPage} of ${totalPages}`}</span>
+                            <span className={styles.pageSpan}>{`Page ${currentPage} of ${totalPages}`}</span>
                             <button onClick={handleNextPage} disabled={currentPage === totalPages}>
                                 Next
                             </button>

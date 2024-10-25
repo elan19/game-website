@@ -2,8 +2,8 @@ import React, { useEffect, useContext, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import { UserContext } from '../../util/UserContext';
-import MongoDbModel from '../../models/mongodb'; // Import MongoDbModel
-import styles from './Chat.module.css'; // Import your styles
+import MongoDbModel from '../../models/mongodb';
+import styles from './Chat.module.css';
 
 // Connect to the Socket.IO server
 const socket = io('/', {
@@ -17,8 +17,8 @@ const ChatView = () => {
     const [loading, setLoading] = useState(true);
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
-    const [displayCount, setDisplayCount] = useState(5); // Track how many messages to display
-    const messagesEndRef = useRef(null); // Ref for scrolling to the bottom
+    const [displayCount, setDisplayCount] = useState(5);
+    const messagesEndRef = useRef(null);
     const navigate = useNavigate();
 
     const checkLoggedInUser = () => {
@@ -34,7 +34,7 @@ const ChatView = () => {
 
         socket.on('message', (message) => {
             setMessages(prevMessages => [...prevMessages, message]);
-            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); // Scroll to bottom on new message
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
         });
 
         return () => {
@@ -61,7 +61,7 @@ const ChatView = () => {
         } else {
             setLoading(false);
             checkLoggedInUser();
-            fetchMessages(); // Fetch earlier messages here
+            fetchMessages();
         }
     }, [userData, fetchUserData]);
 
@@ -73,7 +73,7 @@ const ChatView = () => {
     };
 
     const loadMoreMessages = () => {
-        setDisplayCount(prevCount => Math.min(prevCount + 5, messages.length)); // Increase display count
+        setDisplayCount(prevCount => Math.min(prevCount + 5, messages.length));
     };
 
     if (loading) {
@@ -82,12 +82,17 @@ const ChatView = () => {
 
     return (
         <div className={styles.container}>
-            <div className={styles.header}>Chat with {friendName}</div>
+            <div className={styles.header}>
+                <button onClick={() => navigate(`/profile/${userData.username}/friends`)} className={styles.backButton}>
+                    Back to Friend List
+                </button>
+                Chat with {friendName}
+            </div>
             <div className={styles.messages}>
                 {displayCount < messages.length && (
-                <button onClick={loadMoreMessages} className={styles.showMoreButton}>
-                    Show More
-                </button>
+                    <button onClick={loadMoreMessages} className={styles.showMoreButton}>
+                        Show More
+                    </button>
                 )}
                 {messages.slice(-displayCount).map((msg, index) => (
                     <div
@@ -97,7 +102,7 @@ const ChatView = () => {
                         {msg.sender}: {msg.text}
                     </div>
                 ))}
-                <div ref={messagesEndRef} /> {/* For scrolling to the bottom */}
+                <div ref={messagesEndRef} />
             </div>
             
             <div className={styles.inputContainer}>

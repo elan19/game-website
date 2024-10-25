@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import ProfileCard from '../../util/ProfileCard.js';
 import { UserContext } from '../../util/UserContext.js';
 import MongoDbModel from '../../models/mongodb.js';
@@ -9,25 +9,22 @@ const UserFriends = () => {
     const { username } = useParams();
     const { fetchUserData } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
-    const [friendsData, setFriendsData] = useState([]); // New state for preloaded friends data
+    const [friendsData, setFriendsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [hoveredFriend, setHoveredFriend] = useState(null);
-    const loggedInUser = localStorage.getItem('username'); // Get the logged-in user's ID
-    const navigate = useNavigate(); // Initialize useNavigate
+    const loggedInUser = localStorage.getItem('username');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchFriends = async () => {
             try {
                 const friendsList = await MongoDbModel.getUserFriends(username);
-
-                // Preload all friends' profile data
                 const friendsData = await Promise.all(
                     friendsList.friends.map(friend => MongoDbModel.getUserProfile(friend.username))
                 );
-
                 setFriends(friendsList.friends);
-                setFriendsData(friendsData); // Store all the friends' data
+                setFriendsData(friendsData);
                 setLoading(false);
             } catch (err) {
                 console.error("Failed to fetch friends", err);
@@ -43,10 +40,7 @@ const UserFriends = () => {
         const confirmed = window.confirm(`Do you really want to remove ${friendUsername} as your friend?`);
         if (confirmed) {
             try {
-                // Call backend to remove the friend
                 await MongoDbModel.removeFriend(username, localStorage.getItem('loginId'), friendUsername);
-                
-                // Update the local state after removing the friend
                 setFriends(friends.filter(friend => friend.username !== friendUsername));
                 setFriendsData(friendsData.filter(friendData => friendData.username !== friendUsername));
                 fetchUserData();
@@ -58,9 +52,12 @@ const UserFriends = () => {
 
     const handleChatClick = (friendUsername) => {
         const loggedInUsername = localStorage.getItem('username');
-        navigate(`/chat/${loggedInUsername}/${friendUsername}`); // Navigate to chat with usernames
+        navigate(`/chat/${loggedInUsername}/${friendUsername}`);
     };
-    
+
+    const handleBackToProfile = () => {
+        navigate(`/profile/${username}`);
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -72,7 +69,11 @@ const UserFriends = () => {
 
     return (
         <div className={styles.container}>
+            
             <h1>{username}'s Friends</h1>
+            <button onClick={handleBackToProfile} className={styles.backButton}>
+                &larr; Back to Profile
+            </button>
             {friends.length > 0 ? (
                 <ul className={styles.friendList}>
                     {friends.map((friend, index) => (
@@ -88,7 +89,6 @@ const UserFriends = () => {
 
                                 {hoveredFriend === friend.username && (
                                     <div className={styles.profileCardContainer}>
-                                        {/* Pass preloaded friend data to ProfileCard */}
                                         <ProfileCard user={friendsData.find(f => f.username === friend.username)} />
                                     </div>
                                 )}
@@ -97,7 +97,6 @@ const UserFriends = () => {
                                     {friend.status}
                                 </span>
 
-                                {/* Chat button to navigate to chat */}
                                 <button 
                                     className={styles.chatButton} 
                                     onClick={() => handleChatClick(friend.username)}
@@ -105,13 +104,12 @@ const UserFriends = () => {
                                     Chat
                                 </button>
 
-                                {/* Only show the remove button if the logged-in user is viewing their own friends list */}
                                 {username === loggedInUser && (
                                     <button 
                                         className={styles.removeButton} 
                                         onClick={() => handleRemoveFriend(friend.username)}
                                     >
-                                        &#x2716; {/* Unicode for 'X' symbol */}
+                                        &#x2716;
                                     </button>
                                 )}
                             </div>

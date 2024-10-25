@@ -83,7 +83,9 @@ const OtherUserInventoryView = () => {
                         </button>
                     ))
                 ) : (
-                    <div>No games found for this user.</div>
+                    <div className={styles.noGames}>
+                        <p>No games or items found.</p>
+                    </div>
                 )}
             </div>
 

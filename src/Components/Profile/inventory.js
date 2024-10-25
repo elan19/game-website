@@ -126,7 +126,7 @@ const InventoryView = () => {
                 ) : (
                     <div className={styles.noGames}>
                         <p>No games or items found.</p>
-                        </div>
+                    </div>
                 )}
             </div>
 

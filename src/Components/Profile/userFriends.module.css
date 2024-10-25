@@ -1,6 +1,9 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    height: 85vh;
     padding: 20px;
-}
+  }
 
 .container h1 {
     color: #eee;
@@ -81,6 +84,22 @@
 .removeButton:hover {
     color: darkred;
 }
+
+.backButton {
+    width: 200px;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #213a4c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  .backButton:hover {
+    background-color: #0092bb;
+  }
 
 @media (max-width: 1500px) {
     .profileCardContainer {

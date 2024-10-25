@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://cloudconvert.com/
+HostUrl=https://eu-central.storage.cloudconvert.com/tasks/9d54b2c6-9343-4a15-965e-f5dcf86203b0/sticker-capsule_csgo.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20241025%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20241025T194433Z&X-Amz-Expires=86400&X-Amz-Signature=602fe09364e9bd8abf7c17efd78091663bd8359456f16c6df72c6ea3207b33ee&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22sticker-capsule_csgo.webp%22&response-content-type=image%2Fwebp&x-id=GetObject

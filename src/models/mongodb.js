@@ -339,6 +339,17 @@ const MongoDbModel = {
             console.error(error);
         }
     },
+
+    getMessages: async function getMessages(user1, user2) {
+        try {
+            const user = await this.getCurrentUser();
+            console.log(user1, user2);
+            const response = await user.functions.getMessages(user1, user2);
+            return response;
+        } catch (error) {
+            console.error("Error fetching messages:", error);
+        }
+    },
     
 };
 

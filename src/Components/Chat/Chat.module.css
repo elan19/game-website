@@ -74,6 +74,24 @@
   background-color: #0056b3;
 }
 
+.showMoreButton {
+  width: 100%;
+  margin: 0;
+  height: 25px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.showMoreButton:hover {
+  background-color: #0056b3;
+}
+
 
 
 @media (max-width: 450px) {

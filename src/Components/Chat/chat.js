@@ -1,11 +1,12 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import io from 'socket.io-client';
 import { UserContext } from '../../util/UserContext';
+import MongoDbModel from '../../models/mongodb'; // Import MongoDbModel
 import styles from './Chat.module.css'; // Import your styles
 
 // Connect to the Socket.IO server
-const socket = io('/', {
+const socket = io('http://localhost:4000', {
     transports: ['websocket'],
     withCredentials: true,
 });
@@ -16,11 +17,12 @@ const ChatView = () => {
     const [loading, setLoading] = useState(true);
     const [messages, setMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
+    const [displayCount, setDisplayCount] = useState(5); // Track how many messages to display
+    const messagesEndRef = useRef(null); // Ref for scrolling to the bottom
     const navigate = useNavigate();
 
     const checkLoggedInUser = () => {
         if (!userData.friends.includes(friendName)) {
-            alert('You cannot chat with this user.');
             navigate('/profile');
         }
     };
@@ -28,11 +30,11 @@ const ChatView = () => {
     useEffect(() => {
         const user1 = username < friendName ? username : friendName;
         const user2 = username < friendName ? friendName : username;
-        const chatRoom = `${user1}-${user2}`;
         socket.emit('join', { user1, user2 });
 
         socket.on('message', (message) => {
             setMessages(prevMessages => [...prevMessages, message]);
+            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" }); // Scroll to bottom on new message
         });
 
         return () => {
@@ -47,11 +49,19 @@ const ChatView = () => {
             setLoading(false);
         };
 
+        const fetchMessages = async () => {
+            const user1 = username < friendName ? username : friendName;
+            const user2 = username < friendName ? friendName : username;
+            const fetchedMessages = await MongoDbModel.getMessages(user1, user2);
+            setMessages(fetchedMessages);
+        };
+
         if (!userData || !userData.email) {
             updateUserData();
         } else {
             setLoading(false);
             checkLoggedInUser();
+            fetchMessages(); // Fetch earlier messages here
         }
     }, [userData, fetchUserData]);
 
@@ -62,6 +72,10 @@ const ChatView = () => {
         }
     };
 
+    const loadMoreMessages = () => {
+        setDisplayCount(prevCount => Math.min(prevCount + 5, messages.length)); // Increase display count
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -70,16 +84,22 @@ const ChatView = () => {
         <div className={styles.container}>
             <div className={styles.header}>Chat with {friendName}</div>
             <div className={styles.messages}>
-                {messages.map((msg, index) => (
+                {displayCount < messages.length && (
+                <button onClick={loadMoreMessages} className={styles.showMoreButton}>
+                    Show More
+                </button>
+                )}
+                {messages.slice(-displayCount).map((msg, index) => (
                     <div
                         key={index}
                         className={`${styles.message} ${msg.sender === userData.username ? styles.sender : styles.receiver}`}
                     >
-                        
                         {msg.sender}: {msg.text}
                     </div>
                 ))}
+                <div ref={messagesEndRef} /> {/* For scrolling to the bottom */}
             </div>
+            
             <div className={styles.inputContainer}>
                 <input
                     type="text"

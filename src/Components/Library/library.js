@@ -5,27 +5,23 @@ import { useNavigate } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
 
 const Library = () => {
-    // State to hold the list of games and the selected game
     const [games, setGames] = useState([]);
     const [selectedGame, setSelectedGame] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Track if device is mobile
     const navigate = useNavigate();
 
-    // Fetch user's games when component mounts
     useEffect(() => {
         const fetchGames = async () => {
             try {
                 const username = localStorage.getItem('username');
-
                 const userGames = await MongoDbModel.getAllGamesFromUser(username);
-                console.log(userGames);
 
                 if (userGames.error) {
                     throw new Error(userGames.error);
                 }
 
-                // Set the games if they exist in the response
                 setGames(userGames.games || []);
             } catch (err) {
                 setError(err.message);
@@ -35,9 +31,15 @@ const Library = () => {
         };
 
         fetchGames();
+
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Handler for selecting a game from the list
     const handleGameClick = (game) => {
         setSelectedGame(game);
     };
@@ -67,6 +69,14 @@ const Library = () => {
                                 onClick={() => handleGameClick(game)}
                             >
                                 {game}
+                                {isMobile && selectedGame === game && (
+                                    <button 
+                                        className={styles.playButtonMobile}
+                                        onClick={() => handlePlayClick(game)}
+                                    >
+                                        Play
+                                    </button>
+                                )}
                             </li>
                         ))}
                     </ul>
@@ -75,23 +85,24 @@ const Library = () => {
                 )}
             </div>
 
-            <div className={styles.gameDetails}>
-                {selectedGame ? (
-                    <div>
-                        <h2>{selectedGame}</h2>
-                        <button 
-                            className={styles.playButton}
-                            onClick={() => handlePlayClick(selectedGame)}
-                        >
-                            Play
-                        </button>
-                    </div>
-                ) : (
-                    <p>Please select a game to view details</p>
-                )}
-            </div>
+            {!isMobile && (
+                <div className={styles.gameDetails}>
+                    {selectedGame ? (
+                        <div>
+                            <h2>{selectedGame}</h2>
+                            <button 
+                                className={styles.playButton}
+                                onClick={() => handlePlayClick(selectedGame)}
+                            >
+                                Play
+                            </button>
+                        </div>
+                    ) : (
+                        <p>Please select a game to view details</p>
+                    )}
+                </div>
+            )}
         </div>
-
     );
 };
 

@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://cloudconvert.com/
+HostUrl=https://eu-central.storage.cloudconvert.com/tasks/6a3b6267-a35e-405a-8974-09ba68b8b4b7/the-barren-crown_dota2.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20241025%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20241025T194433Z&X-Amz-Expires=86400&X-Amz-Signature=b0d051a3f84728530019b39fc0ad133eca250b09c58d437d5b5d5dd8994cd24b&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22the-barren-crown_dota2.webp%22&response-content-type=image%2Fwebp&x-id=GetObject

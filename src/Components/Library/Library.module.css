@@ -1,3 +1,5 @@
+/* Existing CSS */
+
 .libraryContainer {
     display: flex;
     flex-direction: row;
@@ -33,6 +35,10 @@
     border-bottom: 1px solid #394b59;
     font-size: 1.2em;
     transition: background-color 0.2s ease;
+    position: relative;
+    display: flex; /* Ensures flex layout on all screen sizes */
+    align-items: center;
+    justify-content: space-between;
 }
 
 .gameItem:hover {
@@ -70,4 +76,43 @@
 
 .playButton:hover {
     background-color: #4cae4c;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .libraryContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gameList {
+        width: 100%;
+        border: none;
+        padding: 0;
+    }
+
+    .gameDetails {
+        display: none; /* Hide the game details section on mobile */
+    }
+
+    .gameItem {
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .playButtonMobile {
+        margin-left: auto;
+        padding: 8px 20px;
+        background-color: #5cb85c;
+        color: white;
+        font-size: 1em;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .playButtonMobile:hover {
+        background-color: #4cae4c;
+    }
 }

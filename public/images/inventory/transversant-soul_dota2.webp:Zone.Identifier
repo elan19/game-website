@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://cloudconvert.com/
+HostUrl=https://eu-central.storage.cloudconvert.com/tasks/eff41990-f894-4051-b332-ae33391348dc/transversant-soul_dota2.webp?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20241025%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20241025T194433Z&X-Amz-Expires=86400&X-Amz-Signature=9ae4748dea74663c2177ec0e2c39248e985d1705e3220f9981a2b9b6bdae5644&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22transversant-soul_dota2.webp%22&response-content-type=image%2Fwebp&x-id=GetObject

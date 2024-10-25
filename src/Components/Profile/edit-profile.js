@@ -6,15 +6,15 @@ import styles from './EditProfile.module.css';
 import { UserContext } from '../../util/UserContext';
 
 const profileImages = [
-    'profile1.jpg',
-    'profile2.jpg',
-    'profile3.jpg',
-    'profile4.jpg',
-    'profile5.jpg',
-    'profile6.jpg',
-    'profile7.jpg',
-    'profile8.jpg',
-    'profile9.jpg',
+    'profile1.webp',
+    'profile2.webp',
+    'profile3.webp',
+    'profile4.webp',
+    'profile5.webp',
+    'profile6.webp',
+    'profile7.webp',
+    'profile8.webp',
+    'profile9.webp',
 ];
 
 const EditProfile = () => {

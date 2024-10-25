@@ -10,7 +10,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 const client = new MongoClient(process.env.MONGODB_URL, {
-    ssl: true,
+    tls: true,
 });
 
 const PORT = process.env.PORT || 4000;

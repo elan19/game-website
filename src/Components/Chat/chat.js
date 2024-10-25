@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import { UserContext } from '../../util/UserContext';
 
 // Connect to the Socket.IO server
-const socket = io('https://gamipo.org', {
+const socket = io('/', {
     transports: ['websocket'], // Use websockets if available
     withCredentials: true // Include credentials if your server supports them
 });

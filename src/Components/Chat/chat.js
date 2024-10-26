@@ -5,7 +5,6 @@ import { UserContext } from '../../util/UserContext';
 import MongoDbModel from '../../models/mongodb';
 import styles from './Chat.module.css';
 
-// Connect to the Socket.IO server
 const socket = io('/', {
     transports: ['websocket'],
     withCredentials: true,
@@ -22,25 +21,34 @@ const ChatView = () => {
     const navigate = useNavigate();
 
     const checkLoggedInUser = () => {
-        if (!userData.friends.includes(friendName)) {
+        if (!userData.friends?.includes(friendName)) {
             navigate('/profile');
         }
     };
 
+    // Redirects if userData becomes null due to logout
     useEffect(() => {
-        const user1 = username < friendName ? username : friendName;
-        const user2 = username < friendName ? friendName : username;
-        socket.emit('join', { user1, user2 });
+        if (userData === null) {
+            navigate('/login');
+        }
+    }, [userData, navigate]);
 
-        socket.on('message', (message) => {
-            setMessages(prevMessages => [...prevMessages, message]);
-            messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-        });
+    useEffect(() => {
+        if (userData) {
+            const user1 = username < friendName ? username : friendName;
+            const user2 = username < friendName ? friendName : username;
+            socket.emit('join', { user1, user2 });
 
-        return () => {
-            socket.off('message');
-        };
-    }, [username, friendName]);
+            socket.on('message', (message) => {
+                setMessages(prevMessages => [...prevMessages, message]);
+                messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+            });
+
+            return () => {
+                socket.off('message');
+            };
+        }
+    }, [username, friendName, userData]);
 
     useEffect(() => {
         const updateUserData = async () => {
@@ -50,10 +58,12 @@ const ChatView = () => {
         };
 
         const fetchMessages = async () => {
-            const user1 = username < friendName ? username : friendName;
-            const user2 = username < friendName ? friendName : username;
-            const fetchedMessages = await MongoDbModel.getMessages(user1, user2);
-            setMessages(fetchedMessages);
+            if (userData) {
+                const user1 = username < friendName ? username : friendName;
+                const user2 = username < friendName ? friendName : username;
+                const fetchedMessages = await MongoDbModel.getMessages(user1, user2);
+                setMessages(fetchedMessages);
+            }
         };
 
         if (!userData || !userData.email) {
@@ -63,10 +73,10 @@ const ChatView = () => {
             checkLoggedInUser();
             fetchMessages();
         }
-    }, [userData, fetchUserData]);
+    }, [userData, fetchUserData, friendName, username]);
 
     const sendMessage = () => {
-        if (messageInput.trim()) {
+        if (userData && messageInput.trim()) {
             socket.emit('message', { text: messageInput, sender: userData.username });
             setMessageInput('');
         }
@@ -76,7 +86,7 @@ const ChatView = () => {
         setDisplayCount(prevCount => Math.min(prevCount + 5, messages.length));
     };
 
-    if (loading) {
+    if (loading || !userData) {
         return <div>Loading...</div>;
     }
 

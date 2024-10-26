@@ -29,6 +29,7 @@
     background-color: #171a21;
     width: 200px;
     margin-right: 25px;
+    margin-bottom: 10px;
 }
 
 .friendLink {
@@ -50,12 +51,12 @@
     position: absolute;
     display: flex;
     top: 0;
-    left: -150px; /* Adjust as needed to position it to the left */
+    left: -150px; /* Adjust to the left */
     z-index: 10;
 }
 
 .chatButton {
-    background-color: #007bff; /* Bootstrap primary color */
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -66,7 +67,7 @@
 }
 
 .chatButton:hover {
-    background-color: #0056b3; /* Darker shade for hover */
+    background-color: #0056b3;
 }
 
 .removeButton {
@@ -103,7 +104,7 @@
 
 @media (max-width: 1500px) {
     .profileCardContainer {
-        left: 200px; /* Reset default positioning */
+        left: 200px;
         right: 0;
     }
 }
@@ -119,7 +120,7 @@
     }
 
     .profileCardContainer {
-        left: 100%; /* Reset default positioning */
+        left: 100%;
         right: 0;
     }
     
@@ -131,7 +132,7 @@
     }
 
     .profileCardContainer {
-        left: 0px; /* Reset default positioning */
+        left: 0px;
         right: 0;
         top: 50px;
     }

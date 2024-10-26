@@ -1,4 +1,4 @@
-/* chatView.module.css */
+/* Chat.module.css */
 
 .container {
   display: flex;
@@ -47,7 +47,7 @@
   padding: 5px;
   border-radius: 5px;
   word-wrap: break-word;
-  word-break: break-all; /* Break long words */
+  word-break: break-all;
   overflow-wrap: break-word;
   hyphens: auto;
 }
@@ -133,5 +133,18 @@
 
   .backButton {
     margin-right: 15px;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .input {
+    flex-grow: 0;
+    width: 70%;
+  }
+  .sendButton {
+    padding: 10px 2%;
+    width: 25%;
+    margin-right: 10px;
   }
 }

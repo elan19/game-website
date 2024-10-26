@@ -187,7 +187,6 @@
     text-decoration: none;
 }
 
-/* Hover effect for the link */
 .addMoneyButton:hover {
     background-color: #384d66;
     text-decoration: none;
@@ -199,9 +198,9 @@
     font-size: 20px;
     width: 100%;
     word-wrap: break-word;
-    word-break: break-all; /* Break long words */
+    word-break: break-all;
     overflow-wrap: break-word;
-    hyphens: auto; /* Optional: adds hyphens if breaking words */
+    hyphens: auto;
 }
 
 
@@ -209,9 +208,9 @@
     margin-bottom: 25px;
     width: 100%;
     word-wrap: break-word;
-    word-break: break-all; /* Break long words */
+    word-break: break-all;
     overflow-wrap: break-word;
-    hyphens: auto; /* Optional: adds hyphens if breaking words */
+    hyphens: auto;
 }
 
 
@@ -320,9 +319,9 @@
     width: 100%;
     margin-bottom: 15px;
     word-wrap: break-word;
-    word-break: break-all; /* Break long words */
+    word-break: break-all;
     overflow-wrap: break-word;
-    hyphens: auto; /* Optional: adds hyphens if breaking words */
+    hyphens: auto;
 }
 
 .commentH2 {

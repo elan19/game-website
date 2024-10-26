@@ -9,6 +9,7 @@ const GameInfo = () => {
     const { gameId } = useParams();
     const [game, setGame] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');  // New state for error message
     let { userData, fetchUserData } = useContext(UserContext);
     const navigate = useNavigate();
 
@@ -79,12 +80,17 @@ const GameInfo = () => {
 
     const handleBuyClick = async () => {
         if (userOwnsGame) return;
-        //alert("You need to login first.");
         try {
-            await MongoDbModel.purchaseGame(userData.username, -gameCost, game.name);
-            fetchUserData();
+            const response = await MongoDbModel.purchaseGame(userData.username, -gameCost, game.name);
+            if (response.error) {
+                setError(response.error);  // Set error message if there's an error from backend
+            } else {
+                setError('');  // Clear error if purchase is successful
+                fetchUserData();
+            }
         } catch (error) {
             console.error('Failed to update user data:', error);
+            setError("An unexpected error occurred");  // General error message for unexpected issues
         }
     };
 
@@ -132,6 +138,7 @@ const GameInfo = () => {
                                 {userOwnsGame ? 'Play' : 'Buy'}
                             </button>
                         </div>
+                        {error && <div className={styles.error}>{error}</div>}
                 </div>
                 <div className={styles.recommended}>
                     <h2>{userOwnsGame ? `You own the game` : `Recommended game`}</h2>

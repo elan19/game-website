@@ -274,6 +274,16 @@
     display: none;
 }
 
+.error {
+    height: 25px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fd3737;
+    font-weight: bold;
+    margin-top: 15px; 
+    border-radius: 0px 0px 10px 10px;
+    text-align: center;
+}
+
 
 @media (max-width: 1200px) {
     .mapHeading {
@@ -408,13 +418,13 @@
     }
 }
 
-@media (max-width: 625px) {
+@media (max-width: 570px) {
     .gameInfoHeight {
         height: 550px;
     }
 }
 
-@media (max-width: 520px) {
+@media (max-width: 490px) {
 
     .gameInfoHeight {
         height: 500px;

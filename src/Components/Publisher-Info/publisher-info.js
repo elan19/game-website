@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import styles from './PublisherInfo.module.css';
 import SingleProduct from '../Products/single-product';
-import { AuthContext } from '../../util/AuthContext';
 
 const PublisherInfo = () => {
     const { id } = useParams();
@@ -11,12 +10,9 @@ const PublisherInfo = () => {
     const [products, setProducts] = useState([]);
     const [next, setNext] = useState(null);
     const [prev, setPrev] = useState(null);
-    const { isAuthenticated } = useContext(AuthContext);
 
     const apiKey = process.env.REACT_APP_API_KEY;
     const baseURL = process.env.REACT_APP_BASE_URL;
-
-    console.log(isAuthenticated);
 
     useEffect(() => {
         const fetchData = async () => {

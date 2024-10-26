@@ -20,7 +20,6 @@ const InventoryView = () => {
         const loadData = async () => {
             setLoading(true);
             await fetchUserData();
-            console.log(userData);
             setLoading(false);
         };
 

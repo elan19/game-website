@@ -35,7 +35,6 @@ const DeveloperInfo = () => {
                 console.error('Error fetching developer info:', error);
             }
         };
-        console.log("Yep");
         fetchData();
     }, [id, apiKey, baseURL]);
 

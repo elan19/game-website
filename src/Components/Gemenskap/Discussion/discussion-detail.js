@@ -190,7 +190,23 @@ const DiscussionDetail = () => {
             </div>
 
             {/* Render comment form only if the user is the author of the discussion */}
-            {userData && discussion.author === userData.username && (
+            {userData !== null && Object.keys(userData).length > 2 && !discussion.private && (
+                <div className={styles.commentFormContainer}>
+                    <form onSubmit={handleCommentSubmit}>
+                        <textarea
+                            value={commentContent}
+                            onChange={(e) => setCommentContent(e.target.value)}
+                            placeholder="Add a comment..."
+                            maxLength={1000}
+                            required
+                        />
+                        <button className={styles.button} type="submit">Comment</button>
+                    </form>
+                </div>
+            )}
+
+            {/* Render comment form only if the user is the author of the discussion */}
+            {userData !== null && Object.keys(userData).length > 2 && discussion.private && discussion.author === userData.username &&(
                 <div className={styles.commentFormContainer}>
                     <form onSubmit={handleCommentSubmit}>
                         <textarea

@@ -22,7 +22,7 @@ const GameSession = () => {
     const [loadingUserData, setLoadingUserData] = useState(true);
     const navigate = useNavigate();
 
-    const totalInterval = 6 * 1000; // 6 seconds for testing (replace with 3 hours)
+    const totalInterval = 15 * 1000; // 6 seconds for testing (replace with 3 hours)
 
     useEffect(() => {
         let timerId;

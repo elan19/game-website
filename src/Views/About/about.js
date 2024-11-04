@@ -4,7 +4,7 @@ import { AuthContext } from '../../util/AuthContext'; // Adjust the import based
 
 import styles from './About.module.css';
 import gamigoLogo from '../../images/aboutGamigoLogo.png';
-import aboutImg2 from '../../images/about-gemenskap2.png';
+import aboutImg2 from '../../images/about-gemenskap-chat.png';
 
 const About = () => {
     const navigate = useNavigate();

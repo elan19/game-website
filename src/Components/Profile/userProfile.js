@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useCallback  } from 'react';
+import React, { useState, useEffect, useCallback, useContext  } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
+import { UserContext } from '../../util/UserContext.js';
 import styles from './Profile.module.css';
 import defaultProfilePic from '../../images/login.jpg';
 
 const UserProfileView = () => {
     const { username } = useParams();
+    const { userData, fetchUserData } = useContext(UserContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -18,7 +20,6 @@ const UserProfileView = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const commentsPerPage = 10;
 
-    // Move fetchComments outside useEffect and use useCallback to memoize it
     const fetchComments = useCallback(async () => {
         try {
             const response = await MongoDbModel.getUserComments(username);
@@ -30,32 +31,45 @@ const UserProfileView = () => {
     }, [username]);
 
     useEffect(() => {
-        if (username === localStorage.getItem("username")) {
-            navigate("/profile");
-        }
-
-        const fetchUser = async () => {
+        const loadData = async () => {
             try {
-                const fetchedUser = await MongoDbModel.getUserProfile(username);
-                setUser(fetchedUser);
-                setLoading(false);
-                fetchComments(); // Fetch comments once the user is loaded
-                checkIfFriend(fetchedUser); // Check if the user is already a friend
+                setLoading(true);
+    
+                // Fetch user data if not available
+                if (!userData) {
+                    await fetchUserData();
+                }
+    
+                // Proceed with fetching the user profile only if userData is available
+                if (userData) {
+                    // Redirect to profile if viewing the logged-in user's profile
+                    if (username === userData.username) {
+                        navigate("/profile");
+                        return;
+                    }
+    
+                    // Fetch the profile data of the specified user
+                    const fetchedUser = await MongoDbModel.getUserProfile(username);
+                    setUser(fetchedUser);
+                    fetchComments();
+                    checkIfFriend(fetchedUser);
+                }
             } catch (err) {
                 console.error('Failed to fetch user data:', err);
                 setError('Failed to load user profile.');
+            } finally {
                 setLoading(false);
             }
         };
-
-        fetchUser();
-    }, [username, navigate, fetchComments]);
+    
+        loadData();
+    }, [username, navigate, userData, fetchUserData, fetchComments]);
 
     const handleAddComment = async () => {
         if (!newComment.trim()) return;
 
         try {
-            await MongoDbModel.addUserComment(user.username, localStorage.getItem('loginId'), localStorage.getItem("username"), newComment);
+            await MongoDbModel.addUserComment(user.username, userData.loginId, userData.username, newComment);
             setNewComment('');
             fetchComments();
         } catch (error) {
@@ -64,19 +78,18 @@ const UserProfileView = () => {
     };
 
     const checkIfFriend = async (fetchedUser) => {
-        const currentUser = localStorage.getItem("username");
-        if (fetchedUser.friends.includes(currentUser)) {
+        if (fetchedUser.friends.includes(userData.username)) {
             setFriendRequestStatus("friends");
-        } else if (fetchedUser.friendRequests.some(request => request.sender === currentUser && request.status === "pending")) {
+        } else if (fetchedUser.friendRequests.some(request => request.sender === userData.username && request.status === "pending")) {
             setFriendRequestStatus("pending");
-        }  else {
+        } else {
             setFriendRequestStatus('');
         }
     };
 
     const handleSendFriendRequest = async () => {
         try {
-            await MongoDbModel.sendFriendRequest(localStorage.getItem("username"), username);
+            await MongoDbModel.sendFriendRequest(userData.username, username);
             setFriendRequestStatus("pending");
         } catch (error) {
             console.error('Failed to send friend request:', error);
@@ -99,7 +112,7 @@ const UserProfileView = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
     if (error) {

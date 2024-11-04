@@ -11,7 +11,22 @@ const MarketView = () => {
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5; // Show 5 items per page
-    const { fetchUserData } = useContext(UserContext);
+    const { userData, fetchUserData } = useContext(UserContext);
+
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            await fetchUserData();
+            setLoading(false);
+        };
+
+        if (!userData) {
+            loadData();
+        } else {
+            setLoading(false);
+        }
+    }, [userData, fetchUserData]);
 
     useEffect(() => {
         const fetchMarketItems = async () => {
@@ -33,9 +48,7 @@ const MarketView = () => {
         const confirmed = window.confirm(`Are you sure you want to buy this item for ${price} coins?`);
         if (confirmed) {
             try {
-                const buyerUsername = localStorage.getItem('username');
-                const buyerLoginId = localStorage.getItem('loginId');
-                const result = await MongoDbModel.buyMarketItem(buyerUsername, buyerLoginId, marketItemId);
+                const result = await MongoDbModel.buyMarketItem(userData.username, userData.loginId, marketItemId);
 
                 if (result.success) {
                     alert('Item purchased successfully');

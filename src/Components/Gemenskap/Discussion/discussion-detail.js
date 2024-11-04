@@ -99,7 +99,7 @@ const DiscussionDetail = () => {
     if (totalPages < 1) totalPages = 1;
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
     if (!discussion) {

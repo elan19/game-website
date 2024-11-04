@@ -145,7 +145,7 @@ const DiscussionComp = () => {
     };
 
     if (loading) {
-        return <div>Loading discussions...</div>;
+        return <div></div>;
     }
 
     return (

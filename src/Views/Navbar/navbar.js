@@ -9,8 +9,18 @@ const Navigation = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 1050);
-    const { userData, deleteUserData } = useContext(UserContext); // Access user data from context
+    const { userData, fetchUserData, deleteUserData } = useContext(UserContext); // Access user data from context
     const { isLoggedIn, logout } = useContext(AuthContext);
+
+    useEffect(() => {
+        const loadData = async () => {
+            await fetchUserData();
+        };
+
+        if (!userData) {
+            loadData();
+        }
+    }, [userData, fetchUserData]);
 
     const routes = {
         '/': { name: 'Shop', hidden: false },
@@ -18,7 +28,7 @@ const Navigation = () => {
         '/about': { name: 'About', hidden: false },
         '/gemenskap': { name: 'Community', hidden: false },
         '/login': { name: 'Login', hidden: false },
-        ...(isLoggedIn && { '/profile': { name: localStorage.getItem('username') + " ▼ $" + (userData && userData.money !== undefined ? parseFloat(userData.money.toFixed(2)) : 0), hidden: false } })
+        ...(isLoggedIn && userData && { '/profile': { name: userData.username + " ▼ $" + (userData && userData.money !== undefined ? parseFloat(userData.money.toFixed(2)) : 0), hidden: false } })
     };
 
     const handleMenuClick = (event) => {

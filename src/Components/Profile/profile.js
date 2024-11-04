@@ -46,7 +46,7 @@ const ProfileView = () => {
         if (!newComment.trim()) return; // Don't allow empty comments
 
         try {
-            await MongoDbModel.addUserComment(userData.username, localStorage.getItem('loginId'), userData.username, newComment);
+            await MongoDbModel.addUserComment(userData.username, userData.loginId, userData.username, newComment);
             setNewComment('');
             fetchComments(); // Refresh comments after adding a new one
         } catch (error) {
@@ -81,7 +81,7 @@ const ProfileView = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
     if (!userData || !userData.username) {

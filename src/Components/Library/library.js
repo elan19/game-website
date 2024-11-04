@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './Library.module.css';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../util/UserContext'; // Import UserContext
 
 import MongoDbModel from '../../models/mongodb';
 
@@ -11,12 +12,26 @@ const Library = () => {
     const [error, setError] = useState(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // Track if device is mobile
     const navigate = useNavigate();
+    const { userData, fetchUserData } = useContext(UserContext);
+
+    useEffect(() => {
+        const loadData = async () => {
+            setLoading(true);
+            await fetchUserData();
+            setLoading(false);
+        };
+
+        if (!userData) {
+            loadData();
+        } else {
+            setLoading(false);
+        }
+    }, [userData, fetchUserData]);
 
     useEffect(() => {
         const fetchGames = async () => {
             try {
-                const username = localStorage.getItem('username');
-                const userGames = await MongoDbModel.getAllGamesFromUser(username);
+                const userGames = await MongoDbModel.getAllGamesFromUser(userData.username);
 
                 if (userGames.error) {
                     throw new Error(userGames.error);

@@ -11,25 +11,36 @@ const NotificationView = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchFriendRequests = async () => {
+        const loadData = async () => {
             try {
-                const requests = await MongoDbModel.getFriendRequests(localStorage.getItem('username')); // Fetch friend requests
-                setFriendRequests(requests.friendRequests); // Extract the array from the response
-                setLoading(false);
+                setLoading(true);
+
+                // Fetch user data if not available
+                if (!userData) {
+                    await fetchUserData();
+                }
+
+                // Fetch friend requests after ensuring userData is available
+                if (userData) {
+                    const requests = await MongoDbModel.getFriendRequests(userData.username);
+                    setFriendRequests(requests.friendRequests);
+                }
+
             } catch (err) {
                 console.error('Failed to fetch friend requests:', err);
                 setError('Failed to load friend requests.');
+            } finally {
                 setLoading(false);
             }
         };
 
-        fetchFriendRequests();
-    }, []);
+        loadData();
+    }, [userData, fetchUserData]);
 
     const handleAcceptRequest = async (sender) => {
         try {
             await MongoDbModel.friendRequestAction(sender, userData.username, 'accept');
-            const requests = await MongoDbModel.getFriendRequests(localStorage.getItem('username')); // Fetch friend requests
+            const requests = await MongoDbModel.getFriendRequests(userData.username); // Fetch friend requests
             setFriendRequests(requests.friendRequests); // Extract the array from the response
             fetchUserData();
         } catch (error) {
@@ -40,7 +51,7 @@ const NotificationView = () => {
     const handleRejectRequest = async (sender) => {
         try {
             await MongoDbModel.friendRequestAction(sender, userData.username, 'decline');
-            const requests = await MongoDbModel.getFriendRequests(localStorage.getItem('username')); // Fetch friend requests
+            const requests = await MongoDbModel.getFriendRequests(userData.username); // Fetch friend requests
             setFriendRequests(requests.friendRequests); // Extract the array from the response
             fetchUserData();
         } catch (error) {
@@ -49,7 +60,7 @@ const NotificationView = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
     if (error) {

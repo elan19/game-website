@@ -7,13 +7,12 @@ import styles from './userFriends.module.css';
 
 const UserFriends = () => {
     const { username } = useParams();
-    const { fetchUserData } = useContext(UserContext);
+    const { userData, fetchUserData } = useContext(UserContext);
     const [friends, setFriends] = useState([]);
     const [friendsData, setFriendsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [hoveredFriend, setHoveredFriend] = useState(null);
-    const loggedInUser = localStorage.getItem('username');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -40,7 +39,7 @@ const UserFriends = () => {
         const confirmed = window.confirm(`Do you really want to remove ${friendUsername} as your friend?`);
         if (confirmed) {
             try {
-                await MongoDbModel.removeFriend(username, localStorage.getItem('loginId'), friendUsername);
+                await MongoDbModel.removeFriend(username, userData?.loginId, friendUsername);
                 setFriends(friends.filter(friend => friend.username !== friendUsername));
                 setFriendsData(friendsData.filter(friendData => friendData.username !== friendUsername));
                 fetchUserData();
@@ -51,8 +50,7 @@ const UserFriends = () => {
     };
 
     const handleChatClick = (friendUsername) => {
-        const loggedInUsername = localStorage.getItem('username');
-        navigate(`/chat/${loggedInUsername}/${friendUsername}`);
+        navigate(`/chat/${userData?.username}/${friendUsername}`);
     };
 
     const handleBackToProfile = () => {
@@ -104,7 +102,7 @@ const UserFriends = () => {
                                     Chat
                                 </button>
 
-                                {username === loggedInUser && (
+                                {username === userData.username && (
                                     <button 
                                         className={styles.removeButton} 
                                         onClick={() => handleRemoveFriend(friend.username)}

@@ -42,7 +42,7 @@ const InventoryView = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div></div>;
     }
 
     const inventory = userData?.inventory || [];
@@ -53,6 +53,7 @@ const InventoryView = () => {
     // Function to handle opening the modal and setting the price
     const handleSellItem = (card) => {
         setSelectedCard(card);
+        console.log();
         setIsModalOpen(true);
     };
 
@@ -68,11 +69,11 @@ const InventoryView = () => {
         }
     
         setIsProcessing(true); // Disable the button
-    
+
         try {
             const response = await MongoDbModel.setCardToMarket(
                 userData.username,
-                localStorage.getItem('loginId'),
+                userData.loginId,
                 selectedGame,
                 selectedCard.cardName,
                 parseFloat(price)

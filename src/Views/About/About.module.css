@@ -234,12 +234,6 @@
         margin-top: 50px;
     }
 
-    .installSteamButton {
-        font-size: 18px;
-        margin-left: 10%;
-        width: 60%;
-    }
-
     .aboutContentShopInfo {
         min-height: 500px;
     }
@@ -270,9 +264,10 @@
 @media (max-width: 520px) {
     .aboutImgDivRightAboutGemenskap {
         position: absolute;
-        bottom: 700px;
+        bottom: 750px;
         right: 0px;
         margin-right: 10%;
+        width: 60%;
     }
 
 }

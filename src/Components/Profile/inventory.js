@@ -166,8 +166,8 @@ const InventoryView = () => {
             {/* Modal for the selected item - Only show on mobile */}
             {selectedCard && isMobile && (
                 <div className={styles.modal}>
-                    <button className={styles.closeButton} onClick={() => setSelectedCard(null) && setIsModalOpen(null)}>X</button>
                     <div className={styles.itemDetails}>
+                        <button className={styles.closeButton} onClick={() => setSelectedCard(null) && setIsModalOpen(null)}>X</button>
                         <img src={`/images/inventory/${selectedCard.cardPic}`} alt={selectedCard.cardPic} className={styles.itemDetailImage} />
                         <div className={styles.itemName}>{selectedCard.cardName}</div>
                         <div className={styles.itemDescription}>{selectedCard.cardDesc}</div>        

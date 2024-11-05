@@ -10,7 +10,7 @@ const MarketView = () => {
     const [filteredItems, setFilteredItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5; // Show 5 items per page
+    const itemsPerPage = 10; // Show 10 items per page
     const { userData, fetchUserData } = useContext(UserContext);
 
 
@@ -137,6 +137,7 @@ const MarketView = () => {
                             <img src={`/images/inventory/${item.cardPic}` || defaultItemPic} alt={item.cardPic} className={styles.itemImage} />
                             <div className={styles.itemDetails}>
                                 <div className={styles.itemName}>{item.cardName}</div>
+                                <div className={styles.gameName}>{item.gameName}</div>
                                 <div className={styles.itemPrice}>Price: ${item.price}</div>
                                 <div className={styles.sellerName}>Seller: {item.username}</div>
                             </div>

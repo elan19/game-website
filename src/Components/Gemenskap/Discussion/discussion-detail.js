@@ -132,7 +132,7 @@ const DiscussionDetail = () => {
                     ))}
                 </div>
             )}
-            <p>{discussion.content}</p>
+            <p className={styles.discussionContent}>{discussion.content}</p>
 
             {/* Edit Discussion Button */}
             {userData && discussion.author === userData.username && (

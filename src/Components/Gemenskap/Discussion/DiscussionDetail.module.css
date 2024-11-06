@@ -51,6 +51,10 @@ strong {
     border: 1px solid #61dafb;
 }
 
+.discussionContent {
+    white-space: pre-line;
+}
+
 .commentsSection {
     margin-top: 30px;
 }

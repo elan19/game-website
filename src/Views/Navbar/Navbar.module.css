@@ -99,7 +99,8 @@ a:hover {
 .dropdownMenu {
     display: none; /* Hide dropdown by default */
     position: absolute;
-    background-color: #384d66; /* Set background color for dropdown */
+    /*background-color: #384d66; */
+    background-color: var(--link-blue);
     min-width: 160px; /* Set minimum width */
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); /* Add shadow for effect */
     z-index: 1; /* Ensure dropdown is above other elements */
@@ -129,7 +130,8 @@ a:hover {
 
 /* Optional: Hover effect on dropdown links */
 .dropdownMenu a:hover {
-    background-color: #f1f1f1; /* Change background on hover */
+    /*background-color: #f1f1f1;*/ /* Change background on hover */
+    background-color: var(--link-blue-hover);
 }
 
 

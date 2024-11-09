@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import MongoDbModel from '../../models/mongodb';
+import { UserContext } from '../../util/UserContext';
 
 import styles from './EditProfile.module.css';
-import { UserContext } from '../../util/UserContext';
 
 const profileImages = [
     'profile1.webp',
@@ -31,9 +31,15 @@ const EditProfile = () => {
 
     useEffect(() => {
         if (!userData) {
-            fetchUserData();
+            fetchUserData();  // Fetch user data when not available
         } else {
-            setLoading(false);
+            setFormData({
+                username: userData.username,
+                name: userData.name,
+                desc: userData.desc,
+                profilePic: userData.profilePic,
+            });
+            setLoading(false);  // Set loading to false once data is available
         }
     }, [userData, fetchUserData]);
 
@@ -97,7 +103,7 @@ const EditProfile = () => {
                         id="username"
                         name="username"
                         value={formData.username || ''}
-                        placeholder={userData.username || ''}
+                        placeholder={userData ? userData.username : ''}
                         onChange={handleChange}
                         disabled
                         className={styles.disabled}
@@ -110,7 +116,7 @@ const EditProfile = () => {
                         id="name"
                         name="name"
                         value={formData.name || ''}
-                        placeholder={userData.name || ''}
+                        placeholder={userData ? userData.name : ''}
                         onChange={handleChange}
                         maxLength={"20"}
                     />
@@ -121,7 +127,7 @@ const EditProfile = () => {
                         id="desc"
                         name="desc"
                         value={formData.desc || ''}
-                        placeholder={userData.desc || ''}
+                        placeholder={userData ? userData.desc : ''}
                         onChange={handleChange}
                         maxLength={"200"}
                     />

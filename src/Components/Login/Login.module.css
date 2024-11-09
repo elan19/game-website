@@ -79,7 +79,7 @@
 }
 
 .marginBottom {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 }
 
 .loginButton:hover {
@@ -108,6 +108,17 @@
     color: red;
     text-align: center;
     margin: 25px 0;
+}
+
+.guestButton {
+    font-size: 1.2rem;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.guestButton:hover {
+    background-color: #06bfff;
 }
 
 @media (max-width: 667px) {

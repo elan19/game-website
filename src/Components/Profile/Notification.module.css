@@ -2,7 +2,8 @@
     width: 100%;
     min-height: 75vh;
     box-shadow: 2px 2px 5px black;
-    background: linear-gradient(to bottom right, #384d66, #08182c);
+    /*background: linear-gradient(to bottom right, #384d66, #08182c);*/
+    background-color: var(--navbar-grey);
 }
 
 .notificationDiv h1 {
@@ -25,12 +26,14 @@
     padding-top: 30px;
     height: 100px;
     text-align: center;
-    background: linear-gradient(to right, #384d66, #08182c);
+    /*background: linear-gradient(to right, #384d66, #08182c);*/
+    background-color: var(--dark-grey);
     color: #eee;
 }
 
 .request:nth-child(even) {
-    background:  linear-gradient(to left, #384d66, #08182c);
+    /*background:  linear-gradient(to left, #384d66, #08182c);*/
+    background-color: var(--navbar-grey);
 }
 
 .request p {
@@ -41,7 +44,8 @@
 .notificationDiv button {
     width: 25%;
     height: 40px;
-    background-color: #08182c;
+    /*background-color: #08182c;*/
+    background-color: var(--link-blue);
     padding: 0;
     margin: 0 5px;
     border: 0;
@@ -58,8 +62,17 @@
 }
 
 .notificationDiv button:hover {
-    background-color: #384d66;
+    /*background-color: #384d66;*/
+    background-color: var(--link-blue-hover);
     text-decoration: none;
+}
+
+.profileLink {
+    color: var(--link-blue);
+}
+
+.profileLink:hover {
+    color: var(--link-blue-hover)
 }
 
 .notificationDiv .backProfileLinkDiv {
@@ -70,7 +83,8 @@
 .backProfileLink {
     width: 150px;
     height: 40px;
-    background-color: #08182c;
+    /*background-color: #08182c;*/
+    background-color: var(--link-blue);
     padding: 0;
     margin-left: 0px;
     margin: 0;
@@ -85,7 +99,8 @@
 }
 
 .backProfileLink:hover {
-    background-color: #384d66;
+    /*background-color: #384d66;*/
+    background-color: var(--link-blue-hover);
     text-decoration: none;
 }
 

@@ -11,15 +11,29 @@
 }
 
 .modalContent {
-    background: #ccc;
+    background: var(--navbar-grey);
     padding: 20px;
     border-radius: 8px;
     width: 300px;
     text-align: center;
+    color: #eee;
 }
 
 .modalButtons {
     margin-top: 10px;
+}
+
+.modalButton {
+    padding: 5px 10px;
+    background-color: var(--link-blue);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: #eee;
+}
+
+.modalButton:hover {
+    background-color: var(--link-blue-hover);
 }
 
 button {
@@ -28,4 +42,8 @@ button {
 
 .sellCardH2 {
     color: #eee;
+}
+
+.modalContent h2 {
+    color: var(--light-blue);
 }

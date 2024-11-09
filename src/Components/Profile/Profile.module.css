@@ -2,7 +2,8 @@
     width: 100%;
     min-height: 75vh;
     box-shadow: 2px 2px 5px black;
-    background: linear-gradient(to bottom right, #384d66, #08182c);
+    /*background: linear-gradient(to bottom right, #384d66, #08182c);*/
+    background-color: var(--navbar-grey);
 }
 
 .profileContainer {
@@ -90,7 +91,8 @@
 }
 
 .profileDetails h1 {
-    color: #888;
+    /*color: #888;*/
+    color: var(--light-blue);
     display: block;
     margin-bottom: 15px;
 }
@@ -102,6 +104,7 @@
 
 .profileDetails a {
     margin-bottom: 10px;
+    color: var(--link-blue);
     display: block;
 }
 
@@ -109,7 +112,8 @@
 .editProfileLink {
     width: 100px;
     height: 40px;
-    background-color: #08182c;
+    /*background-color: #08182c;*/
+    background-color: var(--link-blue);
     padding: 0;
     margin: 0;
     border: 0;
@@ -123,7 +127,8 @@
 }
 
 .editProfileLink:hover {
-    background-color: #384d66;
+    /*background-color: #384d66;*/
+    background-color: var(--link-blue-hover);
     text-decoration: none;
 }
 
@@ -143,7 +148,8 @@
 .notificationLink {
     width: 100px;
     height: 40px;
-    background-color: #08182c;
+    /*background-color: #08182c;*/
+    background-color: var(--link-blue);
     padding: 0;
     margin: 0;
     border: 0;
@@ -157,7 +163,8 @@
 }
 
 .notificationLink:hover {
-    background-color: #384d66;
+    /*background-color: #384d66;*/
+    background-color: var(--link-blue-hover);
     text-decoration: none;
 }
 
@@ -173,7 +180,8 @@
 .addMoneyButton {
     width: 100px;
     height: 40px;
-    background-color: #08182c;
+    /*background-color: #08182c;*/
+    background-color: var(--link-blue);
     padding: 0;
     margin: 0;
     border: 0;
@@ -188,7 +196,8 @@
 }
 
 .addMoneyButton:hover {
-    background-color: #384d66;
+    /*background-color: #384d66;*/
+    background-color: var(--link-blue-hover);
     text-decoration: none;
 }
 
@@ -228,13 +237,15 @@
 }
 
 .commentH2 {
+    color: var(--light-blue);
     text-align: center;
 }
 
 .comment {
     width: 100%;
     min-height: 75px;
-    background-color: #2e3d50;
+    /*background-color: #2e3d50;*/
+    background-color: var(--dark-grey);
     padding: 15px;
     margin-bottom: 10px;
     color: #eee;
@@ -249,6 +260,11 @@
 .commentProfileLink {
     margin: 0;
     padding: 0;
+    color: var(--link-blue);
+}
+
+.commentProfileLink:hover {
+    color: var(--link-blue);
 }
 
 .addComment textarea {
@@ -259,14 +275,16 @@
     border-radius: 5px;
     border: none;
     box-shadow: 2px 2px 5px black;
-    background-color: #1e2a38;
+    /*background-color: #1e2a38;*/
+    background-color: var(--dark-grey);
     color: #fff;
 }
 
 .addComment button {
     width: 20%;
-    background-color: #08182c;
-    color: white;
+    /*background-color: #08182c;*/
+    background-color: var(--link-blue);
+    color: #eee;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -277,7 +295,8 @@
 }
 
 .addComment button:hover {
-    background-color: #384d66;
+    /*background-color: #384d66;*/
+    background-color: var(--link-blue-hover);
 }
 
 .pagination {
@@ -287,7 +306,8 @@
 }
 
 .pagination button {
-    background-color: #08182c;
+    /*background-color: #08182c;*/
+    background-color: #444;
     color: white;
     padding: 5px 15px;
     border: none;
@@ -322,10 +342,6 @@
     word-break: break-all;
     overflow-wrap: break-word;
     hyphens: auto;
-}
-
-.commentH2 {
-    color: #eee;
 }
 
 .pageSpan {

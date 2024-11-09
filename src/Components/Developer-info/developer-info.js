@@ -69,9 +69,11 @@ const DeveloperInfo = () => {
     return (
         <div>
             <h2 className={styles.mapHeading}>{developer.name}</h2>
-            {products.map(product => (
-                <SingleProduct key={product.id} product={product}></SingleProduct>
-            ))}
+            <div className={styles.productList}>
+                {products.map(product => (
+                    <SingleProduct key={product.id} product={product} />
+                ))}
+            </div>
             <button className={styles.prevPage} onClick={handlePrevClick}>Previous</button>
             <button className={styles.nextPage} onClick={handleNextClick}>Next</button>
         </div>

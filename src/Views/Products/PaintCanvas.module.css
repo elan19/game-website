@@ -1,0 +1,10 @@
+.paintCanvas {
+    width: 400px;
+    border: 2px solid #1F2833; /* Dark grey border */ /* Background color to match your dark theme */
+    display: block;
+    margin: 0 auto;
+    cursor: crosshair;
+    position: relative;
+    bottom: 65vh;
+    z-index: 5;
+}

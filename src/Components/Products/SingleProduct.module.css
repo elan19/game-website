@@ -1,4 +1,4 @@
-.both {
+/*.both {
     width: 100%;
     height: 400px;
     box-shadow: 2px 2px 5px black;
@@ -191,4 +191,121 @@
     .gameName {
         font-size: 1.0em;
     }
+}*/
+
+/* Container card styling */
+.card {
+    width: 230px;
+    background-color: #171A21;
+    color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Image styling */
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.backgroundImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+/* Content styling */
+.cardContent {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.cardFooter {
+    padding: 16px;
+    text-align: center;
+}
+  
+  .card:hover .backgroundImage {
+    transform: scale(1.1);
+  }
+
+  .card:hover .seeMore {
+    background-color: #2563eb;
+  }
+  
+  /* Overlay effect on hover */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+  
+  .card:hover .overlay {
+    opacity: 1;
+  }
+  
+  /* Information section styling */
+  .info {
+    padding: 15px;
+  }
+  
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .date, .rating {
+    font-size: 14px;
+    color: #9ca3af;
+    margin-top: 4px;
+    text-align: center;
+  }
+  
+  /* Button styling */
+  .seeMore {
+    margin-top: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    background-color: #3b82f6;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .seeMore:hover {
+    background-color: #2563eb;
+  }
+  

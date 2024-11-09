@@ -3,6 +3,7 @@
     flex-direction: column;
     height: 85vh;
     padding: 20px;
+    background-color: var(--lighter-purple);
   }
 
 .container h1 {
@@ -19,7 +20,7 @@
 .friendContainer {
     position: relative;
     display: inline-block;
-    width: 200px;
+    min-width: 200px;
 }
 
 .friend {
@@ -27,7 +28,7 @@
     justify-content: space-between;
     height: 50px;
     background-color: #171a21;
-    width: 200px;
+    min-width: 200px;
     margin-right: 25px;
     margin-bottom: 10px;
 }
@@ -52,7 +53,7 @@
     display: flex;
     top: 0;
     left: -150px; /* Adjust to the left */
-    z-index: 10;
+    z-index: 100;
 }
 
 .chatButton {
@@ -63,6 +64,7 @@
     padding: 8px 12px;
     cursor: pointer;
     margin-left: 15px;
+    margin-right: 25px;
     transition: background-color 0.3s;
 }
 

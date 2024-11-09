@@ -1,4 +1,36 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import styles from './SingleProduct.module.css';
+
+const SingleProduct = ({ product }) => {
+  const navigate = useNavigate();
+  const handleClick = () => navigate(`/game-info/${product.id}`);
+  const gameCost = 9.99;
+
+  return (
+    <div className={styles.card} onClick={handleClick}>
+      <div className={styles.imageWrapper}>
+        <img className={styles.backgroundImage} src={product.background_image} alt={product.name} />
+        <div className={styles.overlay}></div>
+      </div>
+      <div className={styles.cardContent}>
+        <h4 className={styles.title}>{product.name}</h4>
+        <p className={styles.date}>Release Date: {product.released}</p>
+        <p className={styles.rating}>Rating: {product.rating.toFixed(1)}</p>
+        <p className={styles.rating}>Price: ${gameCost}</p>
+      </div>
+      <div className={styles.cardFooter}>
+        <button className={styles.seeMore}>See more</button>
+    </div>
+    </div>
+  );
+};
+
+export default SingleProduct;
+
+
+
+/*import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './SingleProduct.module.css';
 
@@ -88,4 +120,4 @@ const SingleProduct = ({ product }) => {
     );
 };
 
-export default SingleProduct;
+export default SingleProduct;*/

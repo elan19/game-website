@@ -1,5 +1,6 @@
 .mainAbout {
-    background-color: #1d2024;
+    /*background-color: #1d2024;*/
+    background-color: var(--lighter-purple);
     width: 100%;
     max-width: 100%;
     min-height: 700px;
@@ -78,7 +79,9 @@
 }
 
 .CreateAccountButton {
-    background-image: linear-gradient(to right, #06bfff 50%, #2b74ff 100%);
+    /*background-image: linear-gradient(to right, #06bfff 50%, #2b74ff 100%);*/
+    /*background-color: var(--link-blue);*/
+    background-image: linear-gradient(to right, var(--link-blue) 50%, var(--link-blue-hover) 100%);
     color: #fff;
     border: 1px solid #ccc;
     text-decoration: none;
@@ -95,7 +98,8 @@
 }
 
 .CreateAccountButton:hover {
-    background-color: #00a6dd;
+    /*background-color: #00a6dd;*/
+    background-color: var(--link-blue-hover);
     background-image: none;
 }
 
@@ -197,6 +201,10 @@
     margin-right: 10%;
     float: right;
     margin-top: 200px;
+}
+
+.mainAbout .colorSpan {
+    color: var(--link-blue);
 }
 
 @media (max-width:1400px) {

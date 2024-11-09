@@ -1,6 +1,8 @@
 .gemenskap {
     width: 44%;
-    background-color: #213a4c;
+    /*background-color: #213a4c;*/
+    background-color: var(--navbar-grey);
+    color: var(--light-grey);
     margin-top: 15px;
     text-align: center;
     display: inline-block;
@@ -29,8 +31,10 @@
     width: 200px;
     height: 50px;
     font-size: 16px;
-    background-color: #213a4c;
-    color: #5fb2e2;
+    /*background-color: #213a4c;
+    color: #5fb2e2;*/
+    background-color: var(--link-blue);
+    color: #eee;
     cursor: pointer;
     border: none;
     border-radius: 10px;
@@ -38,7 +42,9 @@
 }
 
 .picBtn:hover {
-    background-color: #5fb2e2;
+    /*background-color: #5fb2e2;
+    color: #eee;*/
+    background-color: var(--link-blue-hover);
     color: #eee;
 }
 
@@ -51,6 +57,10 @@
     width: 100%;
     height: 1px;
     background: linear-gradient(to right, #1b2838, #eee, #1b2838);
+    margin-bottom: 10px;
+}
+
+.dateText {
     margin-bottom: 10px;
 }
 

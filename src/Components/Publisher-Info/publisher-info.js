@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import styles from './PublisherInfo.module.css';
@@ -77,9 +77,11 @@ const PublisherInfo = () => {
             <div className={styles.publisherDesc}>
                 <div dangerouslySetInnerHTML={{ __html: publisher.description }} />
             </div>
-            {products.map(product => (
-                <SingleProduct key={product.id} product={product}></SingleProduct>
-            ))}
+            <div className={styles.productList}>
+                {products.map(product => (
+                    <SingleProduct key={product.id} product={product} />
+                ))}
+            </div>
             <button className={styles.prevPage} onClick={handlePrevClick}>Previous</button>
             <button className={styles.nextPage} onClick={handleNextClick}>Next</button>
         </div>

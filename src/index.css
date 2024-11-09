@@ -1,3 +1,17 @@
+:root {
+  --black: #0B0C10;
+  --dark-grey: #1F2833;
+  --light-grey: #C5C6C7;
+  --light-blue: #66FCF1;
+  --turquoise: #45A29E;
+  --link-blue: #3b82f6;
+  --link-blue-hover: #2563eb;
+  --dark-purple: #120346;
+  --lighter-purple: #15152F;
+  --navbar-grey: #171A21;
+  --medium-grey: #2E2E2E;
+}
+
 body {
   margin: 0;
   position: relative;

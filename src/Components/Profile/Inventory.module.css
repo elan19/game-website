@@ -71,13 +71,37 @@
     background-color: #1e1e1e;
 }
 
+.grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 16px; /* Optional: Adjusts space between items */
+}
+
+.gridSmall {
+    display: block;
+}
+
+.itemsPerPageControl {
+    margin-bottom: 25px;
+    color: #eee;
+}
+
+.itemsPerPageInput {
+    background-color: var(--medium-grey);
+    width: 75px;
+    height: 25px;
+    color: #eee;
+    text-align: center;
+    outline: none;
+    border: none;
+}
+
 .inventorySelectedGame {
     width: 100%;
     height: 50px;
     display: block;
     font-size: 24px;
     color: white;
-    margin-bottom: 10px;
     text-align: left;
     padding-left: 10px;
     margin-top: 10px;
@@ -94,8 +118,7 @@
 }
 
 .inventoryItem:nth-child(1) {
-    margin-left: 10px;
-    width: 200px;
+    width: 100px;
 }
 
 .inventoryItem:hover, .selectedItem {
@@ -114,7 +137,7 @@
     align-items: center;
     float: right;
     width: 40%;
-    min-height: 500px;
+    min-height: 510px;
     background-color: #1e1e1e;
     border: 3px solid #ccc;
     padding: 5px;
@@ -256,8 +279,43 @@
 }
 
 
+.whiteText {
+    color: #eee;
+}
+
+.pagination {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.pageButton {
+    padding: 10px;
+    margin: 0 5px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.pageButton:disabled {
+    background-color: #333;
+    cursor: not-allowed;
+}
+
+.pageButton:hover {
+    background-color: #555;
+}
+
+.pageButton.active {
+    background-color: #007bff;
+    color: white;
+}
+
+
 /* Modal styles for mobile view only */
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 650px) {
     .inventoryGrid {
         width: 100%;
     }
@@ -329,6 +387,11 @@
         max-width: none;
         padding: 20px;
         box-sizing: border-box;
+    }
+
+    .pagination {
+        width: 100%;
+        text-align: center;
     }
 }
 

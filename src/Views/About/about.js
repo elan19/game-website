@@ -40,7 +40,7 @@ const About = () => {
                 <p className={styles.middleText}>&#8595;</p>
             </div>
             <div className={styles.aboutContentShopInfo}>
-                <h1>Get access to games immediately</h1>
+                <h1>Get access to <span className={styles.colorSpan}>games immediately</span></h1>
                 <div className={styles.aboutTextMiddle}>
                     <p>
                         With a wide range of games from AAA to indie and everything in between. 
@@ -51,7 +51,7 @@ const About = () => {
             </div>
             <div className={styles.aboutContentGemenskapInfo}>
                 <div className={styles.aboutTextLeftAboutGemenskap}>
-                    <h1>Join the community</h1>
+                    <h1>Join the <span className={styles.colorSpan}>community</span></h1>
                     <p>
                         Meet new friends, check out others' photos, and share your own in the community! 
                         With plenty of potential friends (and enemies), the fun never ends.

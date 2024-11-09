@@ -11,7 +11,7 @@ html {
 body {
     line-height: 1.4;
     font-family: sans-serif;
-    background-color: #1b2838;
+    background-color: var(--lighter-purple);
     min-height: 100vh;
     margin: 0;
     display: flex;
@@ -37,11 +37,69 @@ table {
     margin: 0 auto;
 }
 
-header {
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 25px;
+.header {
+    position: relative;
+    background-image: url("./banner.jpg");
+    background-size: cover;
+    background-position: center;
 }
+
+.bannerImage {
+    display: block;  /* Ensure the image behaves correctly in the layout */
+    width: 100%;  /* Make it responsive */
+    height: auto;
+}
+  
+.header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+  
+/* Style for the overlay text */
+.overlayText {
+position: absolute;
+top: 32%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: var(--light-blue); /* Light blue color from your color palette */
+font-size: 2em;
+font-weight: bold;
+text-align: center;
+text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); /* Add shadow for better readability */
+}
+
+.overlayText p {
+font-size: 1em;
+}
+
+.overlayText span {
+color: var(--turquoise);
+}
+
+.paintCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; /* Ensure it’s above the banner but below overlay text */
+    background-color: transparent;
+    cursor: pointer;
+}
+
+/*.header {
+    position: relative;
+    width: 100%; /* Adjust the height as desired */
+/*    overflow: hidden;
+  }
+  
+  .header img {
+    width: 100%;
+    height: 100%;
+    opacity: 0.75;
+    object-fit: cover;
+  }*/
 
 .search {
     background-color: rgba(0, 0, 0, 0.5);
@@ -191,6 +249,10 @@ main {
     .search select {
         margin-left: 150px;
     }
+
+    .overlayText {
+        font-size: 1.5rem;
+    }
 }
 
 @media (max-width: 465px) {
@@ -204,6 +266,10 @@ main {
 
     .search select {
         margin-left: 10px;
+    }
+
+    .overlayText {
+        display: none;
     }
 }
 

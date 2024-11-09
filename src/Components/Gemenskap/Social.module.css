@@ -3,7 +3,8 @@
     width: 100%;
     min-height: 600px;
     box-shadow: 2px 2px 5px black;
-    background: linear-gradient(to bottom right, #384d66, #08182c);
+    /*background: linear-gradient(to bottom right, #384d66, #08182c);*/
+    background-color: var(--navbar-grey);
 }
 
 .searchBar {
@@ -11,7 +12,8 @@
     width: 100%;
     margin-bottom: 20px;
     font-size: 16px;
-    background-color: #213a4c;
+    /*background-color: #213a4c;*/
+    background-color: var(--dark-grey);
     outline: 1px solid #ccc;
     border: none;
     color: #eee;
@@ -24,7 +26,7 @@
 
 .searchBar:focus {
     border: none;
-    outline: 2px solid grey;
+    outline: 2px solid var(--light-blue);
 }
 
 .searchResults ul {
@@ -33,7 +35,7 @@
 }
 
 .userItem {
-    background-color: #ccc;
+    background-color: var(--light-grey);
     border: 1px solid #333;
     margin-bottom: 10px;
     border-radius: 4px;
@@ -52,4 +54,8 @@
 
 .userLink:hover {
     color: black;
+}
+
+.whiteColor {
+    color: #eee;
 }

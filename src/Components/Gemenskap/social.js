@@ -67,7 +67,7 @@ const Social = () => {
                         ))}
                     </ul>
                 ) : (
-                    searchTerm && <p>No users found for "{searchTerm}"</p>
+                    searchTerm && <p className={styles.whiteColor}>No users found for "{searchTerm}"</p>
                 )}
             </div>
         </div>

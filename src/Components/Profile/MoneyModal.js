@@ -46,15 +46,15 @@ const MoneyModal = ({ onClose, onAddMoney }) => {
                     <>
                         <p>Claim your daily reward of {DAILY_REWARD_AMOUNT} Coins!</p>
                         <div className={styles.modalButtons}>
-                            <button onClick={handleClaimReward}>Claim Reward</button>
-                            <button type="button" onClick={onClose}>Close</button>
+                            <button className={styles.modalButton} onClick={handleClaimReward}>Claim Reward</button>
+                            <button type="button" className={styles.modalButton} onClick={onClose}>Close</button>
                         </div>
                     </>
                 ) : (
                     <>
                         <p>You have already claimed your daily reward!</p>
                         <div className={styles.modalButtons}>
-                            <button type="button" onClick={onClose}>Close</button>
+                            <button type="button" className={styles.modalButton} onClick={onClose}>Close</button>
                         </div>
                     </>
                 )}

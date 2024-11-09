@@ -11,7 +11,8 @@
     height: 400px;
     box-shadow: 2px 2px 5px black;
     cursor: pointer;
-    background: linear-gradient(to bottom right, #384d66, #08182c);
+    /*background: linear-gradient(to bottom right, #384d66, #08182c);*/
+    background-color: var(--navbar-grey);
 }
 
 .noCursor {
@@ -24,7 +25,7 @@
 
 .leftDiv {
     width: 50%;
-    height: 400px;
+    min-height: 400px;
     float: left;
     margin-left: 5%;
 }
@@ -36,7 +37,7 @@
 .gameInfoPic {
     width: 100%;
     object-fit: cover;
-    max-height: 400px;
+    height: 400px;
     margin-top: 25px;
     margin-left: 25px;
 }
@@ -97,7 +98,8 @@
 }
 
 .buyGame {
-    background: linear-gradient(to right, #2b3b4a, #566574);
+    /*background: linear-gradient(to right, #2b3b4a, #566574);*/
+    background-color: var(--navbar-grey);
     margin-top: 50px;
     border-radius: 10px;
 }
@@ -129,7 +131,8 @@
     line-height: 30px;
     border: 2px solid black;
     border-radius: 5px;
-    background-color: #2b3b4a;
+    /*background-color: #2b3b4a;*/
+    background-color: var(--dark-purple);
 }
 
 .gameCost p {
@@ -146,12 +149,14 @@
     border: 2px solid black;
     border-radius: 5px;
     color: #eee;
-    background: linear-gradient(to right, #75b022, #598b1b);
+    /*background: linear-gradient(to right, #75b022, #598b1b);*/
     cursor: pointer;
+    background-color: var(--link-blue);
 }
 
 .buyGameBtn:hover {
-    background: linear-gradient(to right, #9ae036, #75b022);
+    /*background: linear-gradient(to right, #9ae036, #75b022);*/
+    background-color: var(--link-blue-hover);
 }
 
 .recommended {

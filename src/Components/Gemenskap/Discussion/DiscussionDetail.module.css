@@ -5,6 +5,7 @@
     margin: 0 auto;
     padding: 20px;
     background-color: #1e1e1e;
+    /*background-color: var(--lighter-purple);*/
     border-radius: 10px;
     color: #f1f1f1;
     font-family: 'Roboto', sans-serif;
@@ -147,7 +148,8 @@ strong {
     margin: 0;
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: #213a4c;
+    /*background-color: #213a4c;*/
+    background-color: var(--link-blue);
     color: white;
     border: none;
     border-radius: 5px;
@@ -156,7 +158,8 @@ strong {
 }
 
 .backButton:hover {
-    background-color: #0092bb;
+    /*background-color: #0092bb;*/
+    background-color: var(--link-blue-hover);
 }
 
 .editButton {
@@ -183,7 +186,8 @@ strong {
 }
 
 .pagination button {
-    background-color: #213a4c;;
+    /*background-color: #213a4c;*/
+    background-color: #444;
     color: white;
     padding: 5px 15px;
     border: none;
@@ -194,7 +198,8 @@ strong {
 }
 
 .pagination button:hover {
-    background-color: #0092bb;
+    /*background-color: #0092bb;*/
+    background-color: #555;
 }
 
 

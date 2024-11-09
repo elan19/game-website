@@ -10,6 +10,7 @@ const MarketView = () => {
     const [filteredItems, setFilteredItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
+    const [searchQuery, setSearchQuery] = useState("");
     const itemsPerPage = 10; // Show 10 items per page
     const { userData, fetchUserData } = useContext(UserContext);
 
@@ -101,6 +102,7 @@ const MarketView = () => {
     const handleSearch = (event) => {
         event.preventDefault();
         const searchInput = document.querySelector('input[type="text"]').value.toLowerCase();
+        setSearchQuery(searchInput);
 
         const filtered = marketItems.filter(item =>
             item.cardName.toLowerCase().includes(searchInput) || // Search by card name
@@ -128,6 +130,11 @@ const MarketView = () => {
                     <input className={styles.searchBar} type="text" name="search" />
                     <input className={styles.searchBtn} onClick={handleSearch} type="submit" value="Search" />
                 </form>
+                {searchQuery && (
+                    <div className={styles.activeFilters}>
+                        <span>Search: {searchQuery}</span>
+                    </div>
+                )}
             </div>
 
             <div className={styles.marketGrid}>
@@ -151,7 +158,7 @@ const MarketView = () => {
 
                     ))
                 ) : (
-                    <div>No items found on the market.</div>
+                    <div className={styles.noItemsMessage}>No items found on the market.</div>
                 )}
             </div>
 

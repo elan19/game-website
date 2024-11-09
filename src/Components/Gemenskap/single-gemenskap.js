@@ -9,7 +9,7 @@ const SingleGemenskap = ({ gemenskap }) => {
         <div className={styles.gemenskap}>
             <img src={gemenskap.originalFileUrl} alt="userpic" />
             <div className={styles.gameDescH2Border}></div>
-            <p>{date.toLocaleString()}</p>
+            <p className={styles.dateText}>{date.toLocaleString()}</p>
         </div>
     );
 };

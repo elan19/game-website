@@ -5,7 +5,8 @@
     flex-direction: row;
     gap: 20px;
     padding: 20px;
-    background-color: #1b2838;
+    /*background-color: #1b2838;*/
+    background-color: var(--navbar-grey);
     color: #c7d5e0;
     height: 80vh;
 }
@@ -51,7 +52,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #2a3a4b;
+    /*background-color: #2a3a4b;*/
+    background-color: var(--dark-grey);
     border-radius: 8px;
     padding: 20px;
     text-align: center;

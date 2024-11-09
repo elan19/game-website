@@ -1,4 +1,79 @@
 import React, { useEffect, useState, useCallback } from 'react';
+//import styles from '../../Views/Products/Products.module.css';
+import styles from './Product.module.css';
+import SingleProduct from './single-product';
+
+const ProductList = () => {
+  const [products, setProducts] = useState([]);
+  const [next, setNext] = useState(null);
+  const [prev, setPrev] = useState(null);
+  const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [genre, setGenre] = useState('');
+
+  const apiKey = process.env.REACT_APP_API_KEY;
+  const baseURL = process.env.REACT_APP_BASE_URL;
+
+  const fetchData = useCallback(async (page, query = '', genre = '') => {
+    let url = `${baseURL}/games?key=${apiKey}&page=${page}`;
+    if (query) url += `&search=${query}`;
+    if (genre) url += `&genres=${genre}`;
+
+    const response = await fetch(url);
+    const result = await response.json();
+
+    setProducts(result.results);
+    setNext(result.next);
+    setPrev(result.previous ? result.previous : `${baseURL}/games?key=${apiKey}&page=1`);
+  }, [apiKey, baseURL]);
+
+  useEffect(() => {
+    fetchData(page, searchQuery, genre);
+  }, [page, searchQuery, genre, fetchData]);
+
+  const handleSearch = (event) => {
+    event.preventDefault();
+    setSearchQuery(event.target.value);
+  };
+
+  const handlePrevPage = () => prev && setPage(page - 1);
+  const handleNextPage = () => next && setPage(page + 1);
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.searchBar}>
+        <input className={styles.searchInput} type="text" placeholder="Search games..." onChange={handleSearch} />
+        <button onClick={() => fetchData(page, searchQuery, genre)}>Search</button>
+        <select value={genre} onChange={(e) => setGenre(e.target.value)}>
+          <option value="">All Genres</option>
+          <option value="action">Action</option>
+          <option value="adventure">Adventure</option>
+          <option value="shooter">Shooter</option>
+          <option value="strategy">Strategy</option>
+          <option value="role-playing-games-rpg">RPG</option>
+          <option value="indie">Indie</option>
+          <option value="puzzle">Puzzle</option>
+          <option value="platformer">Platformer</option>
+        </select>
+      </div>
+      <h3 className={styles.sectionTitle}>Featured and Recommended</h3>
+      <div className={styles.productList}>
+        {products.map((product) => (
+          <SingleProduct key={product.id} product={product} />
+        ))}
+      </div>
+      <div className={styles.pagination}>
+        <button onClick={handlePrevPage}>&lt;</button>
+        <button onClick={handleNextPage}>&gt;</button>
+      </div>
+    </div>
+  );
+};
+
+export default ProductList;
+
+
+/*import React, { useEffect, useState, useCallback } from 'react';
 import styles from '../../Views/Products/Products.module.css';
 import SingleProduct from './single-product';
 
@@ -119,4 +194,5 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default ProductList;*/
+

@@ -46,7 +46,8 @@
 
 .submitButton {
     padding: 10px 20px;
-    background-color: #3498db;
+    /*background-color: #3498db;*/
+    background-color: var(--link-blue);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -54,14 +55,16 @@
 }
 
 .submitButton:hover {
-    background-color: #2980b9;
+    /*background-color: #2980b9;*/
+    background-color: var(--link-blue-hover);
 }
 
 .backButton {
     margin: 0;
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: #213a4c;
+    /*background-color: #213a4c;*/
+    background-color: var(--link-blue);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -70,7 +73,8 @@
 }
 
 .backButton:hover {
-    background-color: #0092bb;
+    /*background-color: #0092bb;*/
+    background-color: var(--link-blue-hover);
 }
 
 .italic {

@@ -31,6 +31,8 @@ const Library = () => {
     useEffect(() => {
         const fetchGames = async () => {
             try {
+                if (!userData) return;
+
                 const userGames = await MongoDbModel.getAllGamesFromUser(userData.username);
 
                 if (userGames.error) {
@@ -53,7 +55,7 @@ const Library = () => {
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [userData]);
 
     const handleGameClick = (game) => {
         setSelectedGame(game);
@@ -96,7 +98,7 @@ const Library = () => {
                         ))}
                     </ul>
                 ) : (
-                    <p>You don't own any games yet.</p>
+                    games.length === 0 && !loading && <p>You don't own any games yet.</p>
                 )}
             </div>
 

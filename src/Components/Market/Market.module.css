@@ -52,14 +52,17 @@
     height: 35px;
     background-color: #5fb2e2;
     color: #171a21;
+    background-color: var(--link-blue);
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+    transition: background-color 0.25s, color 0.15s;
 }
 
 .buyButton:hover {
-    background-color: #4a9cc3;
+    /*background-color: #4a9cc3;*/
+    background-color: var(--link-blue-hover);
     color: white;
 }
 
@@ -75,14 +78,20 @@
 .pageButton {
     padding: 10px;
     margin: 0 5px;
-    background-color: #f0f0f0;
+    background-color: #444;
+    color: #fff;
     border: none;
     cursor: pointer;
     border-radius: 4px;
 }
 
+.pageButton:disabled {
+    background-color: #333;
+    cursor: not-allowed;
+}
+
 .pageButton:hover {
-    background-color: #dcdcdc;
+    background-color: #555;
 }
 
 .pageButton.active {
@@ -94,7 +103,7 @@
 .search {
     background-color: rgba(0, 0, 0, 0.5);
     width: 60%;
-    height: 45px;
+    min-height: 45px;
 }
 
 .search input {
@@ -107,7 +116,8 @@
 
 .searchBar {
     color: #eee;
-    background-color: #213a4c;
+    /*background-color: #213a4c;*/
+    background-color: var(--lighter-purple);
     border: none;
     font-size: 14px;
     padding: 5px;
@@ -115,13 +125,14 @@
 
 .searchBar:focus {
     border: none;
-    outline: 2px solid grey;
+    outline: 2px solid var(--light-grey);
 }
 
 .searchBtn {
     width: 50px;
-    background-color: #213a4c;
-    color: #5fb2e2;
+    /*background-color: #213a4c;*/
+    background-color: var(--link-blue);
+    color: #eee;
     border: none;
     cursor: pointer;
     font-size: 14px;
@@ -129,6 +140,7 @@
 
 .searchBtn:hover {
     background-color: #5fb2e2;
+    background-color: var(--link-blue-hover);
     color: #eee;
 }
 
@@ -147,6 +159,18 @@
 
 .search select:focus {
     outline: 1px solid #5fb2e2;
+}
+
+.activeFilters {
+    line-height: 45px;
+    padding-left: 10px;
+    color: var(--light-blue);
+}
+
+.noItemsMessage {
+    color: #eee;
+    margin-left: 5px;
+    margin-top: 5px;
 }
 
 

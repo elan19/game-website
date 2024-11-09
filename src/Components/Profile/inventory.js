@@ -13,8 +13,10 @@ const InventoryView = () => {
     const [selectedCard, setSelectedCard] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [price, setPrice] = useState('');
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 450);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 650);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(20)
 
     useEffect(() => {
         const loadData = async () => {
@@ -31,8 +33,9 @@ const InventoryView = () => {
     }, [userData, fetchUserData]);
 
     useEffect(() => {
+        setItemsPerPage(window.innerWidth >= 1920 ? 24 : 20);
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 450);
+            setIsMobile(window.innerWidth <= 650);
         };
         window.addEventListener('resize', handleResize);
 
@@ -41,34 +44,41 @@ const InventoryView = () => {
         };
     }, []);
 
+    useEffect(() => {
+        // When selectedGame changes, reset the currentPage to 1
+        setCurrentPage(1);
+    }, [selectedGame]);
+
     if (loading) {
         return <div></div>;
     }
 
     const inventory = userData?.inventory || [];
-
-    // Get unique game names from the inventory
     const gamesFromInventory = [...new Set(inventory.map(item => item.gameName))];
 
-    // Function to handle opening the modal and setting the price
+    const getPagedItems = () => {
+        const itemsToDisplay = selectedGame
+            ? inventory.find(item => item.gameName === selectedGame)?.cards || []
+            : [];
+        const indexOfLastItem = currentPage * itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        return itemsToDisplay.slice(indexOfFirstItem, indexOfLastItem);
+    };
+
     const handleSellItem = (card) => {
         setSelectedCard(card);
-        console.log();
         setIsModalOpen(true);
     };
 
-    // Function to call the MongoDB function to list the item on the market
     const handleConfirmSell = async () => {
         if (price === '') {
             alert("Please enter a price.");
             return;
         }
-    
-        if (isProcessing) {
-            return; // Prevent duplicate clicks
-        }
-    
-        setIsProcessing(true); // Disable the button
+
+        if (isProcessing) return;
+
+        setIsProcessing(true);
 
         try {
             const response = await MongoDbModel.setCardToMarket(
@@ -78,26 +88,63 @@ const InventoryView = () => {
                 selectedCard.cardName,
                 parseFloat(price)
             );
-    
+
             if (response.success) {
                 alert("Item listed for sale successfully.");
                 setIsModalOpen(false);
                 setPrice('');
                 setSelectedCard(null);
-                await fetchUserData(); // Fetch updated user data after selling
+                await fetchUserData();
             } else {
                 alert("Failed to list item for sale: " + response.error);
             }
         } catch (error) {
             console.error("Error selling item:", error);
         } finally {
-            setIsProcessing(false); // Re-enable the button
+            setIsProcessing(false);
         }
     };
 
+    const handlePageChange = (pageNumber) => {
+        if (pageNumber >= 1 && pageNumber <= totalPages) {
+            setCurrentPage(pageNumber);
+        }
+    };
+
+    const totalItems = selectedGame ? inventory.find(item => item.gameName === selectedGame)?.cards.length : 0;
+
+    /*const totalPages = Math.ceil(totalItems / itemsPerPage);
+    
+    const maxVisiblePages = 4;
+    let startPage = Math.max(1, currentPage - 1);
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+        startPage = Math.max(1, endPage - maxVisiblePages + 1);
+    }
+
+    const visiblePages = [];
+    for (let i = startPage; i <= endPage; i++) {
+        visiblePages.push(i);
+    }*/
+
+
+    
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    //const visiblePages = Array.from({ length: totalPages }, (_, index) => index + 1);*/
+
+    const pageWindow = 5; // Number of pages to show at a time
+    const startPage = Math.max(1, currentPage - Math.floor(pageWindow / 2));
+    const endPage = Math.min(totalPages, startPage + pageWindow - 1);
+
+    // Adjust startPage if we're at the end to maintain the pageWindow length
+    const adjustedStartPage = Math.max(1, endPage - pageWindow + 1);
+    const visiblePages = Array.from({ length: endPage - adjustedStartPage + 1 }, (_, index) => adjustedStartPage + index);
+
+
     return (
         <div className={styles.inventoryContainer}>
-            {/* User profile header */}
             <div className={styles.profileHeader}>
                 <img 
                     src={userData.profilePic ? `/images/profile/${userData.profilePic}` : defaultProfilePic} 
@@ -111,7 +158,6 @@ const InventoryView = () => {
                 </div>
             </div>
 
-            {/* Game tabs */}
             <div className={styles.gameTabs}>
                 {gamesFromInventory.length > 0 ? (
                     gamesFromInventory.map((game, index) => (
@@ -130,11 +176,34 @@ const InventoryView = () => {
                 )}
             </div>
 
-            {/* Inventory grid */}
-            {selectedGame && inventory.find(item => item.gameName === selectedGame)?.cards.length > 0 ? (
+            {/* User can set items per page */}
+            <div className={styles.itemsPerPageControl}>
+                <label htmlFor="itemsPerPage">Items per page: </label>
+                <input
+                    type="number"
+                    id="itemsPerPage"
+                    value={itemsPerPage}
+                    onChange={(e) => {
+                        const value = Math.max(Number(e.target.value), 10); // Ensures value is at least 10
+                        setItemsPerPage(value);
+                        setCurrentPage(1); // Reset to the first page
+                    }}
+                    onBlur={(e) => {
+                        if (e.target.value === '' || Number(e.target.value) < 10) {
+                            setItemsPerPage(10); // Set minimum value on blur
+                        }
+                    }}
+                    min="10"
+                    max="100"
+                    className={styles.itemsPerPageInput}
+                />
+            </div>
+
+            {selectedGame && getPagedItems().length > 0 ? (
                 <div className={styles.inventoryGrid}>
                     <h1 className={styles.inventorySelectedGame}>{selectedGame}</h1>
-                    {inventory.find(item => item.gameName === selectedGame).cards.map((card, index) => (
+                    <div className={getPagedItems().length > 5 ? styles.grid : styles.gridSmall}>
+                    {getPagedItems().map((card, index) => (
                         <div
                             key={index}
                             className={`${styles.inventoryItem} ${selectedCard === card ? styles.selectedItem : ''}`}
@@ -143,6 +212,7 @@ const InventoryView = () => {
                             <img src={`/images/inventory/${card.cardPic}`} alt={card.cardName} className={styles.itemImage} />
                         </div>
                     ))}
+                    </div>
                 </div>
             ) : (
                 <div className={styles.inventoryGrid}>
@@ -150,7 +220,6 @@ const InventoryView = () => {
                 </div>
             )}
 
-            {/* Item details */}
             {selectedCard && !isMobile && (
                 <div className={styles.itemDetails}>
                     <img src={`/images/inventory/${selectedCard.cardPic}`} alt={selectedCard.cardPic} className={styles.itemDetailImage} />
@@ -163,11 +232,10 @@ const InventoryView = () => {
                 </div>
             )}
 
-            {/* Modal for the selected item - Only show on mobile */}
             {selectedCard && isMobile && (
                 <div className={styles.modal}>
                     <div className={styles.itemDetails}>
-                        <button className={styles.closeButton} onClick={() => setSelectedCard(null) && setIsModalOpen(null)}>X</button>
+                        <button className={styles.closeButton} onClick={() => { setSelectedCard(null); setIsModalOpen(false); }}>X</button>
                         <img src={`/images/inventory/${selectedCard.cardPic}`} alt={selectedCard.cardPic} className={styles.itemDetailImage} />
                         <div className={styles.itemName}>{selectedCard.cardName}</div>
                         <div className={styles.itemDescription}>{selectedCard.cardDesc}</div>        
@@ -179,8 +247,37 @@ const InventoryView = () => {
                 </div>
             )}
 
-            {/* Modal for selling an item */}
-            {isModalOpen && selectedCard &&(
+            {totalPages > 1 && (
+                <div className={styles.pagination}>
+                    <button 
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className={styles.pageButton} 
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+
+                    {visiblePages.map((page) => (
+                        <button
+                            key={page}
+                            className={`${styles.pageButton} ${currentPage === page ? styles.active : ''}`}
+                            onClick={() => handlePageChange(page)}
+                        >
+                            {page}
+                        </button>
+                    ))}
+
+                    <button 
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        className={styles.pageButton} 
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
+            )}
+
+            {isModalOpen && selectedCard && (
                 <div className={styles.sellModal}>
                     <div className={styles.modalContent}>
                         <button className={styles.closeButtonSellItem} onClick={() => setIsModalOpen(false)}>X</button>
@@ -195,7 +292,7 @@ const InventoryView = () => {
                         <button
                             className={styles.confirmButton}
                             onClick={handleConfirmSell}
-                            disabled={isProcessing} // Disable the button while processing
+                            disabled={isProcessing}
                         >
                             Confirm
                         </button>
@@ -205,7 +302,6 @@ const InventoryView = () => {
                     </div>
                 </div>
             )}
-
         </div>
     );
 };

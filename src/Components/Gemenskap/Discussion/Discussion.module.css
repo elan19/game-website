@@ -91,7 +91,7 @@
     border: none;
     border-radius: 5px;
     background-color: #444;
-    color: #fff;
+    color: #eee;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
 }
@@ -134,6 +134,7 @@
 .searchBar {
     color: #eee;
     background-color: #213a4c;
+    background-color: var(--lighter-purple);
     border: none;
     font-size: 14px;
     padding: 5px;
@@ -146,8 +147,10 @@
 
 .searchBtn {
     width: 50px;
-    background-color: #213a4c;
-    color: #5fb2e2;
+    /*background-color: #213a4c;
+    color: #5fb2e2;*/
+    background-color: var(--link-blue);
+    color: #eee;
     border: none;
     cursor: pointer;
     font-size: 14px;
@@ -155,7 +158,8 @@
 }
 
 .searchBtn:hover {
-    background-color: #5fb2e2;
+    /*background-color: #5fb2e2;*/
+    background-color: var(--link-blue-hover);
     color: #eee;
 }
 
@@ -202,8 +206,10 @@
 .createDiscussionBtn {
     width: 150px;
     height: 45px;
-    background-color: #213a4c;
-    color: #5fb2e2;
+    /*background-color: #213a4c;
+    color: #5fb2e2;*/
+    background-color: var(--link-blue);
+    color: #eee;
     border: none;
     cursor: pointer;
     font-size: 14px;
@@ -213,7 +219,8 @@
 }
 
 .createDiscussionBtn:hover {
-    background-color: #5fb2e2;
+    /*background-color: #5fb2e2;*/
+    background-color: var(--link-blue-hover);
     color: #eee;
 }
 

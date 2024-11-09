@@ -2,8 +2,15 @@
     margin-bottom: 25px;
     margin-top: 25px;
     border-bottom: none;
-    text-align: left;
+    text-align: center;
     color: #eee;
+}
+
+.productList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 24px;
+    justify-items: center;
 }
 
 .prevPage {

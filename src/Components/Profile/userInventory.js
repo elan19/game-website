@@ -13,7 +13,9 @@ const OtherUserInventoryView = () => {
     const [selectedGame, setSelectedGame] = useState(null);
     const [selectedItem, setSelectedItem] = useState(null);
     const [error, setError] = useState(null);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 450);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 650);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(20);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -33,7 +35,7 @@ const OtherUserInventoryView = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 450);
+            setIsMobile(window.innerWidth <= 650);
         };
         window.addEventListener('resize', handleResize);
 
@@ -41,6 +43,20 @@ const OtherUserInventoryView = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    useEffect(() => {
+        // When selectedGame changes, reset the currentPage to 1
+        setCurrentPage(1);
+    }, [selectedGame]);
+
+    const getPagedItems = () => {
+        const itemsToDisplay = selectedGame
+            ? inventory.find(item => item.gameName === selectedGame)?.cards || []
+            : [];
+        const indexOfLastItem = currentPage * itemsPerPage;
+        const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+        return itemsToDisplay.slice(indexOfFirstItem, indexOfLastItem);
+    };
 
     if (loading) {
         return <div>Loading...</div>;
@@ -52,6 +68,23 @@ const OtherUserInventoryView = () => {
 
     const inventory = otherUserData?.inventory || [];
     const gamesFromInventory = [...new Set(inventory.map(item => item.gameName))];
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const totalItems = selectedGame ? inventory.find(item => item.gameName === selectedGame)?.cards.length : 0;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    /*const visiblePages = Array.from({ length: totalPages }, (_, index) => index + 1);*/
+
+    const pageWindow = 5; // Number of pages to show at a time
+    const startPage = Math.max(1, currentPage - Math.floor(pageWindow / 2));
+    const endPage = Math.min(totalPages, startPage + pageWindow - 1);
+
+    // Adjust startPage if we're at the end to maintain the pageWindow length
+    const adjustedStartPage = Math.max(1, endPage - pageWindow + 1);
+    const visiblePages = Array.from({ length: endPage - adjustedStartPage + 1 }, (_, index) => adjustedStartPage + index);
 
     return (
         <div className={styles.inventoryContainer}>
@@ -89,11 +122,35 @@ const OtherUserInventoryView = () => {
                 )}
             </div>
 
+            {/* User can set items per page */}
+            <div className={styles.itemsPerPageControl}>
+                <label htmlFor="itemsPerPage">Items per page: </label>
+                <input
+                    type="number"
+                    id="itemsPerPage"
+                    value={itemsPerPage}
+                    onChange={(e) => {
+                        const value = Math.max(Number(e.target.value), 10); // Ensures value is at least 10
+                        setItemsPerPage(value);
+                        setCurrentPage(1); // Reset to the first page
+                    }}
+                    onBlur={(e) => {
+                        if (e.target.value === '' || Number(e.target.value) < 10) {
+                            setItemsPerPage(10); // Set minimum value on blur
+                        }
+                    }}
+                    min="10"
+                    max="100"
+                    className={styles.itemsPerPageInput}
+                />
+            </div>
+
             {/* Inventory grid */}
-            {selectedGame && inventory.find(item => item.gameName === selectedGame)?.cards.length > 0 ? (
+            {selectedGame && getPagedItems().length > 0 ? (
                 <div className={styles.inventoryGrid}>
                     <h1 className={styles.inventorySelectedGame}>{selectedGame}</h1>
-                    {inventory.find(item => item.gameName === selectedGame).cards.map((card, index) => (
+                    <div className={getPagedItems().length > 5 ? styles.grid : styles.gridSmall}>
+                    {getPagedItems().map((card, index) => (
                         <div
                             key={index}
                             className={styles.inventoryItem}
@@ -102,6 +159,7 @@ const OtherUserInventoryView = () => {
                             <img src={`/images/inventory/${card.cardPic}`} alt={card.cardName} className={styles.itemImage} />
                         </div>
                     ))}
+                    </div>
                 </div>
             ) : (
                 <div className={styles.inventoryGrid}>
@@ -127,6 +185,36 @@ const OtherUserInventoryView = () => {
                     <img src={`/images/inventory/${selectedItem.cardPic}`} alt={selectedItem.cardPic} className={styles.itemDetailImage} />
                     <div className={styles.itemName}>{selectedItem.cardName}</div>
                     <div className={styles.itemDescription}>{selectedItem.cardDesc}</div>
+                </div>
+            )}
+
+            {totalPages > 1 && (
+                <div className={styles.pagination}>
+                    <button 
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        className={styles.pageButton} 
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+
+                    {visiblePages.map((page) => (
+                        <button
+                            key={page}
+                            className={`${styles.pageButton} ${currentPage === page ? styles.active : ''}`}
+                            onClick={() => handlePageChange(page)}
+                        >
+                            {page}
+                        </button>
+                    ))}
+
+                    <button 
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        className={styles.pageButton} 
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
                 </div>
             )}
         </div>

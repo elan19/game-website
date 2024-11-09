@@ -1,0 +1,104 @@
+/* Main container for the product list */
+.container {
+    /*background-color: #0B0B20;*/
+    color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+  
+.sectionTitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Grid layout for the product list */
+.productList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.searchBar input, .searchBar select {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.searchBar select {
+  background-color: var(--navbar-grey);
+  color: var(--light-grey);
+}
+
+.searchBar .searchInput {
+  width: 50%;
+  background-color: var(--navbar-grey);
+  color: var(--light-grey);
+}
+
+.searchBar .searchInput:hover {
+  border: 0px;
+}
+
+.searchBar .searchInput:focus {
+  border: 0px;
+  outline: 1px solid var(--light-blue);
+}
+
+.searchBar button {
+  padding: 10px 16px;
+  background-color: #3b82f6;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchBar button:hover {
+  background-color: #2563eb;
+}
+
+/* Pagination styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 14px;
+  background-color: #1f2937;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.pagination button:hover {
+  background-color: #374151;
+}
+
+
+@media (max-width: 800px) {
+  .searchBar {
+    display: block;
+  }
+    
+}
+  

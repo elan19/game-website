@@ -76,7 +76,7 @@ const GameInfo = () => {
     genres = genres.slice(0, -2);
     const publishersHTML = game.publishers.map(publisher => (
         <Link key={publisher.id} to={`/publisher/${publisher.id}`}>{publisher.name}</Link>
-    )).reduce((prev, curr) => [prev, ', ', curr]);
+    )).reduce((prev, curr) => [prev, ', ', curr], '');
 
     const handleBuyClick = async () => {
         if (userOwnsGame) return;

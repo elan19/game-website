@@ -17,7 +17,6 @@ const LoginForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const submitButtonValue = event.nativeEvent.submitter.value;
 
     if (submitButtonValue === 'Login') {
@@ -41,6 +40,28 @@ const LoginForm = () => {
           setErrorMessage("Something went wrong. Please try again.");
         });
     }
+  };
+
+  const handleGuestLogin = () => {
+    MongoDbModel.loginGuestUser()  // Assuming MongoDbModel has a method for guest login
+      .then(response => {
+        if (response && response.username) {
+          login(response.username, response.loginId);
+          fetchUserData()
+            .then(() => {
+              navigate('/');
+            })
+            .catch(error => {
+              console.error("Error fetching user data:", error);
+            });
+        } else {
+          setErrorMessage("Unable to login as guest.");
+        }
+      })
+      .catch(error => {
+        console.error("Error logging in as guest:", error);
+        setErrorMessage("Something went wrong. Please try again.");
+      });
   };
 
   const handleLogout = () => {
@@ -94,7 +115,11 @@ const LoginForm = () => {
                 className={`${styles.button} ${styles.registerButton} ${styles.marginBottom}`}
               />
             </Link>
+            <button onClick={handleGuestLogin} className={`${styles.button} ${styles.guestButton}`}>
+            Login as Guest
+            </button>
           </form>
+          
         </div>
       )}
     </div>

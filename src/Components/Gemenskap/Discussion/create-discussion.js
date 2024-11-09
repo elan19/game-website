@@ -36,7 +36,7 @@ const CreateDiscussion = () => {
         const newDiscussion = { title, content, game, genre, isPrivate };
         try {
             await MongoDbModel.addDiscussion(newDiscussion, userData.username, userData.loginId);
-            navigate('/gemenskap/discussion');
+            navigate('/community/discussion');
         } catch (error) {
             console.error('Error creating discussion:', error);
         }
@@ -45,7 +45,7 @@ const CreateDiscussion = () => {
     return (
         <div className={styles.createDiscussionContainer}>
             {/* Back to Discussions Button */}
-            <button className={styles.backButton} onClick={() => navigate('/gemenskap/discussions')}>
+            <button className={styles.backButton} onClick={() => navigate('/community/discussions')}>
                 Back to Discussions
             </button>
             <h2>Create New Discussion</h2>

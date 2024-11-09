@@ -66,7 +66,7 @@ const EditDiscussion = () => {
             if (response.error) {
                 console.error('Error updating discussion:', response.error);
             } else {
-                navigate(`/gemenskap/discussions/${discussionId}`);
+                navigate(`/community/discussions/${discussionId}`);
             }
         } catch (error) {
             console.error('Error submitting updated discussion:', error);
@@ -83,13 +83,13 @@ const EditDiscussion = () => {
 
     // Ensure only the author can edit the discussion
     if (userData && discussion.author !== userData.username) {
-        navigate('/gemenskap/discussions'); // Redirect immediately
+        navigate('/community/discussions'); // Redirect immediately
         return null; // Return null to avoid rendering anything else
     }
 
     return (
         <div className={styles.editDiscussionContainer}>
-            <button className={styles.backButton} onClick={() => navigate(`/gemenskap/discussions/${discussionId}`)}>
+            <button className={styles.backButton} onClick={() => navigate(`/community/discussions/${discussionId}`)}>
                 Back to Discussion
             </button>
             <h2>Edit Discussion</h2>

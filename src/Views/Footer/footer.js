@@ -16,10 +16,6 @@ const Footer = () => {
         </div>
         <a className={styles.footerLink} href="/">Shop</a> |
         <a className={styles.footerLink} href="/about">About Gamipo</a> |
-        <a className={styles.footerLink} href="#">Works</a> |
-        <a className={styles.footerLink} href="#">Support</a> |
-        <a className={styles.footerLink} href="https://www.facebook.com/#">Facebook</a> |
-        <a className={styles.footerLink} href="https://twitter.com/#">Twitter</a>
     </div>
     );
 }

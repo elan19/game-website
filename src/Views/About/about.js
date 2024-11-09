@@ -14,7 +14,7 @@ const About = () => {
         if (!isLoggedIn) {
             navigate('/login');
         } else {
-            navigate('/gemenskap/social');
+            navigate('/community/social');
         }
     };
 
@@ -23,7 +23,7 @@ const About = () => {
             <div className={styles.aboutContent}>
                 <div className={styles.aboutText}>
                     <p className={styles.topTextAbout}>
-                        Gamipo is the ultimate place to buy, discuss and play games.
+                        Gamipo is the ultimate place to buy, chat and play games for rewards.
                     </p>
                     <button className={styles.CreateAccountButton} onClick={handleButtonClick}>
                         {isLoggedIn ? 'Be Social' : 'Log in'}
@@ -43,7 +43,7 @@ const About = () => {
                 <h1>Get access to <span className={styles.colorSpan}>games immediately</span></h1>
                 <div className={styles.aboutTextMiddle}>
                     <p>
-                        With a wide range of games from AAA to indie and everything in between. 
+                        With a wide range of games with rewards. 
                         Enjoy exclusive offers, fast access and other great perks.
                     </p>
                     <a className={styles.aboutLink} href="/">Browse the store <span>&#8594;</span></a>
@@ -53,13 +53,13 @@ const About = () => {
                 <div className={styles.aboutTextLeftAboutGemenskap}>
                     <h1>Join the <span className={styles.colorSpan}>community</span></h1>
                     <p>
-                        Meet new friends, check out others' photos, and share your own in the community! 
+                        Meet new friends, check out others' photos, and share your own in the community!
                         With plenty of potential friends (and enemies), the fun never ends.
                     </p>
-                    <a className={styles.aboutLink} href="/gemenskap">Visit the community<span>&#8594;</span></a>
+                    <a className={styles.aboutLink} href="/community">Visit the community<span>&#8594;</span></a>
                 </div>
                 <div className={styles.aboutImgDivRightAboutGemenskap}>
-                    <img className={styles.aboutImg} src={aboutImg2} alt="Gemenskap" />
+                    <img className={styles.aboutImg} src={aboutImg2} alt="Community" />
                 </div>
             </div>
         </div>

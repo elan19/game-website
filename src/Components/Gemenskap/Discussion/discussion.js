@@ -137,11 +137,11 @@ const DiscussionComp = () => {
     }
 
     const handleDiscussionClick = (discussionId) => {
-        navigate(`/gemenskap/discussions/${discussionId}`);
+        navigate(`/community/discussions/${discussionId}`);
     };
 
     const handleCreateDiscussionClick = () => {
-        navigate(`/gemenskap/discussion/create-discussion`);
+        navigate(`/community/discussion/create-discussion`);
     };
 
     if (loading) {

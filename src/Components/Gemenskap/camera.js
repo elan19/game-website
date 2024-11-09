@@ -23,7 +23,7 @@ const CameraComponent = () => {
         const client = new UploadClient({ publicKey: process.env.REACT_APP_UPLOADKEY });
         try {
             const fileInfo = await client.uploadFile(selectedFile);
-            window.location.hash = `gemenskap`; // Navigate back to the community page after uploading
+            window.location.hash = `community`; // Navigate back to the community page after uploading
         } catch (error) {
             console.error('Error uploading file:', error);
         }

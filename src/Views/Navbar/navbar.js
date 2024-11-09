@@ -26,7 +26,7 @@ const Navigation = () => {
         '/': { name: 'Shop', hidden: false },
         ...(isLoggedIn && { '/library': { name: 'Library', hidden: false } }),
         '/about': { name: 'About', hidden: false },
-        '/gemenskap': { name: 'Community', hidden: false },
+        '/community': { name: 'Community', hidden: false },
         '/login': { name: 'Login', hidden: false },
         ...(isLoggedIn && userData && { '/profile': { name: userData.username + " ▼ $" + (userData && userData.money !== undefined ? parseFloat(userData.money.toFixed(2)) : 0), hidden: false } })
     };
@@ -85,7 +85,7 @@ const Navigation = () => {
                     if (route.hidden || (path === '/login' && isLoggedIn)) {
                         return null;
                     }
-                    return path === '/gemenskap' ? (
+                    return path === '/community' ? (
                         <div
                             key={path}
                             className={`${styles.dropdownContainer} ${isMobile && dropdownOpen ? styles.dropdownContainerMobileOpen : ''}`}
@@ -104,10 +104,10 @@ const Navigation = () => {
                             </Link>
                             {((dropdownOpen && menuOpen) || !isMobile) && (
                                 <div className={`${styles.dropdownMenu} ${isMobile && dropdownOpen ? styles.dropdownMenuOpen : ''}`}>
-                                    <Link to="/gemenskap" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Home</Link>
-                                    <Link to="/gemenskap/social" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Social</Link>
-                                    <Link to="/gemenskap/discussion" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Discussion</Link>
-                                    <Link to="/gemenskap/market" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Market</Link>
+                                    <Link to="/community" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Home</Link>
+                                    <Link to="/community/social" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Social</Link>
+                                    <Link to="/community/discussion" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Discussion</Link>
+                                    <Link to="/community/market" onClick={() => { setMenuOpen(false); setDropdownOpen(false); }}>Market</Link>
                                 </div>
                             )}
                         </div>

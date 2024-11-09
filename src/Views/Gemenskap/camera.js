@@ -13,7 +13,7 @@ function CameraView() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/gemenskap/camera');
+            navigate('/community/camera');
         } else {
             navigate('/login');
         }

@@ -60,21 +60,21 @@ root.render(
                   )}
                   <Route path="/publisher/:id" element={<PublisherInfoView />} />
                   <Route path="/developer/:id" element={<DeveloperInfoView />} />
-                  <Route path="/gemenskap" element={<GemenskapView />} />
-                  <Route path="/gemenskap/camera" element={<CameraView />} />
+                  <Route path="/community" element={<GemenskapView />} />
+                  <Route path="/community/camera" element={<CameraView />} />
                   <Route path="/profile" element={<ProfileView />} />
                   <Route path="/profile/:username" element={<UserProfileView />} />
                   <Route path="/profile/:username/inventory" element={<InventoryView />} />
                   <Route path="/profile/edit" element={<EditProfile />} />
                   <Route path="/profile/notification" element={<NotificationView />} />
                   <Route path="/profile/:username/friends" element={<UserFriendsView />} />
-                  <Route path="/gemenskap/social" element={<SocialView />} />
-                  <Route path="/gemenskap/market" element={<MarketView />} />
-                  <Route path="/gemenskap/discussion" element={<DiscussionView />} />
-                  <Route path="/gemenskap/discussions" element={<DiscussionView />} />
-                  <Route path="/gemenskap/discussion/create-discussion" element={<CreateDiscussionView />} />
-                  <Route path="/gemenskap/discussions/:discussionId" element={<DiscussionDetailiew />} />
-                  <Route path="/gemenskap/discussions/:discussionId/edit" element={<EditDiscussionView />} />
+                  <Route path="/community/social" element={<SocialView />} />
+                  <Route path="/community/market" element={<MarketView />} />
+                  <Route path="/community/discussion" element={<DiscussionView />} />
+                  <Route path="/community/discussions" element={<DiscussionView />} />
+                  <Route path="/community/discussion/create-discussion" element={<CreateDiscussionView />} />
+                  <Route path="/community/discussions/:discussionId" element={<DiscussionDetailiew />} />
+                  <Route path="/community/discussions/:discussionId/edit" element={<EditDiscussionView />} />
                   <Route path="/chat/:username/:friendName" element={<ChatView />} />
                 </Routes>
                 <Footer />

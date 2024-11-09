@@ -52,7 +52,7 @@ const DiscussionDetail = () => {
     }, [userData, fetchUserData, loadingUserData]);
 
     const handleTagClick = (tag) => {
-        navigate(`/gemenskap/discussions?genre=${tag}`);
+        navigate(`/community/discussions?genre=${tag}`);
     };
 
     const addCommentToDiscussion = async (discussionId, newComment) => {
@@ -108,7 +108,7 @@ const DiscussionDetail = () => {
 
     return (
         <div className={styles.discussionDetailContainer}>
-            <button className={styles.backButton} onClick={() => navigate('/gemenskap/discussions')}>
+            <button className={styles.backButton} onClick={() => navigate('/community/discussions')}>
                 Back to Discussions
             </button>
             <h2>{discussion.title}</h2>
@@ -138,7 +138,7 @@ const DiscussionDetail = () => {
             {userData && discussion.author === userData.username && (
                 <button 
                     className={styles.editButton} 
-                    onClick={() => navigate(`/gemenskap/discussions/${discussionId}/edit`)}
+                    onClick={() => navigate(`/community/discussions/${discussionId}/edit`)}
                 >
                     Edit Discussion
                 </button>
@@ -166,7 +166,7 @@ const DiscussionDetail = () => {
                         );
                     })
                 ) : (
-                    <p>No comments yet. Be the first to comment!</p>
+                    <p>{discussion.private ? 'Private discussion. You cannot write comments here!' : 'No comments yet. Be the first to comment!'}</p>
                 )}
 
                 {/* Pagination Controls */}

@@ -13,7 +13,7 @@ function GemenskapView() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/gemenskap');
+            navigate('/community');
         } else {
             navigate('/login');
         }

@@ -29,7 +29,7 @@ const GemenskapList = () => {
     }, [uploadKey, secretUploadKey]);
 
     const handleButtonClick = () => {
-        navigate('/gemenskap/camera');
+        navigate('/community/camera');
     };
 
     return (

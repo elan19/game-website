@@ -13,7 +13,7 @@ function CreateDiscussionView() {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/gemenskap/discussion/create-discussion');
+            navigate('/community/discussion/create-discussion');
         } else {
             navigate('/login');
         }

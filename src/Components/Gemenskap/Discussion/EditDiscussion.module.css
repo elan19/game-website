@@ -93,7 +93,7 @@
     margin: 0;
     margin-bottom: 20px;
     padding: 10px 20px;
-    background-color: #213a4c;
+    background-color: var(--link-blue);
     color: white;
     border: none;
     border-radius: 5px;
@@ -102,7 +102,7 @@
 }
 
 .backButton:hover {
-    background-color: #0092bb;
+    background-color: var(--link-blue-hover);
 }
 
 @media (max-width: 450px) {

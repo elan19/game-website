@@ -127,7 +127,7 @@ const MarketView = () => {
 
             <div className={styles.search}>
                 <form>
-                    <input className={styles.searchBar} type="text" name="search" />
+                    <input className={styles.searchBar} type="text" name="search" placeholder="Search item..." />
                     <input className={styles.searchBtn} onClick={handleSearch} type="submit" value="Search" />
                 </form>
                 {searchQuery && (

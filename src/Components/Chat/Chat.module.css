@@ -20,7 +20,7 @@
 .backButton {
   margin: 0;
   padding: 10px 20px;
-  background-color: #213a4c;
+  background-color: var(--link-blue);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -29,7 +29,7 @@
 }
 
 .backButton:hover {
-  background-color: #0092bb;
+  background-color: var(--link-blue-hover);
 }
 
 .messages {
